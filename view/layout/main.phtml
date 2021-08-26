@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="ressources/img/logo.png" />
+    <!-- importations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"> <!-- Importation de normalize.css -->
+    <!-- mon css -->
+    <link rel="stylesheet" href="ressources/css/style.css">
+    <title>Weebsithèque</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.php" class="logo"><h1>Weebsithèque</h1></a>
+            <div class="connect">
+                <a href="#">Ce connecter</a>  <!-- 'a' a set -->
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Acceuil</a></li>
+                    <li>
+                        <a href="#">Anime</a>
+                        <ul>
+                            <li><a href="#">Ma liste</a></li> <!-- si connecter -->
+                            <li><a href="#">Recherche</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Manga</a>
+                        <ul>
+                            <li><a href="#">Ma liste</a></li> <!-- si connecter -->
+                            <li><a href="#">Recherche</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Divers</a>
+                        <ul>
+                            <li><a href="#">Waifus</a></li> 
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <?php require $view ?>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p class="sign">Zirnheld Cédric</p>
+        </div>
+    </footer>
+</body>
+</html>

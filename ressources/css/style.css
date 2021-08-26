@@ -1,0 +1,219 @@
+/*Créer les varriables*/
+:root{
+    --primary-color: #7B9CFF;
+    --secondary-color: #fff;
+    --third-color: #91248f;
+    --background-texture: url("../ressources/textures/purty-wood.png");
+    --header-text-color: #000;
+    --default-text-color: #000;
+}
+
+/*****************************
+*          IMPORT            *
+*****************************/
+
+@font-face{
+    font-family: animeAce;
+    src: url('../fonts/animeace2bb_ot/animeace2_reg.otf') format('OpenType'),
+         url('../fonts/animeace2bb_tt/animeace2_reg.ttf') format('TrueType');
+}
+
+
+/**************************
+*          ALL            *
+**************************/
+
+/* pour que 1 rem/em est egual à 10px */
+html{
+    font-size: 62.5%;  
+}
+
+/*définir la couleur et la texture sur toute la page*/
+body{
+    background-color: var(--primary-color);
+    font-size: 1.5rem;
+    min-width:min-content; /* Pour éviter que pour des écrans vraiment petit la page ce déforme */
+}
+
+
+
+/******************************
+*          CLASSES            *
+******************************/
+
+/* Classe pour aligner et centrer sur la page */
+.container{
+    max-width: 1200px;
+    margin:1rem auto;
+}
+
+/* Classe pour faire un flotement à droite */
+.fRight{
+    float:right;
+}
+
+/* Classe pour faire un flotement à gauche */
+.fLeft{
+    float: left;
+}
+
+/*****************************
+*          HEADER            *
+*****************************/
+
+    /*      --- ALL ---        */
+
+/* Définir la font et aligner au centre dans le header  */
+header{
+    font-family: animeAce;
+    text-align:center;
+}
+
+/* Changer la font du header et mettre une margen (droite, gauche) pour éviter que le texte ce colle au bord */
+header>div{
+    font-size: 2rem;
+    margin:0 2rem;
+}
+
+/* Sur tout les a du header enlever le soulignement et définir la couleur */
+header a{
+    text-decoration: none;
+    color: var(--header-text-color);
+}
+
+
+
+    /*      --- LOGO ---        */
+
+/* La div du logo à une largeur de toute la largeur du parent */
+.logo{
+    width:100%;
+}
+
+    /*      --- NAV ---        */
+
+/* La nav à une largeur de toute la largeur du parent */
+header nav{
+    width: 100%;
+}
+
+/* aligner les élements avec des espace equivalent entre et autour */
+header nav ul{
+    display:flex;
+    list-style:none;
+    justify-content:space-around;
+    margin:0;
+    margin-bottom:1rem;
+    padding:1rem 0;
+    width: 100%;
+}
+
+/* le bouton plus gros pour cliquer */
+header nav a{
+    padding:1rem;
+}
+
+header nav>ul{
+    display: flex;
+    justify-content: space-around;
+}
+
+header nav li {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+header nav ul ul{
+    font-size: 1.5rem;
+    display: none;
+    position:absolute;
+    text-align: left;
+    min-width: 100%;
+    width:max-content;
+    background-color: var(--primary-color);
+    top:100%;
+}
+
+header nav a:hover{
+    color: var(--secondary-color);
+}
+
+header nav li>a:focus+ul,
+header nav li:hover>ul{
+    display: block;
+}
+
+    /*      --- CONNECT ---        */
+
+header .connect{
+    width:100%;
+    white-space: nowrap;
+    margin-bottom: 1rem;
+}
+
+header .connect a{
+    width: max-content;
+    padding: 1rem;
+}
+
+
+/*****************************
+*          FOOTER            *
+*****************************/
+
+.sign{
+    color:var(--secondary-color);
+    text-align: right;
+    margin-right:1rem;
+}
+
+/*******************************
+*          ALL-MAIN            *
+*******************************/
+
+main{
+    background-color: var(--secondary-color);
+    padding:2rem;
+}
+
+/*********************************
+*          RESPONSIVE            *
+*********************************/
+
+    /****************************************
+    *          TABLETTE + Mobile            *
+    ****************************************/
+
+@media screen and (min-width: 0px) and (max-width: 980px){
+    header nav a:focus{
+        color: var(--secondary-color);
+    }
+}
+
+    /*******************************
+    *          TABLETTE            *
+    *******************************/
+
+@media screen and (min-width: 780px){
+    header>div {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items:center;
+    }
+    header .logo,
+    header .connect{
+        width:max-content;
+        margin:0 1rem;
+    }
+}
+
+
+    /******************************
+    *          DESKTOP            *
+    ******************************/
+
+@media screen and (min-width: 980px){
+    
+}
