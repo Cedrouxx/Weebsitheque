@@ -6,6 +6,8 @@ use PDOException;
 
 class Database{
 
+    private array $config;
+
     private string $server;
     private string $user;
     private string $password;
@@ -13,8 +15,10 @@ class Database{
     public PDO $pdo;
     
     public function __construct(){
+        
+        $this->config = require 'config.php';
 
-        $this->server   = 'mysql:host=localhost;dbname=test';
+        $this->server   = 'mysql:host='.$config['database']['host'].';dbname='.$config['database']['name'];
         $this->user     = 'root';
         $this->password = '';
         $this->options  = [
