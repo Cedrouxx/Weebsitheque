@@ -1,5 +1,5 @@
 <?php
-namespace core;
+namespace App\Core;
 
 use PDO;
 use PDOException;
@@ -18,14 +18,10 @@ class Database{
         
         $this->config = require 'config.php';
 
-        $this->server   = 'mysql:host='.$config['database']['host'].';dbname='.$config['database']['name'];
-        $this->user     = 'root';
-        $this->password = '';
-        $this->options  = [
-                            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                            PDO::ATTR_ORACLE_NULLS => PDO::NULL_EMPTY_STRING,
-                            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'  
-                        ];
+        $this->server   = 'mysql:host='.$this->config['database']['host'].';dbname='.$this->config['database']['name'];
+        $this->user     = $this->config['database']['user'];
+        $this->password = $this->config['database']['password'];
+        $this->options  = $this->config['database']['option'];
                         
         $this->pdo = $this->connexion();
     }
