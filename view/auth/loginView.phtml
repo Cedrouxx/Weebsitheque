@@ -2,17 +2,25 @@
 
     <h1>Connection</h1>
 
+    <div>
+        <ul>
+            <?php foreach($data['messages'] as $message): ?>
+                <li class="<?=key($message)?>"><?= $message[key($message)] ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+
     <form action="loginPost" method="post">
 
         <div>
-            <label for="username">Nom d'utilisateur</label>
-            <input type="text" id="username" name="username">
+            <label for="email">Adresse mail</label>
+            <input type="email" id="email" name="email">
         </div>
         <div>
             <label for="password">Mot-de-passe</label>
             <input type="password" id="password" name="password">
         </div>
-        <div><input type="submit" value="Ce cennecter" class="button"></div>
+        <div><input type="submit" value="Se connecter" class="button"></div>
 
     </form>
 

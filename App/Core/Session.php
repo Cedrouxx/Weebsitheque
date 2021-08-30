@@ -7,7 +7,7 @@ class Session{
         session_start();
     }
 
-    public static function addMessage(array $messages){
+    public static function addMessage(array $messages): void{
         
         foreach($messages as $message){
             $_SESSION['message'][] = $message;
@@ -15,12 +15,33 @@ class Session{
 
     }
 
-    public static function getMessage(){
-        return $_SESSION['message'];
+    public static function getMessage(): array{
+        return $_SESSION['message'] ?? [];
     }
 
-    public static function clearMessage(){
+    public static function clearMessage(): void{
         $_SESSION['message'] = [];
+    }
+
+    public static function login(int $userId, string $username, string $userEmail, bool $isAdmin): void{
+        $_SESSION['user'] = [
+            'id' => $userId,
+            'username' => $username,
+            'email' => $userEmail,
+            'isAdmin' => $isAdmin
+        ];
+    }
+
+    public static function logout(): void{
+        unset($_SESSION['user']);
+    }
+
+    public static function isLogin(): bool{
+        return !empty(Session::getUser());
+    }
+
+    public static function getUser() :array{
+        return $_SESSION['user'] ?? [];
     }
 
 }

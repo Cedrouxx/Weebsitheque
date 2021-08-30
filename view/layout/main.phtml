@@ -1,3 +1,7 @@
+<?php
+
+use App\Core\Session;
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -15,24 +19,47 @@
     <header>
         <div class="container">
             <a href="/" class="logo"><h1>Weebsithèque</h1></a>
-            <div class="connect">
-                <a href="login">Ce connecter</a>  <!-- 'a' a set -->
+            <div class="connect <?= Session::isLogin() ? 'navigation' : ''?> ">
+                <?php if(Session::isLogin()): ?>
+                    <ul>
+                        <li>
+                            <?= Session::getUser()['username'] ?>
+                            <ul>
+                                <li><a href="#">Mon compte</a></li>
+                                <li><a href="#">Mes listes</a></li>
+                                <li><a href="logout">Se déconnecter</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                <?php else: ?>
+                    <a href="login"><?= Session::isLogin()? Session::getUser()['username'] : 'Ceux kaunnaiqueté' ?></a>
+                <?php endif; ?>
             </div>
-            <nav>
+            <nav class="navigation">
                 <ul>
                     <li><a href="/">Acceuil</a></li>
                     <li>
                         <a href="#">Anime</a>
                         <ul>
-                            <li><a href="my-anime-list">Ma liste</a></li> <!-- si connecter -->
+                            <?php if(Session::isLogin()): ?>
+                                <li><a href="my-anime-list">Ma liste</a></li> <!-- si connecter -->
+                            <?php endif; ?>
                             <li><a href="anime-search">Recherche</a></li>
+                            <?php if(isset(Session::getUser()['isAdmin']) && Session::getUser()['isAdmin']): ?>
+                                <li><a href="anime-add">Ajouter</a></li>
+                            <?php endif; ?>
                         </ul>
                     </li>
                     <li>
                         <a href="#">Manga</a>
                         <ul>
-                            <li><a href="my-manga-list">Ma liste</a></li> <!-- si connecter -->
+                            <?php if(Session::isLogin()): ?>
+                                <li><a href="my-manga-list">Ma liste</a></li> <!-- si connecter -->
+                            <?php endif; ?>
                             <li><a href="manga-search">Recherche</a></li>
+                            <?php if(isset(Session::getUser()['isAdmin']) && Session::getUser()['isAdmin']): ?>
+                                <li><a href="manga-add">Ajouter</a></li>
+                            <?php endif; ?>
                         </ul>
                     </li>
                     <li>

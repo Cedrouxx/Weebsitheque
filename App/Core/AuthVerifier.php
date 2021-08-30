@@ -6,15 +6,35 @@ use App\Model\User;
 
 class AuthVerifier{
 
-    public static function loginForm(array $loginData){
+    public static function loginForm(array $loginData): array{
 
+        $result = [];
 
+        if(!isset($loginData['email']) || empty($loginData['email'])) 
+            $result[] = [ 'error' => 'Champ \'Adresse mail\' non renseigné !' ];
 
-    }
+        if(!isset($loginData['password']) || empty($loginData['password'])) 
+            $result[] = [ 'error' => 'Champ \'Mot-de-passe\' non renseigné !' ];
 
-    public static function registerForm(array $loginData){
+        if(!empty($result))
+            return $result;
+        
+        if(!filter_var($loginData['email'], FILTER_VALIDATE_EMAIL)) 
+            $result[] =  [ 'error' => 'L\'adresse mail est incorect !' ];
+        
+        if(!empty($result))
+            return $result;
 
         $userModel = new User();
+        $user = $userModel->getOneByMail($loginData['email']);
+
+        if(!isset($user['password']) || !password_verify($loginData['password'], $user['password'])) 
+            $result[] = [ 'error' => 'Adresse mail ou mot-de-passe incorrect' ];
+
+        return $result;
+    }
+
+    public static function registerForm(array $loginData): array{
 
         $result = [];
 
@@ -37,6 +57,7 @@ class AuthVerifier{
         // if(empty($loginData['email'])) $result[] = 'Champ \'Adresse mail\' non renseigné !';
         // if(empty($loginData['password'])) return false;
         // if(empty($loginData['password-confirm'])) return false;
+        $userModel = new User();
 
         if(!filter_var($loginData['email'], FILTER_VALIDATE_EMAIL)) 
             $result[] =  [ 'error' => 'L\'adresse mail est incorect !' ];

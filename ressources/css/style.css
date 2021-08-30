@@ -99,7 +99,7 @@ header nav{
 }
 
 /* aligner les élements avec des espace equivalent entre et autour */
-header nav ul{
+.navigation ul{
     display:flex;
     list-style:none;
     justify-content:space-around;
@@ -110,23 +110,23 @@ header nav ul{
 }
 
 /* le bouton plus gros pour cliquer */
-header nav a{
+.navigation a{
     padding:1rem;
 }
 
-header nav>ul{
+.navigation>ul{
     display: flex;
     justify-content: space-around;
 }
 
-header nav li {
+.navigation li {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-header nav ul ul{
+.navigation ul ul{
     font-size: 1.5rem;
     display: none;
     position:absolute;
@@ -139,15 +139,15 @@ header nav ul ul{
     border-bottom-left-radius: 1rem;
 }
 
-/* header nav ul ul li{
-    border-top:1px solid black;
-} */
+.navigation li>ul{
+    z-index: 1000;
+}
 
-header nav a:hover{
+.navigation a:hover{
     color: var(--secondary-color);
 }
 
-header nav li:hover>ul{
+.navigation li:hover>ul{
     display: block;
 }
 
@@ -216,8 +216,9 @@ main{
     header .logo,
     header .connect{
         width:max-content;
-        margin:0 1rem;
+        margin:0 5rem;
     }
+
 }
 
 

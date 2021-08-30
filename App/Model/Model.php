@@ -79,8 +79,6 @@ class Model extends Database{
         
         for($i = 0; $i < count($where->getChampNames()); $i++){
 
-            //$query = $this->autoBindValue($query ,$where->getChampNames()[$i], $where->getValues()[$i]);
-
             if(is_int($where->getValues()[$i]))
                 $query->bindValue(':'.$where->getChampNames()[$i], $where->getValues()[$i] , PDO::PARAM_INT);
             else if(is_bool($where->getValues()[$i]))

@@ -16,4 +16,6 @@ return [
     '/register' => [ 'class' => AuthController::class, 'method' => 'register' ],
     '/registerPost' => [ 'class' => AuthController::class, 'method' => 'registerPost' ],
 
+        //logout
+    '/logout' => [ 'class' => AuthController::class, 'method' => 'logout' ],
 ];

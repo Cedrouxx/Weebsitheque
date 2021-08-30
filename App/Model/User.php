@@ -9,7 +9,7 @@ class User extends Model{
     }
 
     public function getOneByMail(string $email){
-        return $this->getOne('user', ['id', 'username', 'password'], new WhereMaker('email = ?', ['email'], [$email]));
+        return $this->getOne('user', ['id', 'username', 'password', 'is_admin'], new WhereMaker('email = ?', ['email'], [$email]));
     }
 
     public function insertOneUser(string $username, string $email, string $password) :void{
