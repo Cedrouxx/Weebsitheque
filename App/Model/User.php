@@ -5,21 +5,19 @@ namespace App\Model;
 class User extends Model{
 
     public function getAllUsers() :array{
-        return $this->get('user', ['id', 'username', 'password']);
+        return $this->from('user')->getAll();
     }
 
     public function getOneByMail(string $email){
-        return $this->getOne('user', ['id', 'username', 'password', 'is_admin'], new WhereMaker('email = ?', ['email'], [$email]));
+        return $this->from('user')->where('email', $email)->getOne();
     }
 
     public function insertOneUser(string $username, string $email, string $password) :void{
-        $this->insert('user', [
-
+        $this->from('user')->values([
             'username' => $username,
             'email' => $email,
             'password' => $password
-
-        ]);
+        ])->insert();
     }
 
 }

@@ -1,5 +1,11 @@
 <section>
 
-    <h1>Liste de ???</h1>
+    <h1>Liste de <?= $data['type'] ?></h1>
+
+    <ul>
+        <?php foreach($data['list'] as $artwork): ?>
+            <li><?php var_dump($artwork) ?></li>
+        <?php endforeach; ?>
+    </ul>
 
 </section>

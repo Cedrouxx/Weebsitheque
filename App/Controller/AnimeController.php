@@ -2,13 +2,16 @@
 
 namespace App\Controller;
 
-use model\User;
+use App\Model\Artwork;
 use Throwable;
 
 class AnimeController extends Controller{
 
     public function search() :void{
-        $this->lunchPage('artwork/search', 'Recherche');
+        $artworkModels = new Artwork;
+        $data['type'] = 'Anime';
+        $data['list'] = $artworkModels->getAllAnime();
+        $this->lunchPage('artwork/search', 'Recherche', $data);
     }
 
 }
