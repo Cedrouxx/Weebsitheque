@@ -8,11 +8,11 @@ use App\Core\Session;
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="ressources/img/logo.png" />
+    <link rel="icon" type="image/png" href="/ressources/img/logo.png" />
     <!-- importations -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"> <!-- Importation de normalize.css -->
     <!-- mon css -->
-    <link rel="stylesheet" href="ressources/css/style.css">
+    <link rel="stylesheet" href="/ressources/css/style.css">
     <title>Weebsithèque | <?= $title ?></title>
 </head>
 <body>
@@ -27,12 +27,12 @@ use App\Core\Session;
                             <ul>
                                 <li><a href="#">Mon compte</a></li>
                                 <li><a href="#">Mes listes</a></li>
-                                <li><a href="logout">Se déconnecter</a></li>
+                                <li><a href="/logout">Se déconnecter</a></li>
                             </ul>
                         </li>
                     </ul>
                 <?php else: ?>
-                    <a href="login"><?= Session::isLogin()? Session::getUser()['username'] : 'Ceux kaunnaiqueté' ?></a>
+                    <a href="/login"><?= Session::isLogin()? Session::getUser()['username'] : 'Ceux kaunnaiqueté' ?></a>
                 <?php endif; ?>
             </div>
             <nav class="navigation">
@@ -42,11 +42,11 @@ use App\Core\Session;
                         <a href="#">Anime</a>
                         <ul>
                             <?php if(Session::isLogin()): ?>
-                                <li><a href="my-anime-list">Ma liste</a></li> <!-- si connecter -->
+                                <li><a href="/my-anime-list">Ma liste</a></li> <!-- si connecter -->
                             <?php endif; ?>
-                            <li><a href="anime-search">Recherche</a></li>
+                            <li><a href="/anime/search">Recherche</a></li>
                             <?php if(isset(Session::getUser()['isAdmin']) && Session::getUser()['isAdmin']): ?>
-                                <li><a href="anime-add">Ajouter</a></li>
+                                <li><a href="/anime-add">Ajouter</a></li>
                             <?php endif; ?>
                         </ul>
                     </li>
@@ -54,18 +54,18 @@ use App\Core\Session;
                         <a href="#">Manga</a>
                         <ul>
                             <?php if(Session::isLogin()): ?>
-                                <li><a href="my-manga-list">Ma liste</a></li> <!-- si connecter -->
+                                <li><a href="/my-manga-list">Ma liste</a></li> <!-- si connecter -->
                             <?php endif; ?>
-                            <li><a href="manga-search">Recherche</a></li>
+                            <li><a href="/manga-search">Recherche</a></li>
                             <?php if(isset(Session::getUser()['isAdmin']) && Session::getUser()['isAdmin']): ?>
-                                <li><a href="manga-add">Ajouter</a></li>
+                                <li><a href="/manga-add">Ajouter</a></li>
                             <?php endif; ?>
                         </ul>
                     </li>
                     <li>
                         <a href="#">Divers</a>
                         <ul>
-                            <li><a href="waifu">Waifus</a></li> 
+                            <li><a href="/waifu">Waifus</a></li> 
                         </ul>
                     </li>
                 </ul>
@@ -83,6 +83,6 @@ use App\Core\Session;
         </div>
     </footer>
 
-    <script src="ressources/js/main.js"></script>
+    <script src="/ressources/js/main.js"></script>
 </body>
 </html>

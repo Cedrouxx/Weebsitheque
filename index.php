@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types = 1);
 
 require 'helpers.php';
@@ -15,6 +16,7 @@ $routes = require 'route.php';
 
 if(!isset($routes[$_SERVER['REQUEST_URI']]))
     abord(404);
+
 
 [ 'class' => $class, 'method' => $method] = $routes[$_SERVER['REQUEST_URI']];
 

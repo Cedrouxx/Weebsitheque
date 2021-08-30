@@ -16,3 +16,7 @@ function abord(int $errorCode): void{
     }
     exit;
 }
+
+function route(string $route): string{
+    return  $_SERVER['CONTEXT_DOCUMENT_ROOT'].'/'.$route;
+}

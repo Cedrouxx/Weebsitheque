@@ -2,6 +2,7 @@
 
 use App\Controller\DefaultController;
 use App\Controller\AuthController;
+use App\Controller\AnimeController;
 
 return [
     // Default route
@@ -16,6 +17,10 @@ return [
     '/register' => [ 'class' => AuthController::class, 'method' => 'register' ],
     '/registerPost' => [ 'class' => AuthController::class, 'method' => 'registerPost' ],
 
-        //logout
+        // logout
     '/logout' => [ 'class' => AuthController::class, 'method' => 'logout' ],
+
+    // Artworks
+        // lists
+    '/anime/search' => [ 'class' => AnimeController::class, 'method' => 'search' ],
 ];
