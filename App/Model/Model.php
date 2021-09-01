@@ -122,12 +122,12 @@ class Model extends Database{
 
     public function getAll(){
         $query = $this->get();
-        return $this->secureAll(($query->fetchAll(PDO::FETCH_ASSOC)) ?:  []);
+        return ModelOutput::makeAll($this->secureAll(($query->fetchAll(PDO::FETCH_ASSOC)) ?:  []));
     }
 
     public function getOne(){
         $query = $this->get();
-        return $this->secure(($query->fetch(PDO::FETCH_ASSOC)) ?:  []);
+        return ModelOutput::makeOne($this->secure(($query->fetch(PDO::FETCH_ASSOC)) ?:  []));
     }
 
     public function insert(){

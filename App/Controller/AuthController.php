@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Core\AuthVerifier;
+use App\Core\Verifier\AuthVerifier;
 use App\Core\Session;
 use App\Model\User;
 
@@ -31,7 +31,7 @@ class AuthController extends Controller{
         $userModel = new User();
         $user = $userModel->getOneByMail($_POST['email']);
 
-        Session::login($user['id'], $user['username'], $_POST['email'], $user['is_admin']);
+        Session::login($user->id, $user->username, $_POST['email'], $user->is_admin);
 
         redirect('/');
     }

@@ -3,6 +3,8 @@
 use App\Controller\DefaultController;
 use App\Controller\AuthController;
 use App\Controller\AnimeController;
+use App\Controller\MangaController;
+use App\Controller\AdminController;
 
 return [
     // Default route
@@ -21,6 +23,12 @@ return [
     '/logout' => [ 'class' => AuthController::class, 'method' => 'logout' ],
 
     // Artworks
-        // lists
+        // search
     '/anime/search' => [ 'class' => AnimeController::class, 'method' => 'search' ],
+    '/manga/search' => [ 'class' => MangaController::class, 'method' => 'search' ],
+
+    // Admin
+    '/admin' => [ 'class' => AdminController::class, 'method' => 'index' ],
+        // add
+    '/admin/add/artwork' => [ 'class' => AdminController::class, 'method' => 'addArtwork' ],
 ];

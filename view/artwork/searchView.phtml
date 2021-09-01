@@ -1,11 +1,23 @@
-<section>
 
-    <h1>Liste de <?= $data['type'] ?></h1>
 
-    <ul>
-        <?php foreach($data['list'] as $artwork): ?>
-            <li><?php var_dump($artwork) ?></li>
-        <?php endforeach; ?>
-    </ul>
+<section class="grid-3">
+
+    <h2>Liste de <?= $data['type'] ?></h2>
+
+    <?php foreach($data['list'] as $artwork): ?>
+        <article>
+            <figure class="hover-caption" tabindex="0">
+                <img src="<?= $artwork->image ?>" alt="<?= $artwork->name ?>">
+                <figcaption>
+                    <div>
+                        <h3><?= $artwork->name ?></h3>
+                        <p>Créer par : <?= $artwork->author ?></p>
+                        <p>Genre : <?= is_array($artwork->genre)? implode(', ', $artwork->genre) : $artwork->genre ?></p>
+                        <a href="#" class="button">Plus d'info</a>
+                    </div>
+                </figcaption>
+            </figure>
+        </article>
+    <?php endforeach; ?>
 
 </section>

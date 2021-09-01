@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core;
+namespace App\Core\Verifier;
 
 use App\Model\User;
 
@@ -28,7 +28,7 @@ class AuthVerifier{
         $userModel = new User();
         $user = $userModel->getOneByMail($loginData['email']);
 
-        if(!isset($user['password']) || !password_verify($loginData['password'], $user['password'])) 
+        if(!isset($user->password) || !password_verify($loginData['password'], $user->password)) 
             $result[] = [ 'error' => 'Adresse mail ou mot-de-passe incorrect' ];
 
         return $result;

@@ -4,13 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('click', e =>{
 
-        // for mobile to use the navBar
-        let parentElement = e.target.parentElement || e.target;
-        
-        if (parentElement.matches('header nav>ul>li')){
-            parentElement.classList.toggle('navbar-open');
-        }else{
-            document.querySelectorAll('header nav>ul>li').forEach( element => element.classList.remove('navbar-open') );
+        document.querySelectorAll('.nav-check').forEach(element => element.checked = false);
+
+        if(e.target.matches('.nav-check')){
+            e.target.checked = true;
         }
 
         // element <a> with href '#' not work

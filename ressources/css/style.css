@@ -3,7 +3,7 @@
     --primary-color: #7B9CFF;
     --primary-color-bis: #3e6efd;
     --secondary-color: #fff;
-    --third-color: #c74ac5;
+    --third-color: #991197;
     --background-texture: url("../ressources/textures/purty-wood.png");
     --header-text-color: #000;
     --default-text-color: #000;
@@ -36,6 +36,13 @@ body{
     min-width:min-content; /* Pour éviter que pour des écrans vraiment petit la page ce déforme */
 }
 
+img{
+    max-width: 100%;
+}
+
+*{
+    box-sizing: border-box;
+}
 
 
 /******************************
@@ -56,6 +63,98 @@ body{
 /* Classe pour faire un flotement à gauche */
 .fLeft{
     float: left;
+}
+
+.grid-3{
+    max-width: 100%;
+    display: grid;
+    grid-template: fit-content(100px) / 1fr;
+    grid-auto-flow: row;
+    grid-gap: 10px;
+}
+
+.grid-3>h1,
+.grid-3>h2,
+.grid-3>h3,
+.grid-3>h4,
+.grid-3>h5,
+.grid-3>h6{
+    text-align: center;
+}
+.grid-3 article{
+    width: 100%;
+    height: 800rem;
+}
+
+.grid-3 figure{
+    margin: 0;
+}
+
+.hover-caption{
+    position: relative;
+
+}
+
+.hover-caption img{
+    width: 100%;
+    display:block;
+}
+
+.hover-caption figcaption{
+    opacity: 0;
+    position: absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    background-color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    color:white;
+    padding: 1rem;
+    transition: opacity .5s;
+}
+
+.hover-caption figcaption:before{
+    content: "";
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    bottom: 2rem;
+    right: 2rem;
+    border: 1rem solid white;
+    padding: auto 0;
+}
+
+.hover-caption figcaption div{
+    margin-top: 50%;
+    position:relative;
+}
+
+.hover-caption:hover figcaption{
+    opacity: 1;
+}
+
+.button{
+    text-decoration: none;
+    color:var(--secondary-color);
+    background-color: var(--third-color);
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 1px solid var(--third-color);
+    margin-top: 2rem;
+}
+
+.button:hover{
+    color:var(--third-color);
+    background-color: var(--secondary-color);
+}
+
+.admin-check~div{
+    display:none;
+    margin-left: 4rem;
+}
+.admin-check:checked~div{
+    display:block;
 }
 
 /*****************************
@@ -110,6 +209,7 @@ header nav{
 }
 
 /* le bouton plus gros pour cliquer */
+.navigation label,
 .navigation a{
     padding:1rem;
 }
@@ -143,12 +243,21 @@ header nav{
     z-index: 1000;
 }
 
-.navigation a:hover{
+.navigation a:hover,
+.navigation .nav-check:checked + label,
+.navigation label:hover{
     color: var(--secondary-color);
 }
 
+.navigation li>.nav-check:checked+label+ul,
 .navigation li:hover>ul{
     display: block;
+}
+
+.navigation .nav-check{
+    position: absolute;
+    opacity:0;
+    top: -1000rem;
 }
 
     /*      --- CONNECT ---        */
@@ -182,6 +291,7 @@ header .connect a{
 main{
     background-color: var(--secondary-color);
     padding:2rem;
+    max-width: 100%;
 }
 
 /*********************************
@@ -193,6 +303,7 @@ main{
     ****************************************/
 
 @media screen and (min-width: 0px) and (max-width: 980px){
+
     header nav li.navbar-open>a{
         color: var(--secondary-color);
     }
@@ -200,13 +311,17 @@ main{
     header nav li.navbar-open>ul{
         display: block;
     }
+
+    .hover-caption:focus figcaption{
+        opacity: 1;
+    }
 }
 
     /*******************************
     *          TABLETTE            *
     *******************************/
 
-@media screen and (min-width: 780px){
+@media screen and (min-width: 790px){
     header>div {
         display: flex;
         flex-wrap: wrap;
@@ -216,7 +331,24 @@ main{
     header .logo,
     header .connect{
         width:max-content;
-        margin:0 5rem;
+        margin:0 auto;
+    }
+
+    .grid-3{
+        grid-template: fit-content(100px) / 1fr 1fr;
+        /* grid-auto-flow: row; */
+        /* grid-template-columns: repeat(3, calc(100% / 1)); */
+        /* grid-auto-rows: minmax(100px, auto); */
+        /* grid-auto-rows: minmax(100px, auto); */
+    }
+
+    .grid-3>h1,
+    .grid-3>h2,
+    .grid-3>h3,
+    .grid-3>h4,
+    .grid-3>h5,
+    .grid-3>h6{
+        grid-column: 1/3;
     }
 
 }
@@ -228,4 +360,21 @@ main{
 
 @media screen and (min-width: 980px){
     
+    .grid-3{
+        grid-template: fit-content(100px) / 1fr 1fr 1fr;
+        /* grid-auto-flow: row; */
+        /* grid-template-columns: repeat(3, calc(100% / 1)); */
+        /* grid-auto-rows: minmax(100px, auto); */
+        /* grid-auto-rows: minmax(100px, auto); */
+    }
+
+    .grid-3>h1,
+    .grid-3>h2,
+    .grid-3>h3,
+    .grid-3>h4,
+    .grid-3>h5,
+    .grid-3>h6{
+        grid-column: 1/4;
+    }
+
 }

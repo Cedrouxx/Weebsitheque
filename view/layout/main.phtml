@@ -23,11 +23,15 @@ use App\Core\Session;
                 <?php if(Session::isLogin()): ?>
                     <ul>
                         <li>
-                            <?= Session::getUser()['username'] ?>
+                            <input type="checkbox" id="nav-user" class="nav-check">
+                            <label for="nav-user"><?= Session::getUser()['username'] ?></label>
                             <ul>
                                 <li><a href="#">Mon compte</a></li>
                                 <li><a href="#">Mes listes</a></li>
-                                <li><a href="/logout">Se déconnecter</a></li>
+                                <?php if(Session::getUser()['isAdmin']): ?>
+                                    <li><a href="/admin">Page administrateur</a></li>
+                                <?php endif; ?>
+                                <li ><a href="/logout">Se déconnecter</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -39,31 +43,28 @@ use App\Core\Session;
                 <ul>
                     <li><a href="/">Acceuil</a></li>
                     <li>
-                        <a href="#">Anime</a>
+                        <input type="checkbox" id="nav-anime" class="nav-check">
+                        <label for="nav-anime">Anime</label>
                         <ul>
                             <?php if(Session::isLogin()): ?>
                                 <li><a href="/my-anime-list">Ma liste</a></li> <!-- si connecter -->
                             <?php endif; ?>
                             <li><a href="/anime/search">Recherche</a></li>
-                            <?php if(isset(Session::getUser()['isAdmin']) && Session::getUser()['isAdmin']): ?>
-                                <li><a href="/anime-add">Ajouter</a></li>
-                            <?php endif; ?>
                         </ul>
                     </li>
                     <li>
-                        <a href="#">Manga</a>
+                        <input type="checkbox" id="nav-manga" class="nav-check">
+                        <label for="nav-manga">Manga</label>
                         <ul>
                             <?php if(Session::isLogin()): ?>
                                 <li><a href="/my-manga-list">Ma liste</a></li> <!-- si connecter -->
                             <?php endif; ?>
-                            <li><a href="/manga-search">Recherche</a></li>
-                            <?php if(isset(Session::getUser()['isAdmin']) && Session::getUser()['isAdmin']): ?>
-                                <li><a href="/manga-add">Ajouter</a></li>
-                            <?php endif; ?>
+                            <li><a href="/manga/search">Recherche</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#">Divers</a>
+                        <input type="checkbox" id="nav-diver" class="nav-check">
+                        <label for="nav-diver">Divers</label>
                         <ul>
                             <li><a href="/waifu">Waifus</a></li> 
                         </ul>
