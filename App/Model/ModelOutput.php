@@ -9,6 +9,8 @@ class ModelOutput{
     }
 
     public static function makeOne(array $datas){
+        if(empty($datas))
+            return ModelOutput::make([]);
         return ModelOutput::makeAll($datas)[0];
     }
 
