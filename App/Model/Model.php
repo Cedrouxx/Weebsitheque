@@ -61,11 +61,12 @@ class Model extends Database{
         return $this;
     }
 
-    public function with(string $table, string $first_id, string $second_id){
+    public function with(string $table, string $first_id, string $second_id, string $typeJoin = 'INNER'){
         $this->with[] = [
             'table' => $table,
             'first_id' => $first_id,
-            'second_id' => $second_id
+            'second_id' => $second_id,
+            'type' => strtoupper($typeJoin)
         ];
         return $this;
     }
@@ -88,8 +89,8 @@ class Model extends Database{
 
         $withTable = [];
         foreach($this->with as $value){
-            $withTable[] = '
-                INNER JOIN '.$value['table'].'
+            $withTable[] = 
+                $value['type'].' JOIN '.$value['table'].'
                 ON '.$value['first_id'].' = '.$value['second_id'].'
             ';
         }
@@ -127,7 +128,7 @@ class Model extends Database{
 
     public function getOne(){
         $query = $this->get();
-        return ModelOutput::makeOne($this->secure(($query->fetch(PDO::FETCH_ASSOC)) ?:  []));
+        return ModelOutput::makeOne($this->secureAll(( $query->fetchAll(PDO::FETCH_ASSOC)) ?:  []));
     }
 
     public function insert(){
@@ -148,6 +149,44 @@ class Model extends Database{
 
         for($i = 0; $i<count($justValue); $i++){
             $query->bindValue($i+1, $justValue[$i]);
+        }
+
+        $query->execute(); 
+
+        $this->reset();
+    }
+
+    public function update(){
+
+        $from = 'UPDATE '.$this->from;
+
+        $champsNamesTable = [];
+        foreach(array_keys($this->values) as $value){
+            $champsNamesTable[] = $value.' = ? ';
+        }
+        $champsNames = implode(',', $champsNamesTable);
+
+        $whereCommand = [];
+        foreach($this->where as $value){
+            $whereCommand[] = $value['champName'].' = ?';
+        }
+        $where = 'WHERE '.(!empty($this->where)? implode(' AND ', $whereCommand) : '1');
+
+        $sql = $from.' SET '.$champsNames.' '.$where;
+        $query = $this->pdo->prepare($sql);
+
+        var_dump($sql);
+
+        $justValue = array_values($this->values);
+
+        for($i = 0; $i<count($justValue); $i++){
+            var_dump(1);
+            $query->bindValue($i+1, $justValue[$i]);
+        }
+
+        for($o = 0; $o<count($this->where); $o++){
+            var_dump(1);
+            $query->bindValue($o+1+$i, $this->where[$o]['value']);
         }
 
         $query->execute(); 

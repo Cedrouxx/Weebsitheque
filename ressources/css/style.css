@@ -1,7 +1,9 @@
 /*Créer les varriables*/
 :root{
-    --primary-color: #7B9CFF;
-    --primary-color-bis: #3e6efd;
+    /* --primary-color: #7B9CFF;
+    --primary-color-bis: #3e6efd; */
+    --primary-color: #318ce7;
+    --primary-color-bis: #77b5fe;
     --secondary-color: #fff;
     --third-color: #991197;
     --background-texture: url("../ressources/textures/purty-wood.png");
@@ -26,14 +28,16 @@
 
 /* pour que 1 rem/em est egual à 10px */
 html{
-    font-size: 62.5%;  
+    font-size: 62.5%;
+    min-height: 100vh;
 }
 
 /*définir la couleur et la texture sur toute la page*/
 body{
-    background-color: var(--primary-color);
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     min-width:min-content; /* Pour éviter que pour des écrans vraiment petit la page ce déforme */
+    min-height: 100vh;
+    position: relative;
 }
 
 img{
@@ -52,17 +56,7 @@ img{
 /* Classe pour aligner et centrer sur la page */
 .container{
     max-width: 1200px;
-    margin:1rem auto;
-}
-
-/* Classe pour faire un flotement à droite */
-.fRight{
-    float:right;
-}
-
-/* Classe pour faire un flotement à gauche */
-.fLeft{
-    float: left;
+    margin:0 auto;
 }
 
 .grid-3{
@@ -81,22 +75,25 @@ img{
 .grid-3>h6{
     text-align: center;
 }
-.grid-3 article{
+.grid-3>article{
     width: 100%;
-    height: 800rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.grid-3 figure{
-    margin: 0;
+.grid-3 article img{
+    object-fit: cover;
 }
 
 .hover-caption{
     position: relative;
-
+    margin:0;
+    height:100%;
 }
 
 .hover-caption img{
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     display:block;
 }
 
@@ -112,6 +109,9 @@ img{
     color:white;
     padding: 1rem;
     transition: opacity .5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hover-caption figcaption:before{
@@ -126,8 +126,8 @@ img{
 }
 
 .hover-caption figcaption div{
-    margin-top: 50%;
-    position:relative;
+    margin: 0 3rem;
+    position: relative;
 }
 
 .hover-caption:hover figcaption{
@@ -141,7 +141,8 @@ img{
     padding: 1rem;
     border-radius: 1rem;
     border: 1px solid var(--third-color);
-    margin-top: 2rem;
+    display: block;
+    width: max-content;
 }
 
 .button:hover{
@@ -157,6 +158,122 @@ img{
     display:block;
 }
 
+table.border th,
+table.border td{
+    border: 1px solid black;
+    padding:1rem;
+}
+table.border{
+    border-collapse: collapse;
+}
+
+
+    /*      --- FLOAT ---        */
+/* Classe pour faire un flotement à droite */
+.fRight{
+    float:right;
+    margin-left: 2rem;
+
+}
+
+/* Classe pour faire un flotement à gauche */
+.fLeft{
+    float: left;
+    margin-right: 2rem;
+}
+
+    /*      --- DISPLAY ---        */
+.block{
+    display:block;
+}
+.inlineBlock{
+    display:inline-block;
+}
+.flex{
+    display: flex;
+}
+
+    /*      --- BLOCK-ALIGN ---        */
+.block-center{
+    margin-right: auto;
+    margin-left: auto;
+}
+
+    /*      --- TEXT-ALIGN ---        */
+.text-center{
+    text-align: center;
+}
+
+.text-left{
+    text-align: left;
+}
+
+.text-right{
+    text-align: right;
+}
+
+    /*      --- WIDTH ---        */
+.width50p{
+    width: 50%;
+}
+
+.width70p{
+    width: 90%;
+}
+
+.widthMaxContent{
+    width: max-content;
+}
+
+    /*      --- HEIGHT ---        */
+.maxheight{
+    max-height: 80vh;
+}
+
+    /*      --- MARGE ---        */
+.margeAll{
+    margin: 2rem;
+}
+
+.margeTop{
+    margin-top: 2rem;
+}
+
+.margeBottom{
+    margin-bottom: 2rem;
+}
+
+    /*      --- PADDING ---        */
+.paddingAll{
+    padding: 2rem;
+}
+.paddingAllMin{
+    padding: .5rem;
+}
+.paddingRL{
+    padding-right: 2rem;
+    padding-left: 2rem;
+}
+
+    /*      --- BORDER ---        */
+.borderAll{
+    border:1px solid black;
+}
+    /*      --- SHADOW ---        */
+.shadow{
+    box-shadow: 1rem 1rem .5rem silver;
+    margin-bottom: 2rem;
+}
+
+    /*      --- LIST ---        */
+.listNone{
+    list-style: none;
+}
+
+.error{
+    color: red;
+}
+
 /*****************************
 *          HEADER            *
 *****************************/
@@ -167,6 +284,11 @@ img{
 header{
     font-family: animeAce;
     text-align:center;
+    background-color: var(--primary-color);
+    box-shadow: 0px .5rem 1.5rem silver;
+    position: relative;
+    z-index:1;
+    padding-top: 1rem;
 }
 
 /* Changer la font du header et mettre une margen (droite, gauche) pour éviter que le texte ce colle au bord */
@@ -176,7 +298,8 @@ header>div{
 }
 
 /* Sur tout les a du header enlever le soulignement et définir la couleur */
-header a{
+header a,
+header label{
     text-decoration: none;
     color: var(--header-text-color);
 }
@@ -273,10 +396,50 @@ header .connect a{
     padding: 1rem;
 }
 
+/*******************************
+*          ALL-MAIN            *
+*******************************/
+
+body>main{
+    background-color: var(--secondary-color);
+    padding:2rem;
+    padding-bottom: 10rem;
+    max-width: 100%;
+}
+
+body>main>div>section{
+    overflow: hidden;
+}
+
+textarea{
+    resize: none;
+    width:100%;
+    /* border: none; */
+    height:max-content;
+    outline-style: none;
+}
+
+textarea::selection{
+    border:none;
+}
+
+.inputNote{
+    width: 6rem;
+    margin-right: 1rem;
+}
 
 /*****************************
 *          FOOTER            *
 *****************************/
+
+body>footer{
+    background-color: var(--primary-color);
+    position: absolute;
+    bottom:0;
+    right:0;
+    left:0;
+    box-shadow: 0px -.5rem 1.5rem silver;
+}
 
 .sign{
     color:var(--secondary-color);
@@ -284,19 +447,30 @@ header .connect a{
     margin-right:1rem;
 }
 
-/*******************************
-*          ALL-MAIN            *
-*******************************/
-
-main{
-    background-color: var(--secondary-color);
-    padding:2rem;
-    max-width: 100%;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+    text-align: center;
 }
 
 /*********************************
 *          RESPONSIVE            *
 *********************************/
+
+    /**********************************
+    *          Just Mobile            *
+    **********************************/
+
+@media screen and (max-width: 790px){
+
+    .width100pM{
+        width: 100%;
+    }
+
+}
 
     /****************************************
     *          TABLETTE + Mobile            *
@@ -317,9 +491,9 @@ main{
     }
 }
 
-    /*******************************
-    *          TABLETTE            *
-    *******************************/
+    /****************************************
+    *          TABLETTE + DESKTOP           *
+    ****************************************/
 
 @media screen and (min-width: 790px){
     header>div {
@@ -336,10 +510,6 @@ main{
 
     .grid-3{
         grid-template: fit-content(100px) / 1fr 1fr;
-        /* grid-auto-flow: row; */
-        /* grid-template-columns: repeat(3, calc(100% / 1)); */
-        /* grid-auto-rows: minmax(100px, auto); */
-        /* grid-auto-rows: minmax(100px, auto); */
     }
 
     .grid-3>h1,
@@ -349,6 +519,22 @@ main{
     .grid-3>h5,
     .grid-3>h6{
         grid-column: 1/3;
+    }
+
+    .fRightTD{
+        float:right;
+        margin-left: 2rem;
+    
+    }
+
+    .fLeftTD{
+        float:left;
+        margin-right: 2rem;
+    
+    }
+
+    .flexTD{
+        display: flex;
     }
 
 }
@@ -362,10 +548,6 @@ main{
     
     .grid-3{
         grid-template: fit-content(100px) / 1fr 1fr 1fr;
-        /* grid-auto-flow: row; */
-        /* grid-template-columns: repeat(3, calc(100% / 1)); */
-        /* grid-auto-rows: minmax(100px, auto); */
-        /* grid-auto-rows: minmax(100px, auto); */
     }
 
     .grid-3>h1,
@@ -375,6 +557,10 @@ main{
     .grid-3>h5,
     .grid-3>h6{
         grid-column: 1/4;
+    }
+
+    .width70p{
+        width: 70%;
     }
 
 }

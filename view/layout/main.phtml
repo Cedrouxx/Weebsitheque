@@ -1,7 +1,4 @@
-<?php
-
-use App\Core\Session;
-?>
+<?php use App\Core\Session; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -19,7 +16,7 @@ use App\Core\Session;
     <header>
         <div class="container">
             <a href="/" class="logo"><h1>Weebsithèque</h1></a>
-            <div class="connect <?= Session::isLogin() ? 'navigation' : ''?> ">
+            <div class="connect navigation">
                 <?php if(Session::isLogin()): ?>
                     <ul>
                         <li>
@@ -66,7 +63,7 @@ use App\Core\Session;
                         <input type="checkbox" id="nav-diver" class="nav-check">
                         <label for="nav-diver">Divers</label>
                         <ul>
-                            <li><a href="/waifu">Waifus</a></li> 
+                            <li><a href="/diver/waifu">Waifus</a></li> 
                         </ul>
                     </li>
                 </ul>
@@ -84,6 +81,6 @@ use App\Core\Session;
         </div>
     </footer>
 
-    <script src="/ressources/js/main.js"></script>
+    <script src="/ressources/js/main.js" type="module"></script>
 </body>
 </html>

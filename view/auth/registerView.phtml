@@ -1,34 +1,38 @@
-<section>
+<section class="width70p block-center">
 
-    <h1>Enregistrement</h1>
+    <h1>Inscription</h1>
 
-    <div>
-        <ul>
-            <?php foreach($data['messages'] as $message): ?>
-                <li class="<?=key($message)?>"><?= $message[key($message)] ?></li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
+    <?php if(!empty($data['messages'])): ?>
+        <div class="borderAll shadow margeAll">
+            <ul class="listNone">
+                <?php foreach($data['messages'] as $message): ?>
+                    <li class="<?=key($message)?>"><?= $message[key($message)] ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endif; ?>
 
-    <form action="/registerPost" method="post">
+    <form class="borderAll shadow paddingAll margeAll" action="/registerPost" method="post">
 
-        <div>
-            <label for="username">Nom d'utilisateur</label>
-            <input type="text" id="username" name="username">
+        <div class="flexTD">
+            <label class="width100pM width50p" for="username">Nom d'utilisateur :</label>
+            <input class="width100pM width50p" type="text" id="username" name="username">
         </div>
-        <div>
-            <label for="email">Adresse mail</label>
-            <input type="email" id="email" name="email">
+        <div class="flexTD margeTop">
+            <label class="width100pM width50p" for="email">Adresse mail :</label>
+            <input class="width100pM width50p" type="email" id="email" name="email">
         </div>
-        <div>
-            <label for="password">Mot-de-passe</label>
-            <input type="password" id="password" name="password">
+        <div class="flexTD margeTop">
+            <label class="width100pM width50p" for="password">Mot-de-passe :</label>
+            <input class="width100pM width50p" type="password" id="password" name="password">
         </div>
-        <div>
-            <label for="password-confirm">Confirmation du mot-de-passe</label>
-            <input type="password" id="password-confirm" name="password-confirm">
+        <div class="flexTD margeTop ">
+            <label class="width100pM width50p" for="password-confirm">Confirmation du mot-de-passe :</label>
+            <input class="width100pM width50p" type="password" id="password-confirm" name="password-confirm">
         </div>
-        <div><input type="submit" value="S'inscrire" class="button"></div>
+        <div class="margeTop">
+            <input class="button block-center" type="submit" value="S'inscrire" class="button">
+        </div>
 
     </form>
 

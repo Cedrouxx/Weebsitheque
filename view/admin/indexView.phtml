@@ -1,13 +1,44 @@
+<div>
+    <ul>
+        <?php foreach($data['messages'] as $message): ?>
+            <li class="<?=key($message)?>"><?= $message[key($message)] ?></li>
+        <?php endforeach; ?>
+    </ul>
+</div>
+                        <!-- Anime -->
 <section>
-    
-    <div>
-        <ul>
-            <?php foreach($data['messages'] as $message): ?>
-                <li class="<?=key($message)?>"><?= $message[key($message)] ?></li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
-
+                            <!-- list -->
+    <article>
+        <input type="checkbox" id="list-anime" class="admin-check">
+        <label for="list-anime">Liste des animes</label>
+        <div>
+            <table class="border">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>nom</th>
+                        <th>studio</th>
+                        <th>nombre d'épisodes</th>
+                        <th>genre(s)</th>
+                        <th>image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($data['animes'] as $anime): ?>
+                    <tr>
+                        <td><?= $anime->id ?></td>
+                        <td><?= $anime->name ?></td>
+                        <td><?= $anime->author?></td>
+                        <td><?= $anime->number_volume?></td>
+                        <td><?= is_array($anime->genre)? implode(', ', $anime->genre) : $anime->genre ?></td>
+                        <td><?= $anime->image ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </article>
+                            <!-- add -->
     <article>
         <input type="checkbox" id="add-anime" class="admin-check">
         <label for="add-anime">Ajouter un anime</label>
@@ -47,9 +78,43 @@
 
         </div>
     </article>
+</section>
 
+                            <!-- manga -->
+<section>
+                            <!-- list -->
     <article>
-
+        <input type="checkbox" id="list-manga" class="admin-check">
+        <label for="list-manga">Liste des mangas</label>
+        <div>
+            <table class="border">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>nom</th>
+                        <th>auteur</th>
+                        <th>nombre de volumes</th>
+                        <th>genre(s)</th>
+                        <th>image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($data['mangas'] as $manga): ?>
+                    <tr>
+                        <td><?= $manga->id ?></td>
+                        <td><?= $manga->name ?></td>
+                        <td><?= $manga->author?></td>
+                        <td><?= $manga->number_volume?></td>
+                        <td><?= is_array($anime->genre)? implode(', ', $manga->genre) : $manga->genre ?></td>
+                        <td><?= $manga->image ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </article>
+                                <!-- add -->
+    <article>
         <input type="checkbox" id="add-manga" class="admin-check">
         <label for="add-manga">Ajouter un manga</label>
         <div>

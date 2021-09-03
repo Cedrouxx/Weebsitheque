@@ -4,8 +4,12 @@ namespace App\Model;
 
 class ModelOutput{
     
-    public static function makeOne(array $datas){
+    private static function make($datas){
         return new ModelOutput($datas);
+    }
+
+    public static function makeOne(array $datas){
+        return ModelOutput::makeAll($datas)[0];
     }
 
     public static function makeAll(array $datas){
@@ -43,7 +47,7 @@ class ModelOutput{
         
         $result = [];
         foreach($tempArray as $tempValue){
-            $result[] = ModelOutput::makeOne($tempValue);
+            $result[] = ModelOutput::make($tempValue);
         }
 
         return $result;

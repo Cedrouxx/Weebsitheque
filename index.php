@@ -14,11 +14,13 @@ Session::start();
 
 $routes = require 'route.php';
 
-if(!isset($routes[$_SERVER['REQUEST_URI']]))
+$url = explode('?',$_SERVER['REQUEST_URI'])[0];
+
+if(!isset($routes[$url]))
     abord(404);
 
 
-[ 'class' => $class, 'method' => $method] = $routes[$_SERVER['REQUEST_URI']];
+[ 'class' => $class, 'method' => $method] = $routes[$url];
 
 $controller = new $class;
 $controller->$method();

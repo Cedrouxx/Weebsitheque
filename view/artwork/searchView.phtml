@@ -1,19 +1,24 @@
 
 
-<section class="grid-3">
+<section class="grid-3 paddingRL">
 
-    <h2>Liste de <?= $data['type'] ?></h2>
+    <h1>Liste des <?= $data['type'] ?>s</h1>
 
     <?php foreach($data['list'] as $artwork): ?>
-        <article>
+        <article class="shadow borderAll">
             <figure class="hover-caption" tabindex="0">
                 <img src="<?= $artwork->image ?>" alt="<?= $artwork->name ?>">
                 <figcaption>
                     <div>
                         <h3><?= $artwork->name ?></h3>
                         <p>Créer par : <?= $artwork->author ?></p>
-                        <p>Genre : <?= is_array($artwork->genre)? implode(', ', $artwork->genre) : $artwork->genre ?></p>
-                        <a href="#" class="button">Plus d'info</a>
+                        <?php if (!empty($artwork->genre)): ?>
+                            <p>Genre : <?= is_array($artwork->genre)? implode(', ', $artwork->genre) : $artwork->genre ?></p>
+                        <?php endif; ?>
+                        <?php if (!empty($artwork->note)): ?>
+                            <p>Note : <?= $artwork->note ?>/10</p>
+                        <?php endif; ?>
+                        <a href="/<?= strtolower($data['type']) ?>/info?name=<?= $artwork->slug ?>" class="button block-center">Plus d'info</a>
                     </div>
                 </figcaption>
             </figure>

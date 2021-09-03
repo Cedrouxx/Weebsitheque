@@ -19,6 +19,10 @@ class AdminController extends Controller{
         $data['messages'] = Session::getMessage();
         Session::clearMessage();
 
+        $artworkModel = new Artwork();
+        $data['animes'] = $artworkModel->getAllAnime();
+        $data['mangas'] = $artworkModel->getAllManga();
+
         $authorModel = new Author();
         $data['authors'] = $authorModel->getAllAuthor();
 

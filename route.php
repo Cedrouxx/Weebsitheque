@@ -5,6 +5,7 @@ use App\Controller\AuthController;
 use App\Controller\AnimeController;
 use App\Controller\MangaController;
 use App\Controller\AdminController;
+use App\Controller\DiverController;
 
 return [
     // Default route
@@ -26,6 +27,16 @@ return [
         // search
     '/anime/search' => [ 'class' => AnimeController::class, 'method' => 'search' ],
     '/manga/search' => [ 'class' => MangaController::class, 'method' => 'search' ],
+        // info
+    '/anime/info' => [ 'class' => AnimeController::class, 'method' => 'info' ],
+    '/manga/info' => [ 'class' => MangaController::class, 'method' => 'info' ],
+        // add comment
+    '/anime/addComment' => [ 'class' => AnimeController::class, 'method' => 'addComment' ],
+    '/manga/addComment' => [ 'class' => MangaController::class, 'method' => 'addComment' ],
+
+    // Divers
+        // waifu
+    '/diver/waifu' => [ 'class' => DiverController::class, 'method' => 'waifu' ],
 
     // Admin
     '/admin' => [ 'class' => AdminController::class, 'method' => 'index' ],

@@ -1,26 +1,30 @@
-<section>
+<section class="width70p block-center">
 
     <h1>Connection</h1>
 
-    <div>
-        <ul>
-            <?php foreach($data['messages'] as $message): ?>
-                <li class="<?=key($message)?>"><?= $message[key($message)] ?></li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
-
-    <form action="/loginPost" method="post">
-
-        <div>
-            <label for="email">Adresse mail</label>
-            <input type="email" id="email" name="email">
+    <?php if(!empty($data['messages'])): ?>
+        <div class="borderAll shadow margeAll">
+            <ul class="listNone">
+                <?php foreach($data['messages'] as $message): ?>
+                    <li class="<?=key($message)?>"><?= $message[key($message)] ?></li>
+                <?php endforeach; ?>
+            </ul>
         </div>
-        <div>
-            <label for="password">Mot-de-passe</label>
-            <input type="password" id="password" name="password">
+    <?php endif; ?>
+
+    <form class="borderAll shadow paddingAll margeAll" action="/loginPost" method="post">
+
+        <div class="flexTD">
+            <label class="width100pM width50p" for="email">Adresse mail :</label>
+            <input class="width100pM width50p" type="email" id="email" name="email">
         </div>
-        <div><input type="submit" value="Se connecter" class="button"></div>
+        <div class="flexTD margeTop">
+            <label class="width100pM width50p" for="password">Mot-de-passe :</label>
+            <input class="width100pM width50p" type="password" id="password" name="password">
+        </div>
+        <div class="margeTop">
+            <input class="button block-center" type="submit" value="Se connecter">
+        </div>
 
     </form>
 

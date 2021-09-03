@@ -1,5 +1,7 @@
 "use strict";
 
+import Waifu from "./waifu/Waifu.js";
+
 document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('click', e =>{
@@ -10,10 +12,21 @@ document.addEventListener('DOMContentLoaded', () => {
             e.target.checked = true;
         }
 
-        // element <a> with href '#' not work
+        // for element <a> with href '#' not work
         if(e.target.getAttribute('href') === '#')
             e.preventDefault();
 
     });
-        
+
+    document.querySelectorAll('.notJS').forEach( element => element.parentElement.removeChild(element));
+
+    // DIVER WAIFU
+    if (document.title === 'Weebsithèque | Waifu')
+        new Waifu();
+
+    // TEXTAREA
+    let textarea = document.querySelectorAll(`textarea`);
+    textarea.forEach(element => element.addEventListener("input", (e) => {
+        e.target.rows = ((e.target.value.match(/\n/g) || []).length)+2;
+    }));
 });

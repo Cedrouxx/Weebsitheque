@@ -1,0 +1,68 @@
+<section class="width70p block-center borderAll shadow">
+    <img src="<?= $data['artwork']->image ?>" alt="<?= $data['artwork']->name ?>" class="width100pM fLeftTD width50p">
+    <article class="paddingAll">
+        <h1 class="text-left"><?= $data['artwork']->name ?></h1>
+        <p>Auteur : <?= $data['artwork']->author ?></p>
+        <p>Nombre de volume : <?= $data['artwork']->number_volume ?></p>
+        <p>Type : <?= $data['artwork']->type ?></p>
+        <p>Genre : <?= is_array($data['artwork']->genre)? implode(', ', $data['artwork']->genre) : $data['artwork']->genre ?></p>
+    </article>
+</section>
+
+<?php if($data['isLogin']) : ?>
+<section class="width70p block-center">
+    <h2>Ajouter un Commentaires</h2>
+
+    <?php if(!empty($data['messages'])): ?>
+        <div class="borderAll shadow margeAll">
+            <ul class="listNone">
+                <?php foreach($data['messages'] as $message): ?>
+                    <li class="<?=key($message)?>"><?= $message[key($message)] ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endif; ?>
+
+    <form   action="/<?= strtolower($data['artwork']->type) ?>/addComment?name=<?= $data['artwork']->slug ?>" 
+            method="post"
+            class="jsNotRefresh" 
+            data-refresh="" 
+            data-refresh-with="comment"
+    >
+        <input type="hidden" name="artwork_id" value="<?= $data['artwork']->id ?>">
+        <div class="paddingRL">
+            <label for="note">Note : </label>
+            <input type="number" name="note" id="note" min="0" max="10" class="inputNote paddingAllMin borderAll shadow">
+            <span>/10</span>
+        </div>
+        <div class="paddingRL">
+            <textarea name="content" class="paddingAllMin borderAll shadow"></textarea>
+        </div>
+        <input type="submit" value="Ajouter" class="button block-center">
+    </form>
+</section>
+<?php endif; ?>
+
+<?php if(!empty($data['comments'])): ?>
+    <section>
+        <h2>Commentaires</h2>
+        <div>
+            <?php foreach($data['comments'] as $comment): ?>
+                <article class="width70p block-center paddingAll borderAll shadow">
+                    <h3 class="text-left"><span><?= $comment->note ?>/10</span> <?= $comment->user ?></h3>
+                    <p><?= nl2br($comment->content) ?></p>
+                </article>
+            <?php endforeach; ?>
+        </div>
+    </section>
+<?php endif; ?>
+
+
+
+
+
+
+
+
+
+
