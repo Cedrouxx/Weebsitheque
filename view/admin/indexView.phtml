@@ -105,7 +105,7 @@
                         <td><?= $manga->name ?></td>
                         <td><?= $manga->author?></td>
                         <td><?= $manga->number_volume?></td>
-                        <td><?= is_array($anime->genre)? implode(', ', $manga->genre) : $manga->genre ?></td>
+                        <td><?= is_array($manga->genre)? implode(', ', $manga->genre) : $manga->genre ?></td>
                         <td><?= $manga->image ?></td>
                     </tr>
                     <?php endforeach; ?>
