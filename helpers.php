@@ -7,6 +7,11 @@ function redirect(string $location): void{
     exit;
 }
 
+function redirectToLastPage(): void{
+    header("Location: {$_SERVER["HTTP_REFERER"]}");
+    exit;
+}
+
 function abord(int $errorCode): void{
     switch ($errorCode){
         case 404:

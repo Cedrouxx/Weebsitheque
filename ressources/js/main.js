@@ -1,6 +1,7 @@
 "use strict";
 
 import Waifu from "./waifu/Waifu.js";
+import ChangeStatus from "./forms/status/ChangeStatus.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -29,4 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
     textarea.forEach(element => element.addEventListener("input", (e) => {
         e.target.rows = ((e.target.value.match(/\n/g) || []).length)+2;
     }));
+
+    // if (document.title === 'Weebsithèque | Ma liste')
+    //     new ChangeStatus();
+
 });

@@ -194,4 +194,27 @@ class Model extends Database{
         $this->reset();
     }
 
+    public function delete(){
+
+        $from = 'DELETE FROM '.$this->from;
+
+        $whereCommand = [];
+        foreach($this->where as $value){
+            $whereCommand[] = $value['champName'].' = ?';
+        }
+        $where = 'WHERE '.(!empty($this->where)? implode(' AND ', $whereCommand) : '1');
+
+        $sql = $from.' '.$where;
+        $query = $this->pdo->prepare($sql);
+
+        for($o = 0; $o<count($this->where); $o++){
+            var_dump(1);
+            $query->bindValue($o+1, $this->where[$o]['value']);
+        }
+
+        $query->execute(); 
+
+        $this->reset();
+    }
+
 }

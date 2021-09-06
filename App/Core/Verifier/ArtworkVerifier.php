@@ -32,4 +32,22 @@ class ArtworkVerifier{
         return $result;
     }
 
+    public static function removelList(array $removeData): bool{
+        if(!isset($removeData['artwork_id']) || empty($removeData['artwork_id'])) 
+            return false;
+
+        return true;
+    }
+
+    public static function setStatusList(array $setStatusData): bool{
+        if(!ArtworkVerifier::removelList($setStatusData)) 
+            return false;
+
+        if(!isset($setStatusData['status']) || empty($setStatusData['status'])) 
+            return false;
+
+
+        return true;
+    }
+
 }

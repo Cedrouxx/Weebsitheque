@@ -8,6 +8,9 @@
         <article class="shadow borderAll">
             <figure class="hover-caption" tabindex="0">
                 <img src="<?= $artwork->image ?>" alt="<?= $artwork->name ?>">
+                <?php if($data['isLogin'] && !empty($data['user_list'][$artwork->id])): ?>
+                    <span class="user-status"><?= $data['user_list'][$artwork->id] ?></span>
+                <?php endif; ?>
                 <figcaption>
                     <div>
                         <h3><?= $artwork->name ?></h3>
@@ -20,7 +23,18 @@
                         <?php endif; ?>
                         <a href="/<?= strtolower($data['type']) ?>/info?name=<?= $artwork->slug ?>" class="button block-center">Plus d'info</a>
                     </div>
+                    <?php if($data['isLogin']): ?>
+                        <form action="<?= empty($data['user_list'][$artwork->id]) ? '/add-artwork-list' : '/remove-artwork-list'?>" method="post">
+                            <input type="hidden" name="artwork_id" value="<?= $artwork->id ?>">
+                            <?php if(empty($data['user_list'][$artwork->id])): ?>
+                                <button class="add-artwork-button">+</button>
+                            <?php else: ?>
+                                <button class="add-artwork-button"><span>_</span></button>
+                            <?php endif; ?>
+                        </form>
+                    <?php endif; ?>
                 </figcaption>
+                
             </figure>
         </article>
     <?php endforeach; ?>

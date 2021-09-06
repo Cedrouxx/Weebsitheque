@@ -24,7 +24,7 @@
                             <label for="nav-user"><?= Session::getUser()['username'] ?></label>
                             <ul>
                                 <li><a href="#">Mon compte</a></li>
-                                <li><a href="#">Mes listes</a></li>
+                                <li><a href="/my-list/all">Mes listes</a></li>
                                 <?php if(Session::getUser()['isAdmin']): ?>
                                     <li><a href="/admin">Page administrateur</a></li>
                                 <?php endif; ?>
@@ -44,7 +44,7 @@
                         <label for="nav-anime">Anime</label>
                         <ul>
                             <?php if(Session::isLogin()): ?>
-                                <li><a href="/my-anime-list">Ma liste</a></li> <!-- si connecter -->
+                                <li><a href="/my-list/anime">Ma liste</a></li> <!-- si connecter -->
                             <?php endif; ?>
                             <li><a href="/anime/search">Recherche</a></li>
                         </ul>
@@ -54,7 +54,7 @@
                         <label for="nav-manga">Manga</label>
                         <ul>
                             <?php if(Session::isLogin()): ?>
-                                <li><a href="/my-manga-list">Ma liste</a></li> <!-- si connecter -->
+                                <li><a href="/my-list/manga">Ma liste</a></li> <!-- si connecter -->
                             <?php endif; ?>
                             <li><a href="/manga/search">Recherche</a></li>
                         </ul>

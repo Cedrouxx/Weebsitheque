@@ -2,10 +2,9 @@
 
 use App\Controller\DefaultController;
 use App\Controller\AuthController;
-use App\Controller\AnimeController;
-use App\Controller\MangaController;
 use App\Controller\AdminController;
 use App\Controller\DiverController;
+use App\Controller\ArtworkController;
 
 return [
     // Default route
@@ -25,14 +24,25 @@ return [
 
     // Artworks
         // search
-    '/anime/search' => [ 'class' => AnimeController::class, 'method' => 'search' ],
-    '/manga/search' => [ 'class' => MangaController::class, 'method' => 'search' ],
+    '/anime/search' => [ 'class' => ArtworkController::class, 'method' => 'search', 'parameter' => ['anime'] ],
+    '/manga/search' => [ 'class' => ArtworkController::class, 'method' => 'search', 'parameter' => ['manga'] ],
         // info
-    '/anime/info' => [ 'class' => AnimeController::class, 'method' => 'info' ],
-    '/manga/info' => [ 'class' => MangaController::class, 'method' => 'info' ],
+    '/anime/info' => [ 'class' => ArtworkController::class, 'method' => 'info', 'parameter' => ['anime'] ],
+    '/manga/info' => [ 'class' => ArtworkController::class, 'method' => 'info', 'parameter' => ['manga'] ],
         // add comment
-    '/anime/addComment' => [ 'class' => AnimeController::class, 'method' => 'addComment' ],
-    '/manga/addComment' => [ 'class' => MangaController::class, 'method' => 'addComment' ],
+    '/anime/addComment' => [ 'class' => ArtworkController::class, 'method' => 'addComment', 'parameter' => ['anime'] ],
+    '/manga/addComment' => [ 'class' => ArtworkController::class, 'method' => 'addComment', 'parameter' => ['manga'] ],
+
+    // My List
+    '/my-list/all' => [ 'class' => ArtworkController::class, 'method' => 'myList', 'parameter' => ['all'] ],
+    '/my-list/anime' => [ 'class' => ArtworkController::class, 'method' => 'myList', 'parameter' => ['anime'] ],
+    '/my-list/manga' => [ 'class' => ArtworkController::class, 'method' => 'myList', 'parameter' => ['manga'] ],
+        // remove
+    '/remove-artwork-list' => [ 'class' => ArtworkController::class, 'method' => 'removeList' ],
+        // add
+    '/add-artwork-list' => [ 'class' => ArtworkController::class, 'method' => 'addList' ],
+        //set status
+    '/set-artwork-list-status' => [ 'class' => ArtworkController::class, 'method' => 'setListStatus' ],
 
     // Divers
         // waifu
@@ -42,4 +52,5 @@ return [
     '/admin' => [ 'class' => AdminController::class, 'method' => 'index' ],
         // add
     '/admin/add/artwork' => [ 'class' => AdminController::class, 'method' => 'addArtwork' ],
+
 ];

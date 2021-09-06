@@ -23,5 +23,5 @@ if(!isset($routes[$url]))
 [ 'class' => $class, 'method' => $method] = $routes[$url];
 
 $controller = new $class;
-$controller->$method();
+$controller->$method(...$routes[$url]['parameter'] ?? []);
 

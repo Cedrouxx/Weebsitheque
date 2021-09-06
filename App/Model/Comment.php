@@ -7,6 +7,7 @@ class Comment extends Model{
     public function getAllCommentByArtworkId($artworkId): array{
         return $this->select('comment.id', 'user.username AS user', 'comment.note', 'comment.content')
         ->from('comment')
+        ->orderBy('comment.created_at DESC')
         ->with('user', 'user_id', 'user.id')
         ->where('comment.artwork_id', $artworkId)
         ->getAll();
