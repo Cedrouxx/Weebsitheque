@@ -1,7 +1,8 @@
 
 
-<section class="grid-3 paddingRL">
+<section id="refresh" class="grid-3 paddingRL">
 
+    <input id="JStype" type="hidden" name="type" value="<?=strtolower($data['type'])?>">
     <h1>Liste des <?= $data['type'] ?>s</h1>
 
     <?php foreach($data['list'] as $artwork): ?>
@@ -10,6 +11,8 @@
                 <img src="<?= $artwork->image ?>" alt="<?= $artwork->name ?>">
                 <?php if($data['isLogin'] && !empty($data['user_list'][$artwork->id])): ?>
                     <span class="user-status"><?= $data['user_list'][$artwork->id] ?></span>
+                <?php elseif($data['isLogin']): ?>
+                    <span class="user-status none"><?= $data['user_list'][$artwork->id] ?></span>
                 <?php endif; ?>
                 <figcaption>
                     <div>
@@ -27,9 +30,9 @@
                         <form action="<?= empty($data['user_list'][$artwork->id]) ? '/add-artwork-list' : '/remove-artwork-list'?>" method="post">
                             <input type="hidden" name="artwork_id" value="<?= $artwork->id ?>">
                             <?php if(empty($data['user_list'][$artwork->id])): ?>
-                                <button class="add-artwork-button">+</button>
+                                <button id="addArtworkList" class="artwork-list-button add"></button>
                             <?php else: ?>
-                                <button class="add-artwork-button"><span>_</span></button>
+                                <button id="removeArtworkList" class="artwork-list-button remove"></button>
                             <?php endif; ?>
                         </form>
                     <?php endif; ?>

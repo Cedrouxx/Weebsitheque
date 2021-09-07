@@ -151,6 +151,16 @@ img{
     background-color: var(--secondary-color);
 }
 
+.button:disabled{
+    opacity: 0.6 ;
+    cursor: not-allowed;
+}
+.button:hover:disabled{
+    color:var(--secondary-color);
+    background-color: var(--third-color);
+}
+
+
 .navButton{
     text-decoration: none;
     color:black;
@@ -207,8 +217,11 @@ table.border{
 .flex{
     display: flex;
 }
+.none{
+    display: none;
+}
 
-    /*      --- DISPLAY ---        */
+    /*      --- FLEX ---        */
 .flex-around{
     display: flex;
     justify-content: space-around;
@@ -218,6 +231,9 @@ table.border{
     /*      --- BLOCK-ALIGN ---        */
 .block-center{
     margin-right: auto;
+    margin-left: auto;
+}
+.block-right{
     margin-left: auto;
 }
 
@@ -450,7 +466,7 @@ textarea::selection{
     margin-right: 1rem;
 }
 
-.add-artwork-button{
+.artwork-list-button{
     position: absolute;
     bottom: 1rem;
     left: 1rem;
@@ -465,14 +481,23 @@ textarea::selection{
     vertical-align: middle;
     border-radius: 50%;
 }
-.add-artwork-button:hover{
+.artwork-list-button:hover{
     color: var(--third-color);
     background-color: var(--secondary-color);
 }
-.add-artwork-button>span{
+.artwork-list-button.remove::after{
+    content: '_';
     position: absolute;
     display: block;
     bottom: 47%;
+    left: 0;
+    right: 0;
+}
+.artwork-list-button.add::after{
+    content: '+';
+    position: absolute;
+    display: block;
+    bottom: 3%;
     left: 0;
     right: 0;
 }
@@ -488,6 +513,13 @@ textarea::selection{
     z-index: 20;
     min-width: 10rem;
     text-align: center;
+    border:none;
+}
+
+.user-status select{
+    background: none;
+    border: none;
+    color: white;
 }
 
 /*****************************

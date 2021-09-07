@@ -175,17 +175,13 @@ class Model extends Database{
         $sql = $from.' SET '.$champsNames.' '.$where;
         $query = $this->pdo->prepare($sql);
 
-        var_dump($sql);
-
         $justValue = array_values($this->values);
 
         for($i = 0; $i<count($justValue); $i++){
-            var_dump(1);
             $query->bindValue($i+1, $justValue[$i]);
         }
 
         for($o = 0; $o<count($this->where); $o++){
-            var_dump(1);
             $query->bindValue($o+1+$i, $this->where[$o]['value']);
         }
 
@@ -208,7 +204,6 @@ class Model extends Database{
         $query = $this->pdo->prepare($sql);
 
         for($o = 0; $o<count($this->where); $o++){
-            var_dump(1);
             $query->bindValue($o+1, $this->where[$o]['value']);
         }
 

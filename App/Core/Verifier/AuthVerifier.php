@@ -53,19 +53,22 @@ class AuthVerifier{
         if(!empty($result))
             return $result;
 
-        // if(empty($loginData['username'])) $result[] = 'Champ \'Nom d\'utilisateur\' non renseigné !';
-        // if(empty($loginData['email'])) $result[] = 'Champ \'Adresse mail\' non renseigné !';
-        // if(empty($loginData['password'])) return false;
-        // if(empty($loginData['password-confirm'])) return false;
         $userModel = new User();
+
+        if(strlen($loginData['username']) < 3)
+            $result[] =  [ 'error' => 'Le nom d\'utilisateur doit avoir au moin 3 carractères !' ];
 
         if(!filter_var($loginData['email'], FILTER_VALIDATE_EMAIL)) 
             $result[] =  [ 'error' => 'L\'adresse mail est incorect !' ];
 
+        if(empty(preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/', $loginData['password']))){
+            $result[] =  [ 'error' => 'Le mot de passe doit contenir au moin une lettre majuscule, une lettre minuscule, un nombre et un carractère spécial (!, @, #, \$, %, \^, &, \*) !' ];
+        }
+
         if($loginData['password'] !== $loginData['password-confirm'])
             $result[] =  [ 'error' => 'Les mots-de-passe ne corresponde pas !' ];
 
-        if(!empty($userModel->getOneByMail($loginData['email'])))
+        if(isset($userModel->getOneByMail($loginData['email'])->id))
             $result[] =  [ 'error' => 'Adresse mail déjà utilisé !' ];
 
         return $result;

@@ -1,7 +1,11 @@
 "use strict";
 
 import Waifu from "./waifu/Waifu.js";
-import ChangeStatus from "./forms/status/ChangeStatus.js";
+import ChangeStatus from "./forms/artworkList/ChangeStatus.js";
+import ArtworkList from "./forms/artworkList/ArtworkList.js";
+import Login from "./forms/auth/Login.js";
+import Register from "./forms/auth/Register.js";
+import {config} from "./config.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -31,7 +35,16 @@ document.addEventListener('DOMContentLoaded', () => {
         e.target.rows = ((e.target.value.match(/\n/g) || []).length)+2;
     }));
 
-    // if (document.title === 'Weebsithèque | Ma liste')
-    //     new ChangeStatus();
+
+    if (document.title === config.title.userList)
+        new ChangeStatus();
+    
+    if (document.title === config.title.login)
+        new Login();
+
+    if (document.title === config.title.register)
+        new Register();
+
+    new ArtworkList();
 
 });

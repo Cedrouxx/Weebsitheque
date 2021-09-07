@@ -5,6 +5,7 @@ use App\Controller\AuthController;
 use App\Controller\AdminController;
 use App\Controller\DiverController;
 use App\Controller\ArtworkController;
+use App\Controller\ApiController;
 
 return [
     // Default route
@@ -52,5 +53,14 @@ return [
     '/admin' => [ 'class' => AdminController::class, 'method' => 'index' ],
         // add
     '/admin/add/artwork' => [ 'class' => AdminController::class, 'method' => 'addArtwork' ],
+
+    // API
+    '/api/UserList/ChangeStatus' => [ 'class' => ApiController::class, 'method' => 'UserListChangeStatus' ],
+    '/api/UserList/RemoveArtworkList' => [ 'class' => ApiController::class, 'method' => 'RemoveArtworkList' ],
+    '/api/UserList/AddArtworkList' => [ 'class' => ApiController::class, 'method' => 'AddArtworkList' ],
+        // get user list
+    '/api/UserList/getUserList/all' => [ 'class' => ApiController::class, 'method' => 'getUserList', 'parameter' => ['all'] ],
+    '/api/UserList/getUserList/anime' => [ 'class' => ApiController::class, 'method' => 'getUserList', 'parameter' => ['anime'] ],
+    '/api/UserList/getUserList/manga' => [ 'class' => ApiController::class, 'method' => 'getUserList', 'parameter' => ['manga'] ],
 
 ];
