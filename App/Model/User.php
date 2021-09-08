@@ -20,4 +20,25 @@ class User extends Model{
         ])->insert();
     }
 
+    public function updateUsername(int $userId ,string $username){
+        $this->from('user')->values([
+            'username' => $username
+        ])->where('id', $userId)
+        ->update();
+    }
+
+    public function updateEmail(int $userId ,string $email){
+        $this->from('user')->values([
+            'email' => $email
+        ])->where('id', $userId)
+        ->update();
+    }
+
+    public function updatePassword(int $userId ,string $password){
+        $this->from('user')->values([
+            'password' => $password
+        ])->where('id', $userId)
+        ->update();
+    }
+
 }

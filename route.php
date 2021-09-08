@@ -8,10 +8,10 @@ use App\Controller\ArtworkController;
 use App\Controller\ApiController;
 
 return [
-    // Default route
+    // Default
     '/' => [ 'class' => DefaultController::class, 'method' => 'home' ],
 
-    // Auths Route
+    // Auths
         // login
     '/login' => [ 'class' => AuthController::class, 'method' => 'login' ],
     '/loginPost' => [ 'class' => AuthController::class, 'method' => 'loginPost' ],
@@ -22,6 +22,12 @@ return [
 
         // logout
     '/logout' => [ 'class' => AuthController::class, 'method' => 'logout' ],
+
+    // User Account
+    '/my-account' => [ 'class' => AuthController::class, 'method' => 'myAccount' ],
+    '/my-account/change-username' => [ 'class' => AuthController::class, 'method' => 'changeUsername' ],
+    '/my-account/change-email' => [ 'class' => AuthController::class, 'method' => 'changeEmail' ],
+    '/my-account/change-password' => [ 'class' => AuthController::class, 'method' => 'changePassword' ],
 
     // Artworks
         // search

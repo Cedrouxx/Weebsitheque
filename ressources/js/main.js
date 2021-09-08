@@ -5,6 +5,9 @@ import ChangeStatus from "./forms/artworkList/ChangeStatus.js";
 import ArtworkList from "./forms/artworkList/ArtworkList.js";
 import Login from "./forms/auth/Login.js";
 import Register from "./forms/auth/Register.js";
+import ChangeUsername from "./forms/auth/ChangeUsername.js";
+import ChangeEmail from "./forms/auth/ChangeEmail.js";
+import ChangePassword from "./forms/auth/ChangePassword.js";
 import {config} from "./config.js";
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -44,6 +47,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (document.title === config.title.register)
         new Register();
+
+    if (document.title === config.title.myAccount ){
+        new ChangeUsername();
+        new ChangeEmail();
+        new ChangePassword();
+    }
 
     new ArtworkList();
 

@@ -252,7 +252,7 @@ table.border{
 
     /*      --- WIDTH ---        */
 .width50p{
-    width: 50%;
+    width: 70%;
 }
 
 .width70p{
@@ -310,6 +310,9 @@ table.border{
 
 .error{
     color: red;
+}
+.success{
+    color: green;
 }
 
 /*****************************
@@ -651,6 +654,10 @@ h6{
 
     .width70p{
         width: 70%;
+    }
+
+    .width50p{
+        width: 50%;
     }
 
 }

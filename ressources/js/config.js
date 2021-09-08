@@ -4,7 +4,8 @@ export const config = {
 
         userList: 'Weebsithèque | Ma liste',
         login: 'Weebsithèque | Connection',
-        register: 'Weebsithèque | Inscription'
+        register: 'Weebsithèque | Inscription',
+        myAccount: 'Weebsithèque | Mon compte' 
 
     }
 

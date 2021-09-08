@@ -69,4 +69,91 @@ class AuthController extends Controller{
         redirect('/');
     }
 
+    public function myAccount(){
+
+        if(!Session::isLogin())
+            redirect('/');
+
+        $data['user'] = Session::getUser();
+        
+        $data['messages'] = Session::getMessage();
+        Session::clearMessage();
+
+        $this->lunchPage('auth/myAccount', 'Mon compte', $data);
+    }
+
+    public function changeUsername(){
+        
+        if(!Session::isLogin())
+            redirect('/');
+
+        $verifier = AuthVerifier::username($_POST);
+        if(!empty($verifier)){
+            Session::addMessage($verifier);
+            redirect('/my-account');
+        }
+
+        $user = Session::getUser();
+        $userModel = new User();
+        $userModel->updateUsername($user['id'], $_POST['username']);
+
+        $user['username'] = $_POST['username'];
+
+        Session::logout();
+        Session::login($user['id'], $user['username'], $user['email'], $user['isAdmin']);
+
+        Session::addMessage([['success' => 'Nom d\'utilisateur modifier !']]);
+
+        redirect('/my-account');
+
+
+    }
+
+    public function changeEmail(){
+        
+        if(!Session::isLogin())
+            redirect('/');
+
+        $verifier = AuthVerifier::email($_POST);
+        if(!empty($verifier)){
+            Session::addMessage($verifier);
+            redirect('/my-account');
+        }
+
+        $user = Session::getUser();
+        $userModel = new User();
+        $userModel->updateEmail($user['id'], $_POST['email']);
+
+        $user['email'] = $_POST['email'];
+
+        Session::logout();
+        Session::login($user['id'], $user['username'], $user['email'], $user['isAdmin']);
+
+        Session::addMessage([['success' => 'Adresse mail modifier !']]);
+
+        redirect('/my-account');
+
+    }
+
+    public function changePassword(){
+        
+        if(!Session::isLogin())
+            redirect('/');
+
+        $verifier = AuthVerifier::password($_POST);
+        if(!empty($verifier)){
+            Session::addMessage($verifier);
+            redirect('/my-account');
+        }
+
+        $user = Session::getUser();
+        $userModel = new User();
+        $userModel->updatePassword($user['id'], password_hash($_POST['password'], PASSWORD_DEFAULT));
+
+        Session::addMessage([['success' => 'Mot-de-passe modifier !']]);
+
+        redirect('/my-account');
+
+    }
+
 }

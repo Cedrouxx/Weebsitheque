@@ -62,7 +62,7 @@ class AuthVerifier{
             $result[] =  [ 'error' => 'L\'adresse mail est incorect !' ];
 
         if(empty(preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/', $loginData['password']))){
-            $result[] =  [ 'error' => 'Le mot de passe doit contenir au moin une lettre majuscule, une lettre minuscule, un nombre et un carractère spécial (!, @, #, \$, %, \^, &, \*) !' ];
+            $result[] =  [ 'error' => 'Le mot de passe doit contenir au moin 8 carractères, une lettre majuscule, une lettre minuscule, un nombre et un carractère spécial (!, @, #, \$, %, \^, &, \*) !' ];
         }
 
         if($loginData['password'] !== $loginData['password-confirm'])
@@ -72,6 +72,59 @@ class AuthVerifier{
             $result[] =  [ 'error' => 'Adresse mail déjà utilisé !' ];
 
         return $result;
+    }
+
+    public static function username($usernameData){
+        
+        $result = [];
+
+        if(!isset($usernameData['username']) || empty($usernameData['username'])) 
+            $result[] = [ 'error' => 'Champ \'Nom d\'utilisateur\' non renseigné !' ];
+
+        if(strlen($usernameData['username']) < 3)
+            $result[] =  [ 'error' => 'Le nom d\'utilisateur doit avoir au moin 3 carractères !' ];
+
+        return $result;
+
+    }
+
+    public static function email($emailData){
+        
+        $result = [];
+
+        if(!isset($emailData['email']) || empty($emailData['email'])) 
+            $result[] = [ 'error' => 'Champ \'Adresse mail\' non renseigné !' ];
+
+        if(!filter_var($emailData['email'], FILTER_VALIDATE_EMAIL)) 
+            $result[] =  [ 'error' => 'L\'adresse mail est incorect !' ];
+
+        $userModel = new User();
+        if(isset($userModel->getOneByMail($emailData['email'])->id))
+            $result[] =  [ 'error' => 'Adresse mail déjà utilisé !' ];
+
+        return $result;
+
+    }
+
+    public static function password($passwordData){
+        
+        $result = [];
+
+        if(!isset($passwordData['password']) || empty($passwordData['password'])) 
+            $result[] =  [ 'error' => 'Champ \'Mot-de-passe\' non renseigné !' ];
+
+        if(!isset($passwordData['password-confirm']) || empty($passwordData['password-confirm'])) 
+            $result[] =  [ 'error' => 'Champ \'Confirmation du mot-de-passe\' non renseigné !' ];
+
+        if(empty(preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/', $passwordData['password'])))
+            $result[] =  [ 'error' => 'Le mot de passe doit contenir au moin 8 carractères, une lettre majuscule, une lettre minuscule, un nombre et un carractère spécial (!, @, #, \$, %, \^, &, \*) !' ];
+        
+
+        if($passwordData['password'] !== $passwordData['password-confirm'])
+            $result[] =  [ 'error' => 'Les mots-de-passe ne corresponde pas !' ];
+
+        return $result;
+
     }
 
 }

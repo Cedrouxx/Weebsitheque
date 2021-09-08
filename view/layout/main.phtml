@@ -23,7 +23,7 @@
                             <input type="checkbox" id="nav-user" class="nav-check">
                             <label for="nav-user"><?= Session::getUser()['username'] ?></label>
                             <ul>
-                                <li><a href="#">Mon compte</a></li>
+                                <li><a href="/my-account">Mon compte</a></li>
                                 <li><a href="/my-list/all">Mes listes</a></li>
                                 <?php if(Session::getUser()['isAdmin']): ?>
                                     <li><a href="/admin">Page administrateur</a></li>
