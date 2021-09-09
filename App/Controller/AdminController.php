@@ -33,16 +33,16 @@ class AdminController extends Controller{
     }
 
     public function addArtwork(): void{
-        var_dump($_POST, $_FILES);
 
         $messages = AdminVerifier::artworkForm($_POST, $_FILES);
 
-        var_dump($messages);
+        if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))
+            redirect('/');
+
         if(empty($messages)){
 
             $fileType = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-            var_dump($fileType);
-            $folder = '/ressources/img/artwork/'.($_POST['type'] == 1 ? 'manga' : 'anime').'/'.Str::slug($_POST['name']).'.'.$fileType;
+            $folder = 'ressources/img/artwork/'.($_POST['type'] == 1 ? 'manga' : 'anime').'/'.Str::slug($_POST['name']).'.'.$fileType;
             move_uploaded_file($_FILES['image']['tmp_name'], '.'.$folder);
 
             $artworkModel = new Artwork();
@@ -55,7 +55,7 @@ class AdminController extends Controller{
             Session::addMessage($messages);
         }
 
-        redirect('/admin');
+        redirect('admin');
     }
 
 }

@@ -90,7 +90,7 @@ class AuthController extends Controller{
         $verifier = AuthVerifier::username($_POST);
         if(!empty($verifier)){
             Session::addMessage($verifier);
-            redirect('/my-account');
+            redirect('my-account');
         }
 
         $user = Session::getUser();
@@ -104,7 +104,7 @@ class AuthController extends Controller{
 
         Session::addMessage([['success' => 'Nom d\'utilisateur modifier !']]);
 
-        redirect('/my-account');
+        redirect('my-account');
 
 
     }

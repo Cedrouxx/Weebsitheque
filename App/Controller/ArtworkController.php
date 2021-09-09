@@ -42,7 +42,7 @@ class ArtworkController extends Controller{
 
     public function info(string $type){
         if(!isset($_GET['name']))
-            redirect("/$type/search");
+            redirect("$type/search");
 
         $artworkModel = new Artwork();
         $commentModel = new Comment();
@@ -50,7 +50,7 @@ class ArtworkController extends Controller{
         $data['artwork'] = $artworkModel->getOneArtworkBySlug($_GET['name']);
 
         if(!isset($data['artwork']->slug))
-            redirect("/$type/search");
+            redirect("$type/search");
 
         $data['comments'] = $commentModel->getAllCommentByArtworkId($data['artwork']->id);
 
@@ -70,20 +70,20 @@ class ArtworkController extends Controller{
         $artwork = $artworkModel->getOneArtworkById($_POST['artwork_id']);
 
         if(!isset($artwork->id))
-            redirect("/$type/search");
+            redirect("$type/search");
         
         if(!Session::isLogin())
-            redirect("/$type/info?name=$artwork->slug");
+            redirect("$type/info?name=$artwork->slug");
 
         if(!empty($verifier)){
             Session::addMessage($verifier);
-            redirect("/$type/info?name=$artwork->slug");
+            redirect("$type/info?name=$artwork->slug");
         }
 
         $commentModel = new Comment();
         $commentModel->insertOneComment(Session::getUser()['id'], $_POST['artwork_id'], $_POST['note'], $_POST['content']);
 
-        redirect("/$type/info?name=$artwork->slug");
+        redirect("$type/info?name=$artwork->slug");
 
     }
 
