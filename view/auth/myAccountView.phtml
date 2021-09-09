@@ -13,7 +13,7 @@
 <section class="shadow borderAll paddingAll width70p block-center">
     <article>
         <h2 class="text-left">Nom d'utilisateur : <?= $data['user']['username'] ?> </h2>
-        <form action="/my-account/change-username" method="post">
+        <form action="my-account/change-username" method="post">
             <div class="flexTD">
                 <label for="username" class="width100pM width50p block">Nouveau : </label>
                 <input id="username" type="text" class="width100pM width50p" name="username">
@@ -24,7 +24,7 @@
     </article>
     <article>
         <h2 class="text-left">Adresse mail : <?= $data['user']['email'] ?> </h2>
-        <form action="/my-account/change-email" method="post">
+        <form action="my-account/change-email" method="post">
             <div class="flexTD">
                 <label for="email" class="width100pM width50p block">Nouveau : </label>
                 <input id="email" type="text" class="width100pM width50p" name="email">
@@ -35,7 +35,7 @@
     </article>
     <article>
         <h2 class="text-left">Mot-de-passe : </h2>
-        <form action="/my-account/change-password" method="post">
+        <form action="my-account/change-password" method="post">
             <div class="flexTD margeBottom">
                 <label for="password" class="width100pM width50p block">Nouveau : </label>
                 <input id="password" type="password" class="width100pM width50p" name="password">
