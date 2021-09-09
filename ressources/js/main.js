@@ -9,6 +9,7 @@ import ChangeUsername from "./forms/auth/ChangeUsername.js";
 import ChangeEmail from "./forms/auth/ChangeEmail.js";
 import ChangePassword from "./forms/auth/ChangePassword.js";
 import {config} from "./config.js";
+import ArtworkSearch from "./artworks/ArtworkSearch.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -39,21 +40,52 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
 
 
-    if (document.title === config.title.userList)
-        new ChangeStatus();
-    
-    if (document.title === config.title.login)
-        new Login();
-
-    if (document.title === config.title.register)
-        new Register();
-
-    if (document.title === config.title.myAccount ){
-        new ChangeUsername();
-        new ChangeEmail();
-        new ChangePassword();
+    switch(document.title){
+        
+        case config.title.login:
+            new Login();
+            break;
+            
+            case config.title.register:
+                new Register();
+                break;
+                
+            case config.title.myAccount:
+                new ChangeUsername();
+                new ChangeEmail();
+                new ChangePassword();
+                break;
+                    
+            case config.title.search:
+                new ArtworkSearch(document.querySelector('#JStype').value, new ChangeStatus(), new ArtworkList(), false);
+                break;
+                        
+            case config.title.userList:
+                new ArtworkSearch(document.querySelector('#JStype').value, new ChangeStatus(), new ArtworkList(), true);
+                break;
     }
 
-    new ArtworkList();
+    // if (document.title === config.title.userList)
+    //     new ChangeStatus();
+    
+    // if (document.title === config.title.login)
+    //     new Login();
+
+    // if (document.title === config.title.register)
+    //     new Register();
+
+    // if (document.title === config.title.myAccount){
+    //     new ChangeUsername();
+    //     new ChangeEmail();
+    //     new ChangePassword();
+    // }
+
+    // if (document.title === config.title.search)
+    //     new ArtworkSearch(document.querySelector('#JStype').value);
+
+    // if (document.title === config.title.myList)
+    //     new ArtworkSearch(document.querySelector('#JStype').value, true);
+
+    // new ArtworkList();
 
 });

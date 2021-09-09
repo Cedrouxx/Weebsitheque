@@ -95,14 +95,16 @@ class ArtworkController extends Controller{
         $artworkModel = new Artwork();
         if($type === 'all'){
             $data['list'] = $artworkModel->getAllArtworkInUserList(Session::getUser()['id']);
-            $data['type'] = '';
+            $data['titleType'] = '';
         }else if($type === 'anime'){
             $data['list'] = $artworkModel->getAllAnimeInUserList(Session::getUser()['id']);
-            $data['type'] = 'd\'anime';
+            $data['titleType'] = 'd\'anime';
         }else if($type === 'manga'){
             $data['list'] = $artworkModel->getAllMangaInUserList(Session::getUser()['id']);
-            $data['type'] = 'de manga';
+            $data['titleType'] = 'de manga';
         }
+
+        $data['type'] = $type;
 
         $satusModel = new Status();
         $data['status'] = $satusModel->getAllStatus();
@@ -120,23 +122,25 @@ class ArtworkController extends Controller{
         if(!Session::isLogin())
             redirect('/');
         
-        if(!ArtworkVerifier::removelList($_POST))
+        if(!ArtworkVerifier::removeList($_POST))
             redirectToLastPage();
 
         $artworkModel = new Artwork();
-        if(isset($artworkModel->getOneArtworkInUserListByArtworkId(Session::getUser()['id'], $_POST['artwork_id'])->id))
+        if(isset($artworkModel->getOneArtworkInUserListByArtworkId(Session::getUser()['id'], intval($_POST['artwork_id']))->id))
             $artworkModel->removeOneArtworkInUserList(Session::getUser()['id'], $_POST['artwork_id']);
 
         redirectToLastPage();
     }
 
     public function addList(){
+        
+        var_dump($_POST);
 
         if(!Session::isLogin())
             redirect('/');
         
-        if(!ArtworkVerifier::removelList($_POST))
-        redirectToLastPage();
+        if(!ArtworkVerifier::removeList($_POST))
+            redirectToLastPage();
 
         $artworkModel = new Artwork();
         if(!isset($artworkModel->getOneArtworkInUserListByArtworkId(Session::getUser()['id'], $_POST['artwork_id'])->id))

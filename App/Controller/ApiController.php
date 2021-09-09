@@ -6,6 +6,7 @@ use App\Core\Math;
 use App\Core\Session;
 use App\Core\Verifier\ArtworkVerifier;
 use App\Model\Artwork;
+use App\Model\Status;
 
 class ApiController extends Controller{
 
@@ -25,7 +26,7 @@ class ApiController extends Controller{
         if(!Session::isLogin())
             exit;
 
-        if(!ArtworkVerifier::removelList($_POST))
+        if(!ArtworkVerifier::removeList($_POST))
             exit;
 
         $artworkModel = new Artwork();
@@ -37,7 +38,7 @@ class ApiController extends Controller{
         if(!Session::isLogin())
             exit;
 
-        if(!ArtworkVerifier::removelList($_POST))
+        if(!ArtworkVerifier::removeList($_POST))
             exit;
 
         $artworkModel = new Artwork();
@@ -90,8 +91,44 @@ class ApiController extends Controller{
                 }
             }
 
-            echo json_encode($userList);
         }
+        if(!empty($userList))
+            echo json_encode($userList);
+        else
+            echo json_encode([]);
+    }
+
+    public function getArtwork($type = 'all'){
+
+        $artworkModel = new Artwork;
+
+
+        if($type === 'anime'){
+            $userList = $artworkModel->getAllAnime();
+        }else if($type === 'manga'){
+            $userList = $artworkModel->getAllManga();
+        }else{
+            $userList = $artworkModel->getAllArtwork();
+        }
+        
+        if(isset($_GET['id'])){
+            foreach($userList as $artwork){
+                if($artwork->id === $_GET['id']){
+                    echo json_encode($userList);
+                    exit;
+                }
+            }
+        }
+
+        echo json_encode($userList);
+
+    }
+
+    public function getStatus(){
+
+        $statusModel = new Status();
+
+        echo json_encode( $statusModel->getAllStatus() ?? [] );
 
     }
 

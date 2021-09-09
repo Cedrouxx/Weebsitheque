@@ -4,7 +4,14 @@ export default class ChangeStatus{
         
         document.querySelectorAll('#changeStatusButton').forEach(e => e.remove());
 
+        this.makeEvent();
+        
+    }
+
+    makeEvent(){
+
         document.querySelectorAll('#changeStatusSelect').forEach(e => e.addEventListener('change' ,this.changeStatus.bind(this)));
+
     }
 
     changeStatus(e){

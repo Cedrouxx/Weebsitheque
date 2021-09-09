@@ -3,7 +3,12 @@
 <section id="refresh" class="grid-3 paddingRL">
 
     <input id="JStype" type="hidden" name="type" value="<?=strtolower($data['type'])?>">
-    <h1>Liste des <?= $data['type'] ?>s</h1>
+    <h1 class="grid-fullWidth">Liste des <?= $data['type'] ?>s</h1>
+
+    <div class="grid-fullWidth shadow borderAll paddingAll widthMaxContent block-center">
+        <label for="search">Recherche : </label>
+        <input class="width30rem" type="search" name="" id="search" disabled>
+    </div>
 
     <?php foreach($data['list'] as $artwork): ?>
         <article class="shadow borderAll">
@@ -12,7 +17,7 @@
                 <?php if($data['isLogin'] && !empty($data['user_list'][$artwork->id])): ?>
                     <span class="user-status"><?= $data['user_list'][$artwork->id] ?></span>
                 <?php elseif($data['isLogin']): ?>
-                    <span class="user-status none"><?= $data['user_list'][$artwork->id] ?></span>
+                    <span class="user-status none"></span>
                 <?php endif; ?>
                 <figcaption>
                     <div>

@@ -32,7 +32,7 @@ class ArtworkVerifier{
         return $result;
     }
 
-    public static function removelList(array $removeData): bool{
+    public static function removeList(array $removeData): bool{
         if(!isset($removeData['artwork_id']) || empty($removeData['artwork_id'])) 
             return false;
 
@@ -40,7 +40,7 @@ class ArtworkVerifier{
     }
 
     public static function setStatusList(array $setStatusData): bool{
-        if(!ArtworkVerifier::removelList($setStatusData)) 
+        if(!ArtworkVerifier::removeList($setStatusData)) 
             return false;
 
         if(!isset($setStatusData['status']) || empty($setStatusData['status'])) 

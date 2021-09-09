@@ -259,6 +259,10 @@ table.border{
     width: 90%;
 }
 
+.width30rem{
+    width: 30rem;
+}
+
 .widthMaxContent{
     width: max-content;
 }
@@ -605,12 +609,7 @@ h6{
         grid-template: fit-content(100px) / 1fr 1fr;
     }
 
-    .grid-3>h1,
-    .grid-3>h2,
-    .grid-3>h3,
-    .grid-3>h4,
-    .grid-3>h5,
-    .grid-3>h6{
+    .grid-3>.grid-fullWidth{
         grid-column: 1/3;
     }
 
@@ -643,12 +642,7 @@ h6{
         grid-template: fit-content(100px) / 1fr 1fr 1fr;
     }
 
-    .grid-3>h1,
-    .grid-3>h2,
-    .grid-3>h3,
-    .grid-3>h4,
-    .grid-3>h5,
-    .grid-3>h6{
+    .grid-3>.grid-fullWidth{
         grid-column: 1/4;
     }
 

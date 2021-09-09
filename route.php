@@ -61,6 +61,7 @@ return [
     '/admin/add/artwork' => [ 'class' => AdminController::class, 'method' => 'addArtwork' ],
 
     // API
+        // set user list
     '/api/UserList/ChangeStatus' => [ 'class' => ApiController::class, 'method' => 'UserListChangeStatus' ],
     '/api/UserList/RemoveArtworkList' => [ 'class' => ApiController::class, 'method' => 'RemoveArtworkList' ],
     '/api/UserList/AddArtworkList' => [ 'class' => ApiController::class, 'method' => 'AddArtworkList' ],
@@ -68,5 +69,13 @@ return [
     '/api/UserList/getUserList/all' => [ 'class' => ApiController::class, 'method' => 'getUserList', 'parameter' => ['all'] ],
     '/api/UserList/getUserList/anime' => [ 'class' => ApiController::class, 'method' => 'getUserList', 'parameter' => ['anime'] ],
     '/api/UserList/getUserList/manga' => [ 'class' => ApiController::class, 'method' => 'getUserList', 'parameter' => ['manga'] ],
+
+        // artowrks
+    '/api/artwork/all' => [ 'class' => ApiController::class, 'method' => 'getArtwork', 'parameter' => ['all'] ],
+    '/api/artwork/anime' => [ 'class' => ApiController::class, 'method' => 'getArtwork', 'parameter' => ['anime'] ],
+    '/api/artwork/manga' => [ 'class' => ApiController::class, 'method' => 'getArtwork', 'parameter' => ['manga'] ],
+
+        // status
+    '/api/status' => [ 'class' => ApiController::class, 'method' => 'getStatus' ],
 
 ];

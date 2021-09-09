@@ -24,6 +24,7 @@ class Artwork extends Model{
         ->with('artwork_genre', 'artwork.id', 'artwork_genre.artwork_id')
         ->with('genre', 'artwork_genre.genre_id', 'genre.id')
         ->with('comment', 'artwork.id', 'comment.artwork_id', 'LEFT')
+        ->orderBy('artwork.name')
         ->getAll();
     }
 
@@ -44,6 +45,7 @@ class Artwork extends Model{
         ->with('genre', 'artwork_genre.genre_id', 'genre.id')
         ->with('comment', 'artwork.id', 'comment.artwork_id', 'LEFT')
         ->where('type.name', 'Anime')
+        ->orderBy('artwork.name')
         ->getAll();
     }
 
@@ -64,6 +66,7 @@ class Artwork extends Model{
         ->with('genre', 'artwork_genre.genre_id', 'genre.id', 'LEFT')
         ->with('comment', 'artwork.id', 'comment.artwork_id', 'LEFT')
         ->where('type.name', 'Manga')
+        ->orderBy('artwork.name')
         ->getAll();
     }
 
@@ -160,6 +163,7 @@ class Artwork extends Model{
         ->with('genre', 'artwork_genre.genre_id', 'genre.id', 'LEFT')
         ->with('comment', 'artwork.id', 'comment.artwork_id', 'LEFT')
         ->where('user_list.user_id', $userId)
+        ->orderBy('artwork.name')
         ->getAll();
     }
 
@@ -185,6 +189,7 @@ class Artwork extends Model{
         ->with('comment', 'artwork.id', 'comment.artwork_id', 'LEFT')
         ->where('user_list.user_id', $userId)
         ->where('type.name', 'anime')
+        ->orderBy('artwork.name')
         ->getAll();
     }
 
@@ -210,6 +215,7 @@ class Artwork extends Model{
         ->with('comment', 'artwork.id', 'comment.artwork_id', 'LEFT')
         ->where('user_list.user_id', $userId)
         ->where('type.name', 'manga')
+        ->orderBy('artwork.name')
         ->getAll();
     }
 

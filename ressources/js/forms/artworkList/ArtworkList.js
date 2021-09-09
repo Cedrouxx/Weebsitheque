@@ -1,6 +1,10 @@
 export default class ArtworkList{
 
     constructor(){
+        this.makeEvent();
+    }
+
+    makeEvent(){
         document.querySelectorAll('.artwork-list-button').forEach((element) => {
             element.addEventListener('click', this.onChange.bind(this))
 

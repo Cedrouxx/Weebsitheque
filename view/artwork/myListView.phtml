@@ -8,7 +8,13 @@
 
 <section class="grid-3 paddingRL">
 
-    <h1>Ma liste <?= $data['type'] ?></h1>
+    <input id="JStype" type="hidden" name="type" value="<?=strtolower($data['type'])?>">
+    <h1 class="grid-fullWidth">Ma liste <?= $data['titleType'] ?></h1>
+
+    <div class="grid-fullWidth shadow borderAll paddingAll widthMaxContent block-center">
+        <label for="search">Recherche : </label>
+        <input class="width30rem" type="search" name="" id="search" disabled>
+    </div>
 
     <?php foreach($data['list'] as $artwork): ?>
         <article class="shadow borderAll">
