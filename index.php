@@ -14,7 +14,7 @@ Session::start();
 
 $routes = require 'route.php';
 
-$url = explode('?',$_SERVER['REQUEST_URI'])[0];
+$url = '/'.($_GET['url'] ?? '');
 
 if(!isset($routes[$url]))
     abord(404);
@@ -24,4 +24,3 @@ if(!isset($routes[$url]))
 
 $controller = new $class;
 $controller->$method(...$routes[$url]['parameter'] ?? []);
-
