@@ -20,6 +20,8 @@ class ArtworkController extends Controller{
         }else if($type === 'manga'){
             $data['list'] = $artworkModel->getAllManga();
             $data['type'] = 'Manga';
+        }else{
+            abord(404);
         }
         
         foreach($data['list'] as $key => $artwork){
@@ -40,14 +42,16 @@ class ArtworkController extends Controller{
         $this->lunchPage('artwork/search', 'Recherche', $data);
     }
 
-    public function info(string $type){
-        if(!isset($_GET['name']))
+    public function info(string $type, string $ArtworkSlug){
+
+        if(!isset($ArtworkSlug))
             redirect("$type/search");
 
         $artworkModel = new Artwork();
         $commentModel = new Comment();
 
-        $data['artwork'] = $artworkModel->getOneArtworkBySlug($_GET['name']);
+        $data['artwork'] = $artworkModel->getOneArtworkBySlug($ArtworkSlug);
+
 
         if(!isset($data['artwork']->slug))
             redirect("$type/search");
@@ -87,7 +91,7 @@ class ArtworkController extends Controller{
 
     }
 
-    public function myList(string $type){
+    public function myList(string $type = 'all'){
 
         if(!Session::isLogin())
             redirect('/');
@@ -102,6 +106,8 @@ class ArtworkController extends Controller{
         }else if($type === 'manga'){
             $data['list'] = $artworkModel->getAllMangaInUserList(Session::getUser()['id']);
             $data['titleType'] = 'de manga';
+        }else{
+            abord(404);
         }
 
         $data['type'] = $type;

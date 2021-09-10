@@ -2,8 +2,11 @@
 
 use App\Controller\ErrorController;
 
-function redirect(string $location): void{
-    header("Location: $location");
+function redirect(string $location = '', bool $withLang = true): void{
+    if($withLang)
+        header("Location: ".config['baseUrl'].lang['name']."/$location");
+    else 
+        header("Location: ".config['baseUrl'].'fr'."/$location");
     exit;
 }
 

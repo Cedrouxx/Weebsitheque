@@ -1,6 +1,6 @@
 <section class="width70p block-center">
 
-    <h1>Connection</h1>
+    <h1><?= lang['login']['loginTitle'] ?></h1>
 
     <?php if(!empty($data['messages'])): ?>
         <div class="borderAll shadow margeAll">
@@ -12,23 +12,23 @@
         </div>
     <?php endif; ?>
 
-    <form class="borderAll shadow paddingAll margeAll" action="loginPost" method="post">
+    <form class="borderAll shadow paddingAll margeAll" action="<?= lang['name'] ?>/loginPost" method="post">
 
         <div class="flexTD">
-            <label class="width100pM width50p" for="email">Adresse mail :</label>
+            <label class="width100pM width50p" for="email"><?= lang['login']['email'] ?> :</label>
             <input class="width100pM width50p" type="email" id="email" name="email">
         </div>
         <small class="block width50p block-right error" id="E-email"></small>
         <div class="flexTD margeTop">
-            <label class="width100pM width50p" for="password">Mot-de-passe :</label>
+            <label class="width100pM width50p" for="password"><?= lang['login']['password'] ?> :</label>
             <input class="width100pM width50p" type="password" id="password" name="password">
         </div>
         <div class="margeTop">
-            <input class="button block-center" type="submit" value="Se connecter">
+            <input class="button block-center" type="submit" value="<?= lang['multi']['login'] ?>">
         </div>
 
     </form>
 
-    <p>Vous n'avez pas de compte ? <a href="register">S'inscrire</a>.</p>
+    <p><?= lang['login']['questionDontHaveAccount'] ?> <a href="<?= lang['name'] ?>/register"><?= lang['login']['register'] ?></a>.</p>
 
 </section>

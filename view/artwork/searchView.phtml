@@ -1,12 +1,10 @@
-
-
 <section id="refresh" class="grid-3 paddingRL">
 
     <input id="JStype" type="hidden" name="type" value="<?=strtolower($data['type'])?>">
-    <h1 class="grid-fullWidth">Liste des <?= $data['type'] ?>s</h1>
+    <h1 class="grid-fullWidth"><?= lang['search']['listOf'] ?> <?= $data['type'] ?>s</h1>
 
     <div class="grid-fullWidth shadow borderAll paddingAll widthMaxContent block-center">
-        <label for="search">Recherche : </label>
+        <label for="search"><?= lang['multi']['search'] ?> : </label>
         <input class="width30rem" type="search" name="" id="search" disabled>
     </div>
 
@@ -22,14 +20,14 @@
                 <figcaption>
                     <div>
                         <h3><?= $artwork->name ?></h3>
-                        <p>Créer par : <?= $artwork->author ?></p>
+                        <p><?= lang['multi']['createdBy'] ?> : <?= $artwork->author ?></p>
                         <?php if (!empty($artwork->genre)): ?>
-                            <p>Genre : <?= is_array($artwork->genre)? implode(', ', $artwork->genre) : $artwork->genre ?></p>
+                            <p><?= lang['multi']['genre'] ?> : <?= is_array($artwork->genre)? implode(', ', $artwork->genre) : $artwork->genre ?></p>
                         <?php endif; ?>
                         <?php if (!empty($artwork->note)): ?>
-                            <p>Note : <?= $artwork->note ?>/10</p>
+                            <p><?= lang['multi']['mark'] ?> : <?= $artwork->note ?>/10</p>
                         <?php endif; ?>
-                        <a href="/<?= strtolower($data['type']) ?>/info?name=<?= $artwork->slug ?>" class="button block-center">Plus d'info</a>
+                        <a href="<?= lang['name'] ?>/<?= strtolower($data['type']) ?>/info/<?= $artwork->slug ?>" class="button block-center"><?= lang['multi']['moreInfo'] ?></a>
                     </div>
                     <?php if($data['isLogin']): ?>
                         <form action="<?= empty($data['user_list'][$artwork->id]) ? '/add-artwork-list' : '/remove-artwork-list'?>" method="post">

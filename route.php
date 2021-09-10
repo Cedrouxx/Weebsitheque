@@ -31,23 +31,23 @@ return [
 
     // Artworks
         // search
-    '/anime/search' => [ 'class' => ArtworkController::class, 'method' => 'search', 'parameter' => ['anime'] ],
-    '/manga/search' => [ 'class' => ArtworkController::class, 'method' => 'search', 'parameter' => ['manga'] ],
+    '/:artworkType/search' => [ 'class' => ArtworkController::class, 'method' => 'search' ],
+
         // info
-    '/anime/info' => [ 'class' => ArtworkController::class, 'method' => 'info', 'parameter' => ['anime'] ],
-    '/manga/info' => [ 'class' => ArtworkController::class, 'method' => 'info', 'parameter' => ['manga'] ],
+    '/:artworkType/info/:artworkSlug' => [ 'class' => ArtworkController::class, 'method' => 'info' ],
+    
         // add comment
-    '/anime/addComment' => [ 'class' => ArtworkController::class, 'method' => 'addComment', 'parameter' => ['anime'] ],
-    '/manga/addComment' => [ 'class' => ArtworkController::class, 'method' => 'addComment', 'parameter' => ['manga'] ],
+    '/:artworkType/addComment' => [ 'class' => ArtworkController::class, 'method' => 'addComment' ],
 
     // My List
-    '/my-list/all' => [ 'class' => ArtworkController::class, 'method' => 'myList', 'parameter' => ['all'] ],
-    '/my-list/anime' => [ 'class' => ArtworkController::class, 'method' => 'myList', 'parameter' => ['anime'] ],
-    '/my-list/manga' => [ 'class' => ArtworkController::class, 'method' => 'myList', 'parameter' => ['manga'] ],
+    '/my-list/:artwork' => [ 'class' => ArtworkController::class, 'method' => 'myList' ],
+
         // remove
     '/remove-artwork-list' => [ 'class' => ArtworkController::class, 'method' => 'removeList' ],
+
         // add
     '/add-artwork-list' => [ 'class' => ArtworkController::class, 'method' => 'addList' ],
+
         //set status
     '/set-artwork-list-status' => [ 'class' => ArtworkController::class, 'method' => 'setListStatus' ],
 
@@ -66,14 +66,10 @@ return [
     '/api/UserList/RemoveArtworkList' => [ 'class' => ApiController::class, 'method' => 'RemoveArtworkList' ],
     '/api/UserList/AddArtworkList' => [ 'class' => ApiController::class, 'method' => 'AddArtworkList' ],
         // get user list
-    '/api/UserList/getUserList/all' => [ 'class' => ApiController::class, 'method' => 'getUserList', 'parameter' => ['all'] ],
-    '/api/UserList/getUserList/anime' => [ 'class' => ApiController::class, 'method' => 'getUserList', 'parameter' => ['anime'] ],
-    '/api/UserList/getUserList/manga' => [ 'class' => ApiController::class, 'method' => 'getUserList', 'parameter' => ['manga'] ],
+    '/api/UserList/getUserList/:artworkType' => [ 'class' => ApiController::class, 'method' => 'getUserList' ],
 
         // artowrks
-    '/api/artwork/all' => [ 'class' => ApiController::class, 'method' => 'getArtwork', 'parameter' => ['all'] ],
-    '/api/artwork/anime' => [ 'class' => ApiController::class, 'method' => 'getArtwork', 'parameter' => ['anime'] ],
-    '/api/artwork/manga' => [ 'class' => ApiController::class, 'method' => 'getArtwork', 'parameter' => ['manga'] ],
+    '/api/artwork/:artworkType' => [ 'class' => ApiController::class, 'method' => 'getArtwork' ],
 
         // status
     '/api/status' => [ 'class' => ApiController::class, 'method' => 'getStatus' ],
