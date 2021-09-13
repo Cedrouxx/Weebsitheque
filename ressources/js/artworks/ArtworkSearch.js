@@ -1,6 +1,9 @@
 export default class ArtworkSearch{
 
+    lang = document.querySelector('html').lang;
+
     constructor(type, changeStatus, artworkList, isUserList = false){
+
         this.type = type;
         this.changeStatus = changeStatus;
         this.artworkList = artworkList;
@@ -23,7 +26,7 @@ export default class ArtworkSearch{
 
     async getAllArtwork(){
         let result;
-        await fetch('/api/artwork/'+this.type)
+        await fetch(`/${this.lang}/api/artwork/${this.type}`)
         .then(response => response.json())
         .then(response => result = response);
         return result;
@@ -31,7 +34,7 @@ export default class ArtworkSearch{
 
     async getAllArtworkInUserList(){
         let result;
-        await fetch('/api/UserList/getUserList/'+this.type)
+        await fetch(`/${this.lang}/api/UserList/getUserList/${this.type}`)
         .then(response => response.json())
         .then(response => result = response);
         return result;
@@ -39,7 +42,7 @@ export default class ArtworkSearch{
 
     async getAllStatus(){
         let result;
-        await fetch('/api/status')
+        await fetch(`/${this.lang}/api/status`)
         .then(response => response.json())
         .then(response => result = response);
         return result;
@@ -48,6 +51,7 @@ export default class ArtworkSearch{
     async onSearch(){
 
         this.userList = await this.getAllArtworkInUserList();
+        console.log(this.userList);
 
         let value = this.searchInput.value;
         let table;
@@ -94,37 +98,40 @@ export default class ArtworkSearch{
         img.src = artwork.image;
         img.alt = artwork.name;
 
-        let span;
-        if(this.isUserList){
-            span = document.createElement('form');
-            span.action = '/set-artwork-list-status';
-            span.method = 'post';
+        let span = document.createElement('span');
+        if(userArtwork !== undefined){
+            if(this.isUserList){
+                span = document.createElement('form');
+                span.action = '/set-artwork-list-status';
+                span.method = 'post';
 
-            let inputSpan = document.createElement('input');
-            inputSpan.type = 'hidden';
-            inputSpan.name = 'artwork_id';
-            inputSpan.value = artwork.id;
+                let inputSpan = document.createElement('input');
+                inputSpan.type = 'hidden';
+                inputSpan.name = 'artwork_id';
+                inputSpan.value = artwork.id;
 
-            let select = document.createElement('select');
-            select.id = 'changeStatusSelect';
-            select.name = 'status';
-            this.allStatus.forEach( status => {
-                let option = new Option(status.name, status.id, status.name === userArtwork.status, status.name === userArtwork.status);
-                select.append(option);
-            });
+                let select = document.createElement('select');
+                select.id = 'changeStatusSelect';
+                select.name = 'status';
+                this.allStatus.forEach( status => {
+                    let option = new Option(status.name, status.id, status.name === userArtwork.status, status.name === userArtwork.status);
+                    select.append(option);
+                });
 
-            span.append(inputSpan);
-            span.append(select);
-        }else{
-            span = document.createElement('span');
-            if(userArtwork === undefined){
-                span.classList.add('none');
+                span.append(inputSpan);
+                span.append(select);
             }else{
-                span.innerText = userArtwork.status;
+                if(userArtwork === undefined){
+                    span.classList.add('none');
+                }else{
+                    span.innerText = userArtwork.status;
+                }
             }
+        } else{
+            span.classList.add('none');
         }
         span.classList.add('user-status');
-
+        
         let figcaption = document.createElement('figcaption');
 
         let div = document.createElement('div');
@@ -141,7 +148,7 @@ export default class ArtworkSearch{
         let a = document.createElement('a');
         a.classList.add('button');
         a.classList.add('block-center');
-        a.href = `/${this.type}/info?name=${artwork.slug}`;
+        a.href = `${this.lang}/${this.type}/info/${artwork.slug}`;
         a.innerText = 'Plus d\'info';
 
         div.append(h3);
@@ -150,7 +157,7 @@ export default class ArtworkSearch{
         div.append(a);
 
         let form = document.createElement('form');
-        form.action = '/add-artwork-list';
+        form.action = `${this.lang}/add-artwork-list`;
         form.method = 'post';
 
         let input = document.createElement('input');
@@ -158,18 +165,21 @@ export default class ArtworkSearch{
         input.name = 'artwork_id';
         input.value = artwork.id;
 
-        let button = document.createElement('button');
-        button.classList.add('artwork-list-button');
-        if(userArtwork === undefined){
-            button.id = 'addArtworkList';
-            button.classList.add('add');
-        }else{
-            button.id = 'removeArtworkList';
-            button.classList.add('remove');
+        let button;
+        if(this.userList.length > 0){
+            button = document.createElement('button');
+            button.classList.add('artwork-list-button');
+            if(userArtwork === undefined){
+                button.id = 'addArtworkList';
+                button.classList.add('add');
+            }else{
+                button.id = 'removeArtworkList';
+                button.classList.add('remove');
+            }
         }
 
         form.append(input);
-        form.append(button);
+        if(this.userList.length > 0) form.append(button);
 
         figcaption.append(div);
         figcaption.append(form);

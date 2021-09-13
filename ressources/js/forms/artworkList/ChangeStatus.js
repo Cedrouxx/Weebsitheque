@@ -1,5 +1,7 @@
 export default class ChangeStatus{
 
+    lang = document.querySelector('html').lang;
+
     constructor(){
         
         document.querySelectorAll('#changeStatusButton').forEach(e => e.remove());
@@ -20,7 +22,7 @@ export default class ChangeStatus{
             body: new FormData(e.target.parentNode)
         };
 
-        fetch('/api/UserList/ChangeStatus', myInit);
+        fetch(`/${this.lang}/api/UserList/ChangeStatus`, myInit);
     }
 
 }

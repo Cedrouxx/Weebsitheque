@@ -27,6 +27,7 @@ return [
         'moreInfo' => 'Plusse d\'ainpfo',
         'all' => 'Toux',
         'add' => 'Ageouttai',
+        'change' => 'Shenjé',
     ],
 
     'login' => [

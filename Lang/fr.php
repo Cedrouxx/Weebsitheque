@@ -27,6 +27,7 @@ return [
         'moreInfo' => 'Plus d\'info',
         'all' => 'Tous',
         'add' => 'Ajouter',
+        'change' => 'Changer',
     ],
 
     'login' => [

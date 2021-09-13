@@ -1,5 +1,7 @@
 export default class ArtworkList{
 
+    lang = document.querySelector('html').lang;
+
     constructor(){
         this.makeEvent();
     }
@@ -46,9 +48,9 @@ export default class ArtworkList{
         let url;
 
         if(requestType === 'remove')
-            url = '/api/UserList/RemoveArtworkList';
+            url = `/${this.lang}/api/UserList/RemoveArtworkList`;
         else if(requestType === 'add')
-            url = '/api/UserList/AddArtworkList';
+            url = `/${this.lang}/api/UserList/AddArtworkList`;
 
         let myInit = { method: 'POST',
             body: new FormData(form)
