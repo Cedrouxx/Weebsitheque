@@ -1,6 +1,7 @@
 "use strict";
 
 import Waifu from "./waifu/Waifu.js";
+import Carousel from "./Carousel.js";
 import ChangeStatus from "./forms/artworkList/ChangeStatus.js";
 import ArtworkList from "./forms/artworkList/ArtworkList.js";
 import Login from "./forms/auth/Login.js";
@@ -42,50 +43,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     switch(document.title){
         
+        case config.title.home:
+            new ChangeStatus();
+            break;
+
         case config.title.login:
             new Login();
             break;
             
-            case config.title.register:
-                new Register();
-                break;
+        case config.title.register:
+            new Register();
+            break;
+            
+        case config.title.myAccount:
+            new ChangeUsername();
+            new ChangeEmail();
+            new ChangePassword();
+            break;
                 
-            case config.title.myAccount:
-                new ChangeUsername();
-                new ChangeEmail();
-                new ChangePassword();
-                break;
+        case config.title.search:
+            new ArtworkSearch(document.querySelector('#JStype').value, new ChangeStatus(), new ArtworkList(), false);
+            break;
                     
-            case config.title.search:
-                new ArtworkSearch(document.querySelector('#JStype').value, new ChangeStatus(), new ArtworkList(), false);
-                break;
-                        
-            case config.title.userList:
-                new ArtworkSearch(document.querySelector('#JStype').value, new ChangeStatus(), new ArtworkList(), true);
-                break;
+        case config.title.userList:
+            new ArtworkSearch(document.querySelector('#JStype').value, new ChangeStatus(), new ArtworkList(), true);
+            break;
     }
 
-    // if (document.title === config.title.userList)
-    //     new ChangeStatus();
-    
-    // if (document.title === config.title.login)
-    //     new Login();
-
-    // if (document.title === config.title.register)
-    //     new Register();
-
-    // if (document.title === config.title.myAccount){
-    //     new ChangeUsername();
-    //     new ChangeEmail();
-    //     new ChangePassword();
-    // }
-
-    // if (document.title === config.title.search)
-    //     new ArtworkSearch(document.querySelector('#JStype').value);
-
-    // if (document.title === config.title.myList)
-    //     new ArtworkSearch(document.querySelector('#JStype').value, true);
-
-    // new ArtworkList();
+    Carousel.getAll();
 
 });

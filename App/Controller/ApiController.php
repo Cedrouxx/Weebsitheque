@@ -11,6 +11,7 @@ use App\Model\Status;
 class ApiController extends Controller{
 
     public function UserListChangeStatus(): void{
+        echo json_encode($_POST);
         if(!ArtworkVerifier::setStatusList($_POST) || !Session::isLogin()){
             exit;
         }

@@ -1,1 +1,65 @@
-<section></section>
+<section>
+    <h1>Bienvenue sur weebsithèque</h1>
+    <p class="width70p block-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla cupiditate, nisi reiciendis quo eum debitis placeat quaerat velit soluta maiores at repellendus non. Quam quas, culpa quo praesentium soluta vel voluptates fuga doloremque blanditiis architecto. Laborum dicta asperiores, aspernatur earum, eum accusantium itaque quas eligendi commodi dolores similique officiis architecto!</p>
+</section>
+
+
+<section class="flex flexWrap flex-around">
+    <h1 class="width100p">Les mieux notés</h1>
+    <article class="width50p paddingRL">
+
+        <h2>Anime</h2>
+        <div class="carousel block-center">
+            <button class="beforeButton button"><</button>
+
+            <?php foreach( $data['bestMark']['anime'] as $artwork ): ?>
+                <div><?php require 'view/partials/displayArtwork.phtml'; ?></div>
+            <?php endforeach; ?>
+
+            <button class="afterButton button">></button>
+        </div>
+
+    </article>
+    <article class="width50p paddingRL">
+
+        <h2>Mangas</h2>
+        <div class="carousel block-center">
+            <button class="beforeButton button"><</button>
+
+            <?php foreach( $data['bestMark']['manga'] as $artwork ): ?>
+                <div><?php require 'view/partials/displayArtwork.phtml'; ?></div>
+            <?php endforeach; ?>
+
+            <button class="afterButton button">></button>
+        </div>
+    </article>
+
+</section>
+
+<section class="flex flexWrap flex-around">
+    <h1 class="width100p">Nouveauté</h1>
+    <article class="width50p paddingRL">
+        <h2>Anime</h2>
+        <div class="carousel block-center">
+            <button class="beforeButton button"><</button>
+
+            <?php foreach( $data['new']['anime'] as $artwork ): ?>
+                <div><?php require 'view/partials/displayArtwork.phtml'; ?></div>
+            <?php endforeach; ?>
+
+            <button class="afterButton button">></button>
+        </div>
+    </article>
+    <article class="width50p paddingRL">
+        <h2>Mangas</h2>
+        <div class="carousel block-center">
+            <button class="beforeButton button"><</button>
+
+            <?php foreach( $data['new']['manga'] as $artwork ): ?>
+                <div><?php require 'view/partials/displayArtwork.phtml'; ?></div>
+            <?php endforeach; ?>
+
+            <button class="afterButton button">></button>
+        </div>
+    </article>
+</section>

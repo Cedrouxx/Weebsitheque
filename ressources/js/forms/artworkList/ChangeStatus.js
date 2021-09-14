@@ -4,7 +4,7 @@ export default class ChangeStatus{
 
     constructor(){
         
-        document.querySelectorAll('#changeStatusButton').forEach(e => e.remove());
+        document.querySelectorAll('.changeStatusButton').forEach(e => e.remove());
 
         this.makeEvent();
         
@@ -12,7 +12,7 @@ export default class ChangeStatus{
 
     makeEvent(){
 
-        document.querySelectorAll('#changeStatusSelect').forEach(e => e.addEventListener('change' ,this.changeStatus.bind(this)));
+        document.querySelectorAll('.changeStatusSelect').forEach(e => e.addEventListener('change' ,this.changeStatus.bind(this)));
 
     }
 

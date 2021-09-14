@@ -111,6 +111,7 @@ class ArtworkController extends Controller{
         }
 
         $data['type'] = $type;
+        $data['isLogin'] = true;
 
         $satusModel = new Status();
         $data['status'] = $satusModel->getAllStatus();

@@ -193,6 +193,39 @@ table.border{
     border-collapse: collapse;
 }
 
+.carousel{
+    position: relative;
+    width: 75%;
+    margin: 0 10rem;
+}
+
+.carousel>div{
+    width: 100%;
+    height: 100%;
+}
+
+.carousel>div img{
+    display: block;
+    aspect-ratio: 600/800;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel .afterButton{
+    content: '>';
+    position: absolute;
+    right: -5rem;
+    top:50%;
+}
+
+.carousel .beforeButton{
+    content: '<';
+    position: absolute;
+    left: -5rem;
+    top:50%;
+}
+
 
     /*      --- FLOAT ---        */
 /* Classe pour faire un flotement à droite */
@@ -227,6 +260,9 @@ table.border{
     display: flex;
     justify-content: space-around;
 }
+.flexWrap{
+    flex-wrap: wrap;
+}
 
 
     /*      --- BLOCK-ALIGN ---        */
@@ -258,6 +294,10 @@ table.border{
 
 .width70p{
     width: 90%;
+}
+
+.width100p{
+    width: 100%;
 }
 
 .width30rem{
@@ -558,6 +598,11 @@ h6{
     text-align: center;
 }
 
+main h1{
+    background-color: white;
+    margin-top: 5rem;
+}
+
 /*********************************
 *          RESPONSIVE            *
 *********************************/
@@ -578,7 +623,7 @@ h6{
     *          TABLETTE + Mobile            *
     ****************************************/
 
-@media screen and (min-width: 0px) and (max-width: 980px){
+@media screen and (max-width: 980px){
 
     header nav li.navbar-open>a{
         color: var(--secondary-color);
@@ -587,6 +632,7 @@ h6{
     header nav li.navbar-open>ul{
         display: block;
     }
+
 }
 
     /****************************************
@@ -628,6 +674,15 @@ h6{
 
     .flexTD{
         display: flex;
+    }
+
+    main h1:before,
+    main h1:after{
+        content: '';
+        width: 10%;
+        display: inline-block;
+        margin: 1rem 2rem;
+        border-bottom: 1px solid var(--primary-color);
     }
 
 }

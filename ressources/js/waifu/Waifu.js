@@ -13,12 +13,14 @@ export default class Waifu{
         divInput.classList.add('margeBottom');
 
         this.select = document.createElement('select');
+        this.select.classList = 'button margeAll inlineBlock';
         for (const element of this.getTable()) {
             this.select.append(this.createOption(element, capitalizeFirstLetter(element)));
         }
         divInput.append(this.select);
 
         this.pushButton = document.createElement('button');
+        this.pushButton.classList = 'button inlineBlock';
         this.pushButton.innerText = 'Go !'
         divInput.append(this.pushButton);
 

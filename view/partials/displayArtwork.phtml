@@ -1,0 +1,57 @@
+<!-- display one artwork -->
+
+<figure class="hover-caption" tabindex="0">
+
+    <!-- Image -->
+    <img src="<?= $artwork->image ?>" alt="<?= $artwork->name ?>">
+    
+    <!-- Status for user -->
+    <?php if(isset($data['status'])): ?>
+        <!-- Select -->
+        <form class="user-status" action="<?= lang['name'] ?>/set-artwork-list-status" method="post">
+            <input type="hidden" name="artwork_id" value="<?= $artwork->id ?>">
+            <select  name="status" class="changeStatusSelect">
+                <?php foreach($data['status'] as $status ): ?>
+                    <option value="<?= $status->id ?>" <?= $artwork->status_id === $status->id ? 'selected' : '' ?>><?= $status->name ?></option>
+                <?php endforeach; ?>
+            </select>
+            <button type="submit" class="changeStatusButton"><?= lang['multi']['change'] ?></button>
+        </form>
+    <?php else: ?>
+        <!-- Span -->
+        <?php if($data['isLogin'] && !empty($data['user_list'][$artwork->id])): ?>
+            <span class="user-status"><?= $data['user_list'][$artwork->id] ?></span>
+        <?php elseif($data['isLogin']): ?>
+            <span class="user-status none"></span>
+        <?php endif; ?>
+                
+    <?php endif; ?>
+
+    <!-- Hover -->
+    <figcaption>
+        <!-- Artowork Info -->
+        <div>
+            <h3><?= $artwork->name ?></h3>
+            <p><?= lang['multi']['createdBy'] ?> : <?= $artwork->author ?></p>
+            <?php if (!empty($artwork->genre)): ?>
+                <p><?= lang['multi']['genre'] ?> : <?= is_array($artwork->genre)? implode(', ', $artwork->genre) : $artwork->genre ?></p>
+            <?php endif; ?>
+            <?php if (!empty($artwork->note)): ?>
+                <p><?= lang['multi']['mark'] ?> : <?= $artwork->note ?>/10</p>
+            <?php endif; ?>
+            <a href="<?= lang['name'] ?>/<?= strtolower($artwork->type) ?>/info/<?= $artwork->slug ?>" class="button block-center"><?= lang['multi']['moreInfo'] ?></a>
+        </div>
+        <!-- Add and Remove Button -->
+        <?php if($data['isLogin']): ?>
+            <form action="<?= empty($data['user_list'][$artwork->id]) ? '/add-artwork-list' : '/remove-artwork-list'?>" method="post">
+                <input type="hidden" name="artwork_id" value="<?= $artwork->id ?>">
+                <?php if(empty($data['user_list'][$artwork->id]) && !isset($data['status'])): ?>
+                    <button class="artwork-list-button add"></button>
+                <?php else: ?>
+                    <button class="artwork-list-button remove"></button>
+                <?php endif; ?>
+            </form>
+        <?php endif; ?>
+    </figcaption>
+    
+</figure>

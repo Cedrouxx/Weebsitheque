@@ -10,38 +10,7 @@
 
     <?php foreach($data['list'] as $artwork): ?>
         <article class="shadow borderAll">
-            <figure class="hover-caption" tabindex="0">
-                <img src="<?= $artwork->image ?>" alt="<?= $artwork->name ?>">
-                <?php if($data['isLogin'] && !empty($data['user_list'][$artwork->id])): ?>
-                    <span class="user-status"><?= $data['user_list'][$artwork->id] ?></span>
-                <?php elseif($data['isLogin']): ?>
-                    <span class="user-status none"></span>
-                <?php endif; ?>
-                <figcaption>
-                    <div>
-                        <h3><?= $artwork->name ?></h3>
-                        <p><?= lang['multi']['createdBy'] ?> : <?= $artwork->author ?></p>
-                        <?php if (!empty($artwork->genre)): ?>
-                            <p><?= lang['multi']['genre'] ?> : <?= is_array($artwork->genre)? implode(', ', $artwork->genre) : $artwork->genre ?></p>
-                        <?php endif; ?>
-                        <?php if (!empty($artwork->note)): ?>
-                            <p><?= lang['multi']['mark'] ?> : <?= $artwork->note ?>/10</p>
-                        <?php endif; ?>
-                        <a href="<?= lang['name'] ?>/<?= strtolower($data['type']) ?>/info/<?= $artwork->slug ?>" class="button block-center"><?= lang['multi']['moreInfo'] ?></a>
-                    </div>
-                    <?php if($data['isLogin']): ?>
-                        <form action="<?= empty($data['user_list'][$artwork->id]) ? '/add-artwork-list' : '/remove-artwork-list'?>" method="post">
-                            <input type="hidden" name="artwork_id" value="<?= $artwork->id ?>">
-                            <?php if(empty($data['user_list'][$artwork->id])): ?>
-                                <button id="addArtworkList" class="artwork-list-button add"></button>
-                            <?php else: ?>
-                                <button id="removeArtworkList" class="artwork-list-button remove"></button>
-                            <?php endif; ?>
-                        </form>
-                    <?php endif; ?>
-                </figcaption>
-                
-            </figure>
+            <?php require 'view/partials/displayArtwork.phtml' ?>
         </article>
     <?php endforeach; ?>
 
