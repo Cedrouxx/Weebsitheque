@@ -23,12 +23,13 @@
         </div>
     <?php endif; ?>
 
-    <form   action="/<?= strtolower($data['artwork']->type) ?><?= lang['name'] ?>/addComment?name=<?= $data['artwork']->slug ?>" 
+    <form   action="<?= lang['name'] ?>/<?= strtolower($data['artwork']->type) ?>/addComment?name=<?= $data['artwork']->slug ?>" 
             method="post"
             class="jsNotRefresh" 
             data-refresh="" 
-            data-refresh-with="comment"
-    >
+            data-refresh-with="comment">
+
+        
         <input type="hidden" name="artwork_id" value="<?= $data['artwork']->id ?>">
         <div class="paddingRL">
             <label for="note"><?= lang['multi']['mark'] ?> : </label>

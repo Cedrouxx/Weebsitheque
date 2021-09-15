@@ -6,7 +6,11 @@
     <img src="<?= $artwork->image ?>" alt="<?= $artwork->name ?>">
     
     <!-- Status for user -->
-    <?php if(isset($data['status'])): ?>
+    <?php
+
+                                            use Lang\lang;
+
+if(isset($data['status'])): ?>
         <!-- Select -->
         <form class="user-status" action="<?= lang['name'] ?>/set-artwork-list-status" method="post">
             <input type="hidden" name="artwork_id" value="<?= $artwork->id ?>">
@@ -43,7 +47,7 @@
         </div>
         <!-- Add and Remove Button -->
         <?php if($data['isLogin']): ?>
-            <form action="<?= empty($data['user_list'][$artwork->id]) ? '/add-artwork-list' : '/remove-artwork-list'?>" method="post">
+            <form action="<?= lang['name'] ?>/<?= empty($data['user_list'][$artwork->id]) ? 'add-artwork-list' : 'remove-artwork-list'?>" method="post">
                 <input type="hidden" name="artwork_id" value="<?= $artwork->id ?>">
                 <?php if(empty($data['user_list'][$artwork->id]) && !isset($data['status'])): ?>
                     <button class="artwork-list-button add"></button>

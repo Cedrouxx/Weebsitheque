@@ -11,37 +11,67 @@ class DefaultController extends Controller{
     public function home() :void{
 
         $data['isLogin'] = Session::isLogin();
-        // var_dump($data['isLogin']);
 
-        $data['bestMark']['anime'] = (new Artwork)->getAllAnime();
-
-        foreach($data['bestMark']['anime'] as $key => $artwork){
-            if(is_array($artwork->note)){
-                $data['bestMark']['anime'][$key]->note = Math::average(...$artwork->note);
+        //best anime
+        $artworks = Artwork::select('artwork.id', 
+                                    'artwork.name', 
+                                    'artwork.slug',
+                                    'author.name AS author', 
+                                    'number_volume', 
+                                    'type.name AS type', 
+                                    'genre.name AS genre', 
+                                    'artwork.image', 
+                                    'AVG(comment.note) AS note')
+                    ->where('type.name', 'Anime')
+                    ->groupBy('artwork.id')
+                    ->orderBy('note DESC')
+                    ->getAll();
+        foreach($artworks as $key => $artwork){
+            if($key < 5){
+                $data['bestMark']['anime'][] = $artwork;
             }
         }
 
-        $data['bestMark']['manga'] = (new Artwork)->getAllManga();
-
-        foreach($data['bestMark']['manga'] as $key => $artwork){
-            if(is_array($artwork->note)){
-                $data['bestMark']['manga'][$key]->note = Math::average(...$artwork->note);
+        // best manga
+        $artworks = Artwork::select('artwork.id', 
+                                    'artwork.name', 
+                                    'artwork.slug',
+                                    'author.name AS author', 
+                                    'number_volume', 
+                                    'type.name AS type', 
+                                    'genre.name AS genre', 
+                                    'artwork.image', 
+                                    'AVG(comment.note) AS note')
+                    ->where('type.name', 'Manga')
+                    ->groupBy('artwork.id')
+                    ->orderBy('note DESC')
+                    ->getAll();
+        foreach($artworks as $key => $artwork){
+            if($key < 5){
+                $data['bestMark']['manga'][] = $artwork;
+                if(is_array($artwork->note)){
+                    $data['bestMark']['manga'][$key]->note = Math::average(...$artwork->note);
+                }
             }
         }
 
-        $data['new']['anime'] = (new Artwork)->getAllAnime();
-
-        foreach($data['new']['anime'] as $key => $artwork){
-            if(is_array($artwork->note)){
-                $data['new']['anime'][$key]->note = Math::average(...$artwork->note);
+        // new anime
+        foreach(Artwork::where('type.name', 'Anime')->getAll() as $key => $artwork){
+            if($key < 5){
+                $data['new']['anime'][] = $artwork;
+                if(is_array($artwork->note)){
+                    $data['new']['anime'][$key]->note = Math::average(...$artwork->note);
+                }
             }
         }
 
-        $data['new']['manga'] = (new Artwork)->getAllManga();
-
-        foreach($data['new']['manga'] as $key => $artwork){
-            if(is_array($artwork->note)){
-                $data['new']['manga'][$key]->note = Math::average(...$artwork->note);
+        // new manga
+        foreach(Artwork::where('type.name', 'Manga')->getAll() as $key => $artwork){
+            if($key < 5){
+                $data['new']['manga'][] = $artwork;
+                if(is_array($artwork->note)){
+                    $data['new']['manga'][$key]->note = Math::average(...$artwork->note);
+                }
             }
         }
 

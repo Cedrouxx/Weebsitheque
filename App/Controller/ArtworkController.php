@@ -4,21 +4,21 @@ namespace App\Controller;
 
 use App\Model\Artwork;
 use App\Model\Comment;
+use App\Model\Status;
+use App\Model\UserList;
 use App\Core\Math;
 use App\Core\Session;
 use App\Core\Verifier\ArtworkVerifier;
-use App\Model\Status;
 
 class ArtworkController extends Controller{
 
     public function search(string $type) :void{
-        $artworkModel = new Artwork;
 
         if($type === 'anime'){
-            $data['list'] = $artworkModel->getAllAnime();
+            $data['list'] = Artwork::where('type.name', 'Anime')->getAll();
             $data['type'] = 'Anime';
         }else if($type === 'manga'){
-            $data['list'] = $artworkModel->getAllManga();
+            $data['list'] = Artwork::where('type.name', 'Manga')->getAll();
             $data['type'] = 'Manga';
         }else{
             abord(404);
@@ -33,7 +33,7 @@ class ArtworkController extends Controller{
         $data['isLogin'] = Session::isLogin();
 
         if($data['isLogin']){
-            $userList = $artworkModel->getAllArtworkStatusInUserList(Session::getUser()['id']);
+            $userList = UserList::where('user_list.user_id', Session::getUser()['id'])->getAll();
             foreach($userList as $userArtwork){
                 $data['user_list'][$userArtwork->id] = $userArtwork->status;
             }
@@ -47,16 +47,13 @@ class ArtworkController extends Controller{
         if(!isset($ArtworkSlug))
             redirect("$type/search");
 
-        $artworkModel = new Artwork();
-        $commentModel = new Comment();
-
-        $data['artwork'] = $artworkModel->getOneArtworkBySlug($ArtworkSlug);
+        $data['artwork'] = Artwork::where('artwork.slug', $ArtworkSlug)->getOne();
 
 
         if(!isset($data['artwork']->slug))
             redirect("$type/search");
 
-        $data['comments'] = $commentModel->getAllCommentByArtworkId($data['artwork']->id);
+        $data['comments'] = Comment::where('comment.artwork_id', $data['artwork']->id)->getAll();
 
         $data['isLogin'] = Session::isLogin();
 
@@ -67,27 +64,29 @@ class ArtworkController extends Controller{
     }
 
     public function addComment(string $type){
-
-        $artworkModel = new Artwork();
         
         $verifier = ArtworkVerifier::commentForm($_POST);
-        $artwork = $artworkModel->getOneArtworkById($_POST['artwork_id']);
+        $artwork = Artwork::where('artwork.id', $_POST['artwork_id'])->getOne();
 
         if(!isset($artwork->id))
             redirect("$type/search");
         
         if(!Session::isLogin())
-            redirect("$type/info?name=$artwork->slug");
+            redirect("$type/info/$artwork->slug");
 
         if(!empty($verifier)){
             Session::addMessage($verifier);
-            redirect("$type/info?name=$artwork->slug");
+            redirect("$type/info/$artwork->slug");
         }
 
-        $commentModel = new Comment();
-        $commentModel->insertOneComment(Session::getUser()['id'], $_POST['artwork_id'], $_POST['note'], $_POST['content']);
+        Comment::values([
+            'user_id' => Session::getUser()['id'],
+            'artwork_id' => $_POST['artwork_id'],
+            'note' => $_POST['note'],
+            'content' => $_POST['content'],
+        ])->insert();
 
-        redirect("$type/info?name=$artwork->slug");
+        redirect("$type/info/$artwork->slug");
 
     }
 
@@ -96,15 +95,14 @@ class ArtworkController extends Controller{
         if(!Session::isLogin())
             redirect('/');
 
-        $artworkModel = new Artwork();
         if($type === 'all'){
-            $data['list'] = $artworkModel->getAllArtworkInUserList(Session::getUser()['id']);
+            $data['list'] = UserList::where('user_list.user_id', Session::getUser()['id'])->orderBy('artwork.name')->getAll();
             $data['titleType'] = '';
         }else if($type === 'anime'){
-            $data['list'] = $artworkModel->getAllAnimeInUserList(Session::getUser()['id']);
+            $data['list'] = UserList::where('user_list.user_id', Session::getUser()['id'])->where('type.name', 'Anime')->orderBy('artwork.name')->getAll();
             $data['titleType'] = 'd\'anime';
         }else if($type === 'manga'){
-            $data['list'] = $artworkModel->getAllMangaInUserList(Session::getUser()['id']);
+            $data['list'] = UserList::where('user_list.user_id', Session::getUser()['id'])->where('type.name', 'Manga')->orderBy('artwork.name')->getAll();
             $data['titleType'] = 'de manga';
         }else{
             abord(404);
@@ -113,8 +111,7 @@ class ArtworkController extends Controller{
         $data['type'] = $type;
         $data['isLogin'] = true;
 
-        $satusModel = new Status();
-        $data['status'] = $satusModel->getAllStatus();
+        $data['status'] = Status::getAll();
 
         foreach($data['list'] as $key => $artwork){
             if(is_array($artwork->note)){
@@ -127,14 +124,15 @@ class ArtworkController extends Controller{
 
     public function removeList(){
         if(!Session::isLogin())
-            redirect('/');
+            redirect();
         
         if(!ArtworkVerifier::removeList($_POST))
             redirectToLastPage();
 
-        $artworkModel = new Artwork();
-        if(isset($artworkModel->getOneArtworkInUserListByArtworkId(Session::getUser()['id'], intval($_POST['artwork_id']))->id))
-            $artworkModel->removeOneArtworkInUserList(Session::getUser()['id'], $_POST['artwork_id']);
+        if(isset(UserList::where('user.id', Session::getUser()['id'])->where('artwork.id', intval($_POST['artwork_id']))->getOne()->id))
+            UserList::where('user_id', Session::getUser()['id'])
+            ->where('artwork_id', $_POST['artwork_id'])
+            ->delete();
 
         redirectToLastPage();
     }
@@ -150,8 +148,11 @@ class ArtworkController extends Controller{
             redirectToLastPage();
 
         $artworkModel = new Artwork();
-        if(!isset($artworkModel->getOneArtworkInUserListByArtworkId(Session::getUser()['id'], $_POST['artwork_id'])->id))
-            $artworkModel->insertOneArtworkInUserList(Session::getUser()['id'], $_POST['artwork_id']);
+        if(!isset(UserList::where('user.id', Session::getUser()['id'])->where('artwork.id', intval($_POST['artwork_id']))->id))
+            UserList::values([
+                'user_id' => Session::getUser()['id'],
+                'artwork_id' => $_POST['artwork_id']
+            ])->insert();
         
         redirectToLastPage();
     }
@@ -164,9 +165,11 @@ class ArtworkController extends Controller{
         if(!ArtworkVerifier::setStatusList($_POST))
             redirectToLastPage();
 
-        $artworkModel = new Artwork();
-        if(isset($artworkModel->getOneArtworkInUserListByArtworkId(Session::getUser()['id'], $_POST['artwork_id'])->id))
-            $artworkModel->updateOneArtworkStatus(Session::getUser()['id'], $_POST['artwork_id'], $_POST['status']);
+        if(isset(UserList::where('user.id', Session::getUser()['id'])->where('artwork.id', intval($_POST['artwork_id']))->id))
+            UserList::values([ 'user_list_status_id' => $_POST['status'] ])
+            ->where('user_id' ,Session::getUser()['id'])
+            ->where('artwork_id', $_POST['artwork_id'])
+            ->update();
 
         redirectToLastPage();
     }   

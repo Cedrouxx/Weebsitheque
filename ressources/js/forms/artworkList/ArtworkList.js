@@ -43,7 +43,7 @@ export default class ArtworkList{
         }
     }
 
-    send(requestType, form){
+    async send(requestType, form){
 
         let url;
 
@@ -58,7 +58,7 @@ export default class ArtworkList{
 
         let result;
 
-        fetch(url, myInit)
+        await fetch(url, myInit)
         .then(response => response.text())
         .then(response => result = response);
 

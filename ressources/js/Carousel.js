@@ -12,13 +12,36 @@ export default class Carousel{
         let children = this.carousel.children;
         this.carouselElements = [];
 
+        this.bullets = [];
+        let contBullet = document.createElement('div'); 
         for (let i = 0; i < children.length; i++){
-            if (children[i].matches('div'))
+            if (children[i].matches('div')){
                 this.carouselElements.push(children[i]);
+                let bullet = document.createElement('div');
+                bullet.classList = 'round size1rem block borderCoPrim pointer';
+                bullet.dataset.number = this.bullets.length;
+                bullet.addEventListener('click', this.bulletClick.bind(this));
+                this.bullets.push(bullet);
+                contBullet.append(this.bullets[i]);
+            }
         }
 
-        carousel.querySelector('.beforeButton').addEventListener('click', this.before.bind(this));
-        carousel.querySelector('.afterButton').addEventListener('click', this.after.bind(this));
+        let beforeButton = document.createElement('button');
+        beforeButton.classList = 'beforeButton button';
+        beforeButton.innerText = '<';
+        let afterButton = document.createElement('button');
+        afterButton.classList = 'afterButton button';
+        afterButton.innerText = '>';
+
+        beforeButton.addEventListener('click', this.before.bind(this));
+        afterButton.addEventListener('click', this.after.bind(this));
+
+        contBullet.classList = 'flex flex-around margeTop';
+
+        this.carousel.append(beforeButton);
+        this.carousel.append(afterButton);
+        this.carousel.append(contBullet);
+        
 
         this.refresh();
 
@@ -38,14 +61,23 @@ export default class Carousel{
         this.refresh();
     }
 
+    bulletClick(e){
+        
+        this.current = parseInt(e.target.dataset.number);
+
+        this.refresh();
+    }
+
     refresh(){
-        this.carouselElements.forEach((element, index) => {
-            if(index !== this.current){
-                element.classList.add('none');
+        for (let i = 0; i<this.carouselElements.length; i++){
+            if(i !== this.current){
+                this.carouselElements[i].classList.add('none');
+                this.bullets[i].classList.remove('bgcPrim');
             }else{
-                element.classList.remove('none');
+                this.carouselElements[i].classList.remove('none');
+                this.bullets[i].classList.add('bgcPrim');
             }
-        });
+        }
     }
 
 }

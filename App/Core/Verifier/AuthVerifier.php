@@ -25,8 +25,7 @@ class AuthVerifier{
         if(!empty($result))
             return $result;
 
-        $userModel = new User();
-        $user = $userModel->getOneByMail($loginData['email']);
+        $user = User::where('email', $loginData['email'])->getOne();
 
         if(!isset($user->password) || !password_verify($loginData['password'], $user->password)) 
             $result[] = [ 'error' => 'Adresse mail ou mot-de-passe incorrect' ];
@@ -53,8 +52,6 @@ class AuthVerifier{
         if(!empty($result))
             return $result;
 
-        $userModel = new User();
-
         if(strlen($loginData['username']) < 3)
             $result[] =  [ 'error' => 'Le nom d\'utilisateur doit avoir au moin 3 carractères !' ];
 
@@ -68,7 +65,8 @@ class AuthVerifier{
         if($loginData['password'] !== $loginData['password-confirm'])
             $result[] =  [ 'error' => 'Les mots-de-passe ne corresponde pas !' ];
 
-        if(isset($userModel->getOneByMail($loginData['email'])->id))
+        $user = User::where('email', $loginData['email'])->getOne();
+        if(isset($user->id))
             $result[] =  [ 'error' => 'Adresse mail déjà utilisé !' ];
 
         return $result;
@@ -98,8 +96,8 @@ class AuthVerifier{
         if(!filter_var($emailData['email'], FILTER_VALIDATE_EMAIL)) 
             $result[] =  [ 'error' => 'L\'adresse mail est incorect !' ];
 
-        $userModel = new User();
-        if(isset($userModel->getOneByMail($emailData['email'])->id))
+        $user = User::where('email', $emailData['email'])->getOne();
+        if(isset($user->id))
             $result[] =  [ 'error' => 'Adresse mail déjà utilisé !' ];
 
         return $result;

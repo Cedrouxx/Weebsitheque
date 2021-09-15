@@ -28,8 +28,9 @@ class AuthController extends Controller{
             redirect('login');
         }
 
-        $userModel = new User();
-        $user = $userModel->getOneByMail($_POST['email']);
+        
+        $user = User::where('user.email', $_POST['email'])->getOne();
+        
 
         Session::login($user->id, $user->username, $_POST['email'], $user->is_admin);
 
@@ -56,8 +57,11 @@ class AuthController extends Controller{
             redirect('register');
         }
 
-        $userModel = new User;
-        $userModel->insertOneUser($_POST['username'], $_POST['email'], password_hash($_POST['password'], PASSWORD_DEFAULT));
+        User::values([
+            'username' => $_POST['username'],
+            'email' => $_POST['email'],
+            'password' => password_hash($_POST['password'], PASSWORD_DEFAULT)
+        ])->insert();
 
         redirect('login');
     }
@@ -94,8 +98,10 @@ class AuthController extends Controller{
         }
 
         $user = Session::getUser();
-        $userModel = new User();
-        $userModel->updateUsername($user['id'], $_POST['username']);
+        User::values([
+            'username' => $user['id']
+        ])->where('id', $_POST['username'])
+        ->update();
 
         $user['username'] = $_POST['username'];
 
@@ -121,8 +127,10 @@ class AuthController extends Controller{
         }
 
         $user = Session::getUser();
-        $userModel = new User();
-        $userModel->updateEmail($user['id'], $_POST['email']);
+        User::values([
+            'email' => $_POST['email']
+        ])->where('id', $user['id'])
+        ->update();
 
         $user['email'] = $_POST['email'];
 
@@ -147,8 +155,10 @@ class AuthController extends Controller{
         }
 
         $user = Session::getUser();
-        $userModel = new User();
-        $userModel->updatePassword($user['id'], password_hash($_POST['password'], PASSWORD_DEFAULT));
+        User::values([
+            'password' => password_hash($_POST['password'], PASSWORD_DEFAULT)
+        ])->where('id', $user['id'])
+        ->update();
 
         Session::addMessage([['success' => 'Mot-de-passe modifier !']]);
 
