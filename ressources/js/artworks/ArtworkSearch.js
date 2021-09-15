@@ -1,6 +1,7 @@
 export default class ArtworkSearch{
 
     lang = document.querySelector('html').lang;
+    baseUrl = document.querySelector('base').href;
 
     constructor(type, changeStatus, artworkList, isUserList = false){
 
@@ -26,7 +27,7 @@ export default class ArtworkSearch{
 
     async getAllArtwork(){
         let result;
-        await fetch(`/${this.lang}/api/artwork/${this.type}`)
+        await fetch(`${this.baseUrl}/${this.lang}/api/artwork/${this.type}`)
         .then(response => response.json())
         .then(response => result = response);
         return result;
@@ -34,7 +35,7 @@ export default class ArtworkSearch{
 
     async getAllArtworkInUserList(){
         let result;
-        await fetch(`/${this.lang}/api/UserList/getUserList/${this.type}`)
+        await fetch(`${this.baseUrl}/${this.lang}/api/UserList/getUserList/${this.type}`)
         .then(response => response.json())
         .then(response => result = response);
         return result;
@@ -42,7 +43,7 @@ export default class ArtworkSearch{
 
     async getAllStatus(){
         let result;
-        await fetch(`/${this.lang}/api/status`)
+        await fetch(`${this.baseUrl}/${this.lang}/api/status`)
         .then(response => response.json())
         .then(response => result = response);
         return result;
@@ -51,7 +52,6 @@ export default class ArtworkSearch{
     async onSearch(){
 
         this.userList = await this.getAllArtworkInUserList();
-        console.log(this.userList);
 
         let value = this.searchInput.value;
         let table;

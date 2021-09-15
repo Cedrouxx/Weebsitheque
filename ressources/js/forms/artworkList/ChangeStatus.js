@@ -1,6 +1,7 @@
 export default class ChangeStatus{
 
     lang = document.querySelector('html').lang;
+    baseUrl = document.querySelector('base').href;
 
     constructor(){
         
@@ -22,7 +23,7 @@ export default class ChangeStatus{
             body: new FormData(e.target.parentNode)
         };
 
-        fetch(`/${this.lang}/api/UserList/ChangeStatus`, myInit);
+        fetch(`${this.baseUrl}/${this.lang}/api/UserList/ChangeStatus`, myInit);
     }
 
 }

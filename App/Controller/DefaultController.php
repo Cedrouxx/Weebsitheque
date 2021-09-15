@@ -19,7 +19,7 @@ class DefaultController extends Controller{
                                     'author.name AS author', 
                                     'number_volume', 
                                     'type.name AS type', 
-                                    'genre.name AS genre', 
+                                    'GROUP_CONCAT( genre.name SEPARATOR \', \' ) AS genre', 
                                     'artwork.image', 
                                     'AVG(comment.note) AS note')
                     ->where('type.name', 'Anime')
@@ -39,7 +39,7 @@ class DefaultController extends Controller{
                                     'author.name AS author', 
                                     'number_volume', 
                                     'type.name AS type', 
-                                    'genre.name AS genre', 
+                                    'GROUP_CONCAT( genre.name SEPARATOR \', \' ) AS genre', 
                                     'artwork.image', 
                                     'AVG(comment.note) AS note')
                     ->where('type.name', 'Manga')
