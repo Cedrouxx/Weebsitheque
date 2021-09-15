@@ -56,6 +56,20 @@ class DefaultController extends Controller{
         }
 
         // new anime
+        $artworks = Artwork::select('artwork.id', 
+                                    'artwork.name', 
+                                    'artwork.slug',
+                                    'author.name AS author', 
+                                    'number_volume', 
+                                    'type.name AS type', 
+                                    'GROUP_CONCAT( genre.name SEPARATOR \', \' ) AS genre', 
+                                    'artwork.image', 
+                                    'AVG(comment.note) AS note',
+                                    'artwork.release_date')
+                    ->where('type.name', 'Anime')
+                    ->groupBy('artwork.id')
+                    ->orderBy('artwork.release_date DESC')
+                    ->getAll();
         foreach(Artwork::where('type.name', 'Anime')->getAll() as $key => $artwork){
             if($key < 5){
                 $data['new']['anime'][] = $artwork;
@@ -66,6 +80,20 @@ class DefaultController extends Controller{
         }
 
         // new manga
+        $artworks = Artwork::select('artwork.id', 
+                                    'artwork.name', 
+                                    'artwork.slug',
+                                    'author.name AS author', 
+                                    'number_volume', 
+                                    'type.name AS type', 
+                                    'GROUP_CONCAT( genre.name SEPARATOR \', \' ) AS genre', 
+                                    'artwork.image', 
+                                    'AVG(comment.note) AS note',
+                                    'artwork.release_date')
+                    ->where('type.name', 'Manga')
+                    ->groupBy('artwork.id')
+                    ->orderBy('artwork.release_date DESC')
+                    ->getAll();
         foreach(Artwork::where('type.name', 'Manga')->getAll() as $key => $artwork){
             if($key < 5){
                 $data['new']['manga'][] = $artwork;
