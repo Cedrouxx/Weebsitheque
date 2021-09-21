@@ -16,12 +16,4 @@ class Status extends Model{
         return $orm;
     }
 
-    // public function getAllStatus(): array{
-
-    //     return $this->select('name', 'id')
-    //     ->from('user_list_status')
-    //     ->getAll();
-
-    // }
-
 }

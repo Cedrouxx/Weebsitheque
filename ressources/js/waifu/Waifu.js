@@ -49,7 +49,6 @@ export default class Waifu{
     }
 
     onPush(){
-        let result = 'bip';
         fetch(`https://api.waifu.pics/sfw/${this.select.value}`)
         .then(response => response.json())
         .then(this.drawImage.bind(this));

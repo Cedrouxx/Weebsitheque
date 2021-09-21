@@ -16,10 +16,4 @@ class Genre extends Model{
         return $orm;
     }
 
-    // public function getAllGenre(): array{
-    //     return $this->select('id', 'name')
-    //     ->from('genre')
-    //     ->getAll();
-    // }
-
 }

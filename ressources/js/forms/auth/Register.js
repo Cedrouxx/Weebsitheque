@@ -1,5 +1,6 @@
 import { checkEmail } from "../../utilities.js";
 
+// helper for register (username / email / password)
 export default class Register{
 
     constructor(){

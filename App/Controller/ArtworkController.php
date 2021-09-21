@@ -15,19 +15,13 @@ class ArtworkController extends Controller{
     public function search(string $type) :void{
 
         if($type === 'anime'){
-            $data['list'] = Artwork::where('type.name', 'Anime')->getAll();
+            $data['list'] = Artwork::where('type', 'Anime')->getAll();
             $data['type'] = 'Anime';
         }else if($type === 'manga'){
-            $data['list'] = Artwork::where('type.name', 'Manga')->getAll();
+            $data['list'] = Artwork::where('type', 'Manga')->getAll();
             $data['type'] = 'Manga';
         }else{
             abord(404);
-        }
-        
-        foreach($data['list'] as $key => $artwork){
-            if(is_array($artwork->note)){
-                $data['list'][$key]->note = Math::average(...$artwork->note);
-            }
         }
 
         $data['isLogin'] = Session::isLogin();
@@ -99,10 +93,10 @@ class ArtworkController extends Controller{
             $data['list'] = UserList::where('user_list.user_id', Session::getUser()['id'])->orderBy('artwork.name')->getAll();
             $data['titleType'] = '';
         }else if($type === 'anime'){
-            $data['list'] = UserList::where('user_list.user_id', Session::getUser()['id'])->where('type.name', 'Anime')->orderBy('artwork.name')->getAll();
+            $data['list'] = UserList::where('user_list.user_id', Session::getUser()['id'])->where('type', 'Anime')->orderBy('artwork.name')->getAll();
             $data['titleType'] = 'd\'anime';
         }else if($type === 'manga'){
-            $data['list'] = UserList::where('user_list.user_id', Session::getUser()['id'])->where('type.name', 'Manga')->orderBy('artwork.name')->getAll();
+            $data['list'] = UserList::where('user_list.user_id', Session::getUser()['id'])->where('type', 'Manga')->orderBy('artwork.name')->getAll();
             $data['titleType'] = 'de manga';
         }else{
             abord(404);
@@ -111,13 +105,7 @@ class ArtworkController extends Controller{
         $data['type'] = $type;
         $data['isLogin'] = true;
 
-        $data['status'] = Status::getAll();
-
-        foreach($data['list'] as $key => $artwork){
-            if(is_array($artwork->note)){
-                $data['list'][$key]->note = Math::average(...$artwork->note);
-            }
-        }
+        $data['myList'] = true;
 
         $this->lunchPage('artwork/myList', 'Ma liste', $data);
     } 
@@ -138,8 +126,6 @@ class ArtworkController extends Controller{
     }
 
     public function addList(){
-        
-        var_dump($_POST);
 
         if(!Session::isLogin())
             redirect('/');
@@ -147,7 +133,6 @@ class ArtworkController extends Controller{
         if(!ArtworkVerifier::removeList($_POST))
             redirectToLastPage();
 
-        $artworkModel = new Artwork();
         if(!isset(UserList::where('user.id', Session::getUser()['id'])->where('artwork.id', intval($_POST['artwork_id']))->id))
             UserList::values([
                 'user_id' => Session::getUser()['id'],

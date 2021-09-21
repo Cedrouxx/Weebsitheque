@@ -49,6 +49,7 @@ export default class ArtworkSearch{
         return result;
     }
 
+    // search event
     async onSearch(){
 
         this.userList = await this.getAllArtworkInUserList();
@@ -84,32 +85,43 @@ export default class ArtworkSearch{
 
     }
 
+    /* 
+    * Make a html for one artwork 
+    */
     makeHtml(artwork, userArtwork, genre){
 
+        // article
         let article = document.createElement('article');
         article.classList.add('shadow');
         article.classList.add('borderAll');
 
+        // figure
         let figure = document.createElement('figure');
         figure.classList.add('hover-caption');
         figure.tabIndex = 0;
 
+        // image
         let img = document.createElement('img');
         img.src = artwork.image;
         img.alt = artwork.name;
 
+        // span
         let span = document.createElement('span');
         if(userArtwork !== undefined){
             if(this.isUserList){
+                
+                // form
                 span = document.createElement('form');
                 span.action = '/set-artwork-list-status';
                 span.method = 'post';
 
+                // input hidden artwork_id
                 let inputSpan = document.createElement('input');
                 inputSpan.type = 'hidden';
                 inputSpan.name = 'artwork_id';
                 inputSpan.value = artwork.id;
 
+                // select
                 let select = document.createElement('select');
                 select.id = 'changeStatusSelect';
                 select.name = 'status';
@@ -118,6 +130,7 @@ export default class ArtworkSearch{
                     select.append(option);
                 });
 
+                // append in form
                 span.append(inputSpan);
                 span.append(select);
             }else{
@@ -132,39 +145,54 @@ export default class ArtworkSearch{
         }
         span.classList.add('user-status');
         
+        // figcaption
         let figcaption = document.createElement('figcaption');
 
+        // div
         let div = document.createElement('div');
 
+        // title
         let h3 = document.createElement('h3');
         h3.innerText = artwork.name;
 
+        // author
         let pAuthor = document.createElement('p');
         pAuthor.innerText = 'Créer par : ' + artwork.author;
 
+        // genre
         let pGenre = document.createElement('p');
         pGenre.innerText = 'Genre : ' + genre;
 
+        // note
+        let pNote = document.createElement('p');
+        pNote.innerText = 'Note : ' + artwork.note + '/10';
+
+        // button more info
         let a = document.createElement('a');
         a.classList.add('button');
         a.classList.add('block-center');
         a.href = `${this.lang}/${this.type}/info/${artwork.slug}`;
         a.innerText = 'Plus d\'info';
 
+        // append to div
         div.append(h3);
         div.append(pAuthor);
-        div.append(pGenre);
+        if (artwork.genre !== '') div.append(pGenre);
+        if (artwork.note !== '') div.append(pNote);
         div.append(a);
 
+        // form
         let form = document.createElement('form');
         form.action = `${this.lang}/add-artwork-list`;
         form.method = 'post';
 
+        // input
         let input = document.createElement('input');
         input.type = 'hidden';
         input.name = 'artwork_id';
         input.value = artwork.id;
 
+        // button
         let button;
         if(this.userList.length > 0){
             button = document.createElement('button');
@@ -178,16 +206,20 @@ export default class ArtworkSearch{
             }
         }
 
+        // append to form
         form.append(input);
         if(this.userList.length > 0) form.append(button);
 
+        // append to figcaption
         figcaption.append(div);
         figcaption.append(form);
 
+        // append to figure
         figure.append(img);
         figure.append(span);
         figure.append(figcaption);
 
+        // append to article
         article.append(figure);
 
         return article;

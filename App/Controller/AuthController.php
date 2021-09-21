@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Core\Verifier\AuthVerifier;
 use App\Core\Session;
+use App\Core\Str;
 use App\Model\User;
 
 class AuthController extends Controller{
@@ -32,7 +33,7 @@ class AuthController extends Controller{
         $user = User::where('user.email', $_POST['email'])->getOne();
         
 
-        Session::login($user->id, $user->username, $_POST['email'], $user->is_admin);
+        Session::login($user->id, $user->username, $_POST['email'], $user->image, $user->is_admin);
 
         redirect('/');
     }
@@ -86,10 +87,37 @@ class AuthController extends Controller{
         $this->lunchPage('auth/myAccount', 'Mon compte', $data);
     }
 
+    public function changeProfilePicture(){
+
+        if(!Session::isLogin())
+            redirect();
+
+        $message = AuthVerifier::profilePicture($_FILES);
+        if(!empty($message)){
+            Session::addMessage($message);
+            redirect('my-account');
+        }
+
+        $fileType = pathinfo($_FILES['profilePicture']['name'], PATHINFO_EXTENSION);
+        $folder = 'ressources/img/user/'.Str::slug(Session::getUser()['username']).'.'.$fileType;
+        move_uploaded_file($_FILES['profilePicture']['tmp_name'], $folder);
+
+        User::values([
+            'image' => $folder
+        ])->where('id',  Session::getUser()['id'])
+        ->update();
+
+        $user = Session::getUser();
+        Session::logout();
+        Session::login($user['id'], $user['username'], $user['email'], $folder, $user['isAdmin']);
+        
+        redirect('my-account');
+    }
+
     public function changeUsername(){
         
         if(!Session::isLogin())
-            redirect('/');
+            redirect();
 
         $verifier = AuthVerifier::username($_POST);
         if(!empty($verifier)){
@@ -106,7 +134,7 @@ class AuthController extends Controller{
         $user['username'] = $_POST['username'];
 
         Session::logout();
-        Session::login($user['id'], $user['username'], $user['email'], $user['isAdmin']);
+        Session::login($user['id'], $user['username'], $user['email'], $user['image'], $user['isAdmin']);
 
         Session::addMessage([['success' => 'Nom d\'utilisateur modifier !']]);
 
@@ -135,7 +163,7 @@ class AuthController extends Controller{
         $user['email'] = $_POST['email'];
 
         Session::logout();
-        Session::login($user['id'], $user['username'], $user['email'], $user['isAdmin']);
+        Session::login($user['id'], $user['username'], $user['email'], $user['image'], $user['isAdmin']);
 
         Session::addMessage([['success' => 'Adresse mail modifier !']]);
 

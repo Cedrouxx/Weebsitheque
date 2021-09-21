@@ -18,11 +18,11 @@ class DefaultController extends Controller{
                                     'artwork.slug',
                                     'author.name AS author', 
                                     'number_volume', 
-                                    'type.name AS type', 
+                                    'type', 
                                     'GROUP_CONCAT( genre.name SEPARATOR \', \' ) AS genre', 
                                     'artwork.image', 
                                     'AVG(comment.note) AS note')
-                    ->where('type.name', 'Anime')
+                    ->where('type', 'Anime')
                     ->groupBy('artwork.id')
                     ->orderBy('note DESC')
                     ->getAll();
@@ -38,11 +38,11 @@ class DefaultController extends Controller{
                                     'artwork.slug',
                                     'author.name AS author', 
                                     'number_volume', 
-                                    'type.name AS type', 
+                                    'type', 
                                     'GROUP_CONCAT( genre.name SEPARATOR \', \' ) AS genre', 
                                     'artwork.image', 
                                     'AVG(comment.note) AS note')
-                    ->where('type.name', 'Manga')
+                    ->where('type', 'Manga')
                     ->groupBy('artwork.id')
                     ->orderBy('note DESC')
                     ->getAll();
@@ -61,16 +61,16 @@ class DefaultController extends Controller{
                                     'artwork.slug',
                                     'author.name AS author', 
                                     'number_volume', 
-                                    'type.name AS type', 
+                                    'type', 
                                     'GROUP_CONCAT( genre.name SEPARATOR \', \' ) AS genre', 
                                     'artwork.image', 
                                     'AVG(comment.note) AS note',
                                     'artwork.release_date')
-                    ->where('type.name', 'Anime')
+                    ->where('type', 'Anime')
                     ->groupBy('artwork.id')
                     ->orderBy('artwork.release_date DESC')
                     ->getAll();
-        foreach(Artwork::where('type.name', 'Anime')->getAll() as $key => $artwork){
+        foreach(Artwork::where('type', 'Anime')->getAll() as $key => $artwork){
             if($key < 5){
                 $data['new']['anime'][] = $artwork;
                 if(is_array($artwork->note)){
@@ -85,16 +85,16 @@ class DefaultController extends Controller{
                                     'artwork.slug',
                                     'author.name AS author', 
                                     'number_volume', 
-                                    'type.name AS type', 
+                                    'type', 
                                     'GROUP_CONCAT( genre.name SEPARATOR \', \' ) AS genre', 
                                     'artwork.image', 
                                     'AVG(comment.note) AS note',
                                     'artwork.release_date')
-                    ->where('type.name', 'Manga')
+                    ->where('type', 'Manga')
                     ->groupBy('artwork.id')
                     ->orderBy('artwork.release_date DESC')
                     ->getAll();
-        foreach(Artwork::where('type.name', 'Manga')->getAll() as $key => $artwork){
+        foreach(Artwork::where('type', 'Manga')->getAll() as $key => $artwork){
             if($key < 5){
                 $data['new']['manga'][] = $artwork;
                 if(is_array($artwork->note)){

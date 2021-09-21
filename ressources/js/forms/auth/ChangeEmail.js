@@ -1,5 +1,6 @@
 import { checkEmail } from "../../utilities.js";
 
+// helper for change email 
 export default class ChangeEmail{
 
     constructor(){

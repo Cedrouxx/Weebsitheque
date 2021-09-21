@@ -123,7 +123,6 @@ img{
     bottom: 2rem;
     right: 2rem;
     border: 1rem solid white;
-    padding: auto 0;
 }
 
 .hover-caption figcaption div{
@@ -193,6 +192,7 @@ table.border{
     border-collapse: collapse;
 }
 
+    /*      --- CAROUSEL ---        */
 .carousel{
     position: relative;
     width: 75%;
@@ -224,6 +224,16 @@ table.border{
     position: absolute;
     left: -5rem;
     top:50%;
+}
+
+    /*      --- PROFILE PICTURE ---        */
+.profilePicture{
+    width: 5rem;
+    border-radius: 50%;
+    float: left;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border: 1px solid black;
 }
 
 
@@ -260,8 +270,14 @@ table.border{
     display: flex;
     justify-content: space-around;
 }
+.flex-between{
+    justify-content: space-between;
+}
 .flexWrap{
     flex-wrap: wrap;
+}
+.flex-align-center{
+    align-items: center;
 }
 
 
@@ -331,6 +347,10 @@ table.border{
 .margeBottom{
     margin-bottom: 2rem;
 }
+.margeLR{
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
 
     /*      --- PADDING ---        */
 .paddingAll{
@@ -381,6 +401,26 @@ table.border{
     color: green;
 }
 
+    /*      --- LIST ---        */
+.noAftBef:after{
+    content: none;
+}
+.noAftBef::before{
+    content: none;
+}
+    /*      --- FONT ---        */
+.bold{
+    font-weight: bold;
+}
+.sizeTitle{
+    font-size: 2em;
+}
+
+    /*      --- OVERFLOW ---        */
+.hidden{
+    overflow: hidden;
+}
+
 /*****************************
 *          HEADER            *
 *****************************/
@@ -402,6 +442,7 @@ header{
 header>div{
     font-size: 2rem;
     margin:0 2rem;
+    line-height: 2;
 }
 
 /* Sur tout les a du header enlever le soulignement et définir la couleur */
@@ -418,6 +459,9 @@ header label{
 /* La div du logo à une largeur de toute la largeur du parent */
 .logo{
     width:100%;
+}
+.logo span{
+    font-size: 2em;
 }
 
     /*      --- NAV ---        */
@@ -447,13 +491,13 @@ header nav{
 .navigation>ul{
     display: flex;
     justify-content: space-around;
+    line-height: normal;
 }
 
 .navigation li {
     position: relative;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
 }
 
 .navigation ul ul{

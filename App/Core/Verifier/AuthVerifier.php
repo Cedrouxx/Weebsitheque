@@ -125,4 +125,11 @@ class AuthVerifier{
 
     }
 
+    public static function profilePicture(array $file){
+        if(!isset($file['profilePicture']) || $file['profilePicture']['error'] > 0)
+            $result[] = [ 'error' => 'Champ \'image\' non renseigné ou invalide !' ];
+
+        return $result ?? [];
+    }
+
 }

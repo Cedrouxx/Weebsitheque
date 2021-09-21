@@ -11,6 +11,7 @@ import ChangeEmail from "./forms/auth/ChangeEmail.js";
 import ChangePassword from "./forms/auth/ChangePassword.js";
 import {config} from "./config.js";
 import ArtworkSearch from "./artworks/ArtworkSearch.js";
+import ChangeProfilePicture from "./forms/auth/ChangeProfilePicture.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -56,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             break;
             
         case config.title.myAccount:
+            new ChangeProfilePicture();
             new ChangeUsername();
             new ChangeEmail();
             new ChangePassword();

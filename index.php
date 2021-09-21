@@ -16,17 +16,21 @@ class Main{
         define('config', require 'config.php');
         require 'helpers.php';
 
+        $this->lang();
+
+        new Router;
+
+    }
+
+    public function lang(){
         try{
             $lang = new Lang($_GET['lang'] ?? '');
             define('lang', $lang->getLang());
         }catch(LangException){
-            if ($url === '/')
+            if ($_GET['url'] === '')
                 redirect($_GET['lang'] ?? '', false);
             redirect('', false);
         }
-
-        new Router;
-
     }
 
     public function autoLoad(){

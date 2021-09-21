@@ -6,18 +6,18 @@
     <img src="<?= $artwork->image ?>" alt="<?= $artwork->name ?>">
     
     <!-- Status for user -->
-    <?php
-
-                                            use Lang\lang;
-
-if(isset($data['status'])): ?>
+    <?php if(isset($data['myList'])): ?>
         <!-- Select -->
         <form class="user-status" action="<?= lang['name'] ?>/set-artwork-list-status" method="post">
             <input type="hidden" name="artwork_id" value="<?= $artwork->id ?>">
             <select  name="status" class="changeStatusSelect">
-                <?php foreach($data['status'] as $status ): ?>
-                    <option value="<?= $status->id ?>" <?= $artwork->status_id === $status->id ? 'selected' : '' ?>><?= $status->name ?></option>
-                <?php endforeach; ?>
+                
+                <option value="Non défini" <?= $artwork->status === 'Non défini' ? 'selected' : '' ?>> Non défini </option>
+                <option value="À commencer" <?= $artwork->status === 'À commencer' ? 'selected' : '' ?>>À commencer</option>
+                <option value="En cours" <?= $artwork->status === 'En cours' ? 'selected' : '' ?>>En cours</option>
+                <option value="Arrêté" <?= $artwork->status === 'Arrêté' ? 'selected' : '' ?>>Arrêté</option>
+                <option value="Fini" <?= $artwork->status === 'Fini' ? 'selected' : '' ?>>Fini</option>
+                
             </select>
             <button type="submit" class="changeStatusButton"><?= lang['multi']['change'] ?></button>
         </form>

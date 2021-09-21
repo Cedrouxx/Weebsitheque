@@ -5,10 +5,12 @@
         <?php endforeach; ?>
     </ul>
 </div>
-                        <!-- Anime -->
+                        <!-- Artwork -->
 <section>
-                            <!-- list -->
+    <h1>Artwork</h1>
+                            <!-- lists -->
     <article>
+                                <!-- Anime -->
         <input type="checkbox" id="list-anime" class="admin-check">
         <label for="list-anime">Liste des animes</label>
         <div>
@@ -32,58 +34,16 @@
                         <td><?= $anime->number_volume?></td>
                         <td><?= is_array($anime->genre)? implode(', ', $anime->genre) : $anime->genre ?></td>
                         <td><?= $anime->image ?></td>
+                        <td><a href="<?= lang['name'] ?>/admin/artwork/remove/<?= $anime->id ?>">X</a></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
     </article>
-                            <!-- add -->
+
     <article>
-        <input type="checkbox" id="add-anime" class="admin-check">
-        <label for="add-anime">Ajouter un anime</label>
-        <div>
-
-            <form action="/admin/add/artwork" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="type" value="2">
-                <div>
-                    <label for="anime-name">Nom</label>
-                    <input type="text" id="anime-name" name="name">
-                </div>
-                <div>
-                    <label for="anime-author">Auteur</label>
-                    <select id="anime-author" name="author">
-                        <?php foreach($data['authors'] as $author): ?>
-                            <option value="<?= $author->id ?>"><?= $author->name ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div>
-                    <label for="anime-number-volume">Nombre d'épisode</label>
-                    <input type="number" id="anime-number-volume" name="number_volume" min="0">
-                </div>
-                <div>
-                    <span>Genres : </span>
-                    <?php foreach($data['genres'] as $genre): ?>
-                        <input type="checkbox" id="anime-genre-<?= $genre->id ?>" name="genres[]" value="<?= $genre->id ?>">
-                        <label for="anime-genre-<?= $genre->id ?>"><?= $genre->name ?></label>
-                    <?php endforeach; ?>
-                </div>
-                <div>
-                    <label for="anime-image">Image</label>
-                    <input type="file" id="anime-image" name="image">
-                </div>
-                <input type="submit" value="Ajouter">
-            </form>
-
-        </div>
-    </article>
-</section>
-
-                            <!-- manga -->
-<section>
-                            <!-- list -->
-    <article>
+                                <!-- Manga -->
         <input type="checkbox" id="list-manga" class="admin-check">
         <label for="list-manga">Liste des mangas</label>
         <div>
@@ -107,47 +67,149 @@
                         <td><?= $manga->number_volume?></td>
                         <td><?= is_array($manga->genre)? implode(', ', $manga->genre) : $manga->genre ?></td>
                         <td><?= $manga->image ?></td>
+                        <td><a href="<?= lang['name'] ?>/admin/artwork/remove/<?= $anime->id ?>">X</a></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
     </article>
-                                <!-- add -->
+                            <!-- add Artwork -->
     <article>
-        <input type="checkbox" id="add-manga" class="admin-check">
-        <label for="add-manga">Ajouter un manga</label>
+        <input type="checkbox" id="add-artwork" class="admin-check">
+        <label for="add-artwork">Ajouter un artwork</label>
         <div>
-            <form action="/admin/add/artwork" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="type" value="1">
+
+            <form action="<?= lang['name'] ?>/admin/add/artwork" method="post" enctype="multipart/form-data">
                 <div>
-                    <label for="manga-name">Nom</label>
-                    <input type="text" id="manga-name" name="name">
+                    <label for="type">Type</label>
+                    <select name="type" id="type">
+                        <option value="Manga">Manga</option>
+                        <option value="Anime">Anime</option>
+                    </select>
                 </div>
                 <div>
-                    <label for="manga-author">Auteur</label>
-                    <select id="manga-author" name="author">
+                    <label for="artwork-name">Nom</label>
+                    <input type="text" id="artwork-name" name="name">
+                </div>
+                <div>
+                    <label for="artwork-author">Auteur</label>
+                    <select id="artwork-author" name="author">
                         <?php foreach($data['authors'] as $author): ?>
                             <option value="<?= $author->id ?>"><?= $author->name ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
                 <div>
-                    <label for="manga-number-volume">Nombre d'épisode</label>
-                    <input type="number" id="manga-number-volume" name="number_volume" min="0">
+                    <label for="artwork-number-volume">Nombre d'épisode</label>
+                    <input type="number" id="artwork-number-volume" name="number_volume" min="0">
                 </div>
                 <div>
                     <span>Genres : </span>
                     <?php foreach($data['genres'] as $genre): ?>
-                        <input type="checkbox" id="manga-genre-<?= $genre->id ?>" name="genres[]" value="<?= $genre->id ?>">
-                        <label for="manga-genre-<?= $genre->id ?>"><?= $genre->name ?></label>
+                        <input type="checkbox" id="artwork-genre-<?= $genre->id ?>" name="genres[]" value="<?= $genre->id ?>">
+                        <label for="artwork-genre-<?= $genre->id ?>"><?= $genre->name ?></label>
                     <?php endforeach; ?>
                 </div>
                 <div>
-                    <label for="manga-image">Image</label>
-                    <input type="file" id="manga-image" name="image">
+                    <label for="artwork-image">Image</label>
+                    <input type="file" id="artwork-image" name="image">
+                </div>
+                <div>
+                    <label for="release_date ">Date</label>
+                    <input type="date" name="release_date">
                 </div>
                 <input type="submit" value="Ajouter">
+            </form>
+
+        </div>
+    </article>
+</section>
+
+<section>
+
+<section>
+                        <!-- Authors/Studio -->
+    <h1>Auteurs/Studios</h1>
+    <article>
+                            <!-- List -->
+        <input type="checkbox" id="list-author" class="admin-check">
+        <label for="list-author">Liste des Auteurs/Studios</label>
+        <div>
+            <table class="border">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>nom</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($data['authors'] as $author): ?>
+                    <tr>
+                        <td><?= $author->id ?></td>
+                        <td><?= $author->name ?></td>
+                        <td><a href="<?= lang['name'] ?>/admin/author/remove/<?= $anime->id ?>">X</a></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article>
+        <input type="checkbox" id="add-author" class="admin-check">
+        <label for="add-author">Ajouter un Auteur/Studio</label>
+        <div>
+            <form action="<?= lang['name'] ?>/admin/add/author" method="post">
+                <div>
+                    <label for="name">Nom</label>
+                    <input id="name" type="text" name="name">
+                </div>
+                <input type="submit">
+            </form>
+        </div>
+    </article>
+
+</section>
+
+                        <!-- Genres -->
+<h1>Genres</h1>
+    <article>
+                            <!-- List -->
+        <input type="checkbox" id="list-genre" class="admin-check">
+        <label for="list-genre">Liste des Genres</label>
+        <div>
+            <table class="border">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>nom</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($data['genres'] as $genre): ?>
+                    <tr>
+                        <td><?= $genre->id ?></td>
+                        <td><?= $genre->name ?></td>
+                        <td><a href="<?= lang['name'] ?>/admin/genre/remove/<?= $anime->id ?>">X</a></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article>
+        <input type="checkbox" id="add-genre" class="admin-check">
+        <label for="add-genre">Ajouter un Genre</label>
+        <div>
+            <form action="<?= lang['name'] ?>/admin/add/genre" method="post">
+                <div>
+                    <label for="name">Nom</label>
+                    <input id="name" type="text" name="name">
+                    <td><a href="<?= lang['name'] ?>/admin/genre/remove/<?= $anime->id ?>">X</a></td>
+                </div>
+                <input type="submit">
             </form>
         </div>
     </article>

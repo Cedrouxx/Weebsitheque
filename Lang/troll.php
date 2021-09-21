@@ -30,6 +30,22 @@ return [
         'change' => 'Shenjé',
     ],
 
+    'home' => [
+        'welcome' => [
+            'title' => 'Bienvenue sur weebsithèque',
+            'text1' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla cupiditate, nisi reiciendis quo eum debitis placeat quaerat velit 
+                        soluta maiores at repellendus non. Quam quas, culpa quo praesentium soluta vel voluptates fuga doloremque blanditiis architecto. 
+                        Laborum dicta asperiores, aspernatur earum, eum accusantium itaque quas eligendi commodi dolores similique officiis architecto!'
+        ],
+        'bestMark' => [
+            'title' => 'Les mieux notés',
+        ],
+
+        'new' => [
+            'title' => 'Nouveautées',
+        ]
+    ],
+
     'login' => [
         'loginTitle' => 'Konequession',
         'registerTitle' => 'Unskripession',

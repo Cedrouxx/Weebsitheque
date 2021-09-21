@@ -1,5 +1,5 @@
-import { checkEmail } from "../../utilities.js";
 
+// helper for change username 
 export default class ChangeUsername{
 
     constructor(){

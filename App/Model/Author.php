@@ -16,10 +16,4 @@ class Author extends Model{
         return $orm;
     }
 
-    // public function getAllAuthor(): array{
-    //     return $this->select('id', 'name')
-    //     ->from('author')
-    //     ->getAll();
-    // }
-
 }

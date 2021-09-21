@@ -23,11 +23,12 @@ class Session{
         $_SESSION['message'] = [];
     }
 
-    public static function login(int $userId, string $username, string $userEmail, bool $isAdmin): void{
+    public static function login(int $userId, string $username, string $userEmail, string $image, bool $isAdmin): void{
         $_SESSION['user'] = [
             'id' => $userId,
             'username' => $username,
             'email' => $userEmail,
+            'image' => $image,
             'isAdmin' => $isAdmin
         ];
     }

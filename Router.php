@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Router{
 
@@ -30,23 +30,25 @@ class Router{
             if($match){
 
                 unset($result[0]);
-    
-                $routeFind = $route;
-                $routeParameter = $result;
+
+                return [
+                    'routeFind' => $route,
+                    'routeParameter' => $result
+                ];
     
             }
     
         }
 
         return [
-            'routeFind' => $routeFind,
-            'routeParameter' => $routeParameter
+            'routeFind' => '',
+            'routeParameter' => ''
         ];
     }
 
-    public function start($routeFind, $routeParameter){
+    public function start(string $routeFind, array $routeParameter){
 
-        if(!isset($routeFind))
+        if(empty($routeFind))
             abord(404);
     
         [ 'class' => $class, 'method' => $method] = $this->routeList[$routeFind];

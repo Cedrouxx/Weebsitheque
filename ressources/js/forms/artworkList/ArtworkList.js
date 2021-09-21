@@ -7,6 +7,10 @@ export default class ArtworkList{
         this.makeEvent();
     }
 
+    /* 
+     * Make event for all artwork-list-button 
+     * callable with auther class
+    */
     makeEvent(){
         document.querySelectorAll('.artwork-list-button').forEach((element) => {
             element.addEventListener('click', this.onChange.bind(this))
@@ -14,6 +18,7 @@ export default class ArtworkList{
         })
     }
 
+    // event change of select
     onChange(e){
         e.preventDefault();
 
@@ -44,6 +49,7 @@ export default class ArtworkList{
         }
     }
 
+    // send add or remove one artwork on user list to bdd
     async send(requestType, form){
 
         let url;

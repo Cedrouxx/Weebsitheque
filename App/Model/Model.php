@@ -2,8 +2,6 @@
 
 namespace App\Model;
 
-use App\Core\Str;
-
 abstract class Model{
 
     public static function __callStatic($name, $arguments){

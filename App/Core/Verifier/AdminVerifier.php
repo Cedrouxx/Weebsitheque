@@ -2,6 +2,10 @@
 
 namespace App\Core\Verifier;
 
+use App\Model\Author;
+use App\Model\Genre;
+use DateTime;
+
 class AdminVerifier{
 
     public static function artworkForm(array $artworkData, array $file): array{
@@ -26,6 +30,45 @@ class AdminVerifier{
         if(!isset($file['image']) || $file['image']['error'] > 0)
             $result[] = [ 'error' => 'Champ \'image\' non renseigné ou invalide !' ];
 
+        $d = DateTime::createFromFormat('Y-m-d', $_POST['release_date']);
+        if(!isset($artworkData['release_date']) || !($d && $d->format('Y-m-d') === $_POST['release_date']))
+            $result[] = [ 'error' => 'Champ \'date\' non renseigné ou invalide !' ];
+
+
+
+        return $result;
+    }
+
+    public static function authorForm(array $authorData){
+
+        $result = [];
+
+        if(!isset($authorData['name']) || empty($authorData['name'])) 
+            $result[] = [ 'error' => 'Champ \'nom\' non renseigné !' ];
+
+        if(!empty($result))
+            return $result;
+
+        $author = Author::select('name')->where('name', $authorData['name'])->getOne();
+        if(isset($author->name)) 
+            $result[] = [ 'error' => 'L\'auteur/studios est déjà enregistré !' ];
+
+        return $result;
+    }
+
+    public static function genreForm(array $genreData){
+
+        $result = [];
+
+        if(!isset($genreData['name']) || empty($genreData['name'])) 
+            $result[] = [ 'error' => 'Champ \'nom\' non renseigné !' ];
+
+        if(!empty($result))
+            return $result;
+
+        $genre = Genre::select('name')->where('name', $genreData['name'])->getOne();
+        if(isset($genre->name)) 
+            $result[] = [ 'error' => 'L\'auteur/studios est déjà enregistré !' ];
 
         return $result;
     }

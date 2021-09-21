@@ -1,17 +1,20 @@
-<section class="width70p block-center borderAll shadow">
-    <img src="<?= $data['artwork']->image ?>" alt="<?= $data['artwork']->name ?>" class="width100pM fLeftTD width50p">
-    <article class="paddingAll">
-        <h1 class="text-left"><?= $data['artwork']->name ?></h1>
-        <p><?= lang['multi']['createdBy'] ?> : <?= $data['artwork']->author ?></p>
-        <p><?= lang['multi']['numberVolume'] ?> : <?= $data['artwork']->number_volume ?></p>
-        <p><?= lang['multi']['type'] ?> : <?= $data['artwork']->type ?></p>
-        <p><?= lang['multi']['genre'] ?> : <?= is_array($data['artwork']->genre)? implode(', ', $data['artwork']->genre) : $data['artwork']->genre ?></p>
+<section class="width70p block-center ">
+    <h1>Présentation</h1>
+    <article class="borderAll shadow hidden">
+        <img src="<?= $data['artwork']->image ?>" alt="<?= $data['artwork']->name ?>" class="width100pM fLeftTD width50p">
+        <div class="paddingAll">
+            <h2 class="sizeTitle bold text-left noAftBef"><?= $data['artwork']->name ?></h2>
+            <p><?= lang['multi']['createdBy'] ?> : <?= $data['artwork']->author ?></p>
+            <p><?= lang['multi']['numberVolume'] ?> : <?= $data['artwork']->number_volume ?></p>
+            <p><?= lang['multi']['type'] ?> : <?= $data['artwork']->type ?></p>
+            <p><?= lang['multi']['genre'] ?> : <?= is_array($data['artwork']->genre)? implode(', ', $data['artwork']->genre) : $data['artwork']->genre ?></p>
+        </div>
     </article>
 </section>
 
 <?php if($data['isLogin']) : ?>
 <section class="width70p block-center">
-    <h2><?= lang['artworkInfo']['addComment'] ?></h2>
+    <h1><?= lang['artworkInfo']['addComment'] ?></h1>
 
     <?php if(!empty($data['messages'])): ?>
         <div class="borderAll shadow margeAll">
@@ -46,11 +49,12 @@
 
 <?php if(!empty($data['comments'])): ?>
     <section>
-        <h2><?= lang['artworkInfo']['comment'] ?></h2>
+        <h1><?= lang['artworkInfo']['comment'] ?></h1>
         <div>
             <?php foreach($data['comments'] as $comment): ?>
                 <article class="width70p block-center paddingAll borderAll shadow">
-                    <h3 class="text-left"><span><?= $comment->note ?>/10</span> <?= $comment->user ?></h3>
+                    <h3 class="text-left"><span><?= $comment->note ?>/10</span></h3>
+                    <div class="flex flex-align-center"><img src="<?= $comment->userPicture ?>" class="profilePicture" alt="logo"> <span class="margeLR bold"><?= $comment->user ?></span></div>
                     <p><?= nl2br($comment->content) ?></p>
                 </article>
             <?php endforeach; ?>

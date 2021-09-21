@@ -12,7 +12,7 @@ use App\Model\UserList;
 class ApiController extends Controller{
 
     public function UserListChangeStatus(): void{
-        echo json_encode($_POST);
+        
         if(!ArtworkVerifier::setStatusList($_POST) || !Session::isLogin()){
             exit;
         }
@@ -27,6 +27,7 @@ class ApiController extends Controller{
     }
 
     public function RemoveArtworkList(): void{
+
         if(!Session::isLogin())
             exit;
 
@@ -40,6 +41,7 @@ class ApiController extends Controller{
     }
 
     public function AddArtworkList(): void{
+
         if(!Session::isLogin())
             exit;
 
@@ -51,27 +53,6 @@ class ApiController extends Controller{
                 'user_id' => Session::getUser()['id'],
                 'artwork_id' => $_POST['artwork_id']
             ])->insert();
-    }
-
-    public function getArtworks($type = 'all'){
-
-        if($type === 'anime'){
-            $data['list'] = Artwork::where('artwork.type', 'Anime')->getAll();
-            $data['type'] = 'Anime';
-        }else if($type === 'manga'){
-            $data['list'] = Artwork::where('artwork.type', 'Manga')->getAll();
-            $data['type'] = 'Manga';
-        }
-        
-        foreach($data['list'] as $key => $artwork){
-            if(is_array($artwork->note)){
-                $data['list'][$key]->note = Math::average(...$artwork->note);
-            }
-        }
-
-        
-
-        require 'Api/ArtworkList/GetInHtml.php';
     }
 
     public function getUserList($type = 'all'){
@@ -94,8 +75,8 @@ class ApiController extends Controller{
                     }
                 }
             }
-
         }
+        
         if(!empty($userList))
             echo json_encode($userList);
         else

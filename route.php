@@ -25,9 +25,10 @@ return [
 
     // User Account
     '/my-account' => [ 'class' => AuthController::class, 'method' => 'myAccount' ],
-    '/my-account/change-username' => [ 'class' => AuthController::class, 'method' => 'changeUsername' ],
-    '/my-account/change-email' => [ 'class' => AuthController::class, 'method' => 'changeEmail' ],
-    '/my-account/change-password' => [ 'class' => AuthController::class, 'method' => 'changePassword' ],
+    '/my-account/change/profile-picture' => [ 'class' => AuthController::class, 'method' => 'changeProfilePicture' ],
+    '/my-account/change/username' => [ 'class' => AuthController::class, 'method' => 'changeUsername' ],
+    '/my-account/change/email' => [ 'class' => AuthController::class, 'method' => 'changeEmail' ],
+    '/my-account/change/password' => [ 'class' => AuthController::class, 'method' => 'changePassword' ],
 
     // Artworks
         // search
@@ -59,6 +60,13 @@ return [
     '/admin' => [ 'class' => AdminController::class, 'method' => 'index' ],
         // add
     '/admin/add/artwork' => [ 'class' => AdminController::class, 'method' => 'addArtwork' ],
+    '/admin/add/author' => [ 'class' => AdminController::class, 'method' => 'addAuthor' ],
+    '/admin/add/genre' => [ 'class' => AdminController::class, 'method' => 'addGenre' ],
+        // remove
+    '/admin/artwork/remove/:artwork_id' => [ 'class' => AdminController::class, 'method' => 'removeArtwork' ],
+    '/admin/author/remove/:author_id' => [ 'class' => AdminController::class, 'method' => 'removeAuthor' ],
+    '/admin/genre/remove/:genre_id' => [ 'class' => AdminController::class, 'method' => 'removeGenre' ],
+    
 
     // API
         // set user list

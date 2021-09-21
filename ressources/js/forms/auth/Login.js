@@ -1,5 +1,6 @@
 import { checkEmail } from "../../utilities.js";
 
+// helper for login (email / password)
 export default class Login{
 
     constructor(){
