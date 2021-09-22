@@ -13,7 +13,7 @@ class ArtworkGenre extends Model{
 
     protected static function with(Orm $orm): Orm{
         return $orm
-        ->with('user', 'user_id', 'user.id');
+        ->with('genre', 'genre_id', 'genre.id');
     }
 
 }

@@ -13,7 +13,8 @@ class Artwork extends Model{
                             'type', 
                             'GROUP_CONCAT(DISTINCT genre.name, \' \') AS genre', 
                             'artwork.image', 
-                            'AVG(DISTINCT comment.note) AS note')
+                            'AVG(DISTINCT comment.note) AS note',
+                            'artwork.release_date')
         ->groupBy('artwork.id');
     }
 

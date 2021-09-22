@@ -34,6 +34,7 @@
                         <td><?= $anime->number_volume?></td>
                         <td><?= is_array($anime->genre)? implode(', ', $anime->genre) : $anime->genre ?></td>
                         <td><?= $anime->image ?></td>
+                        <td><a href="<?= lang['name'] ?>/admin/artwork/edit/<?= $anime->id ?>">Editer</a></td>
                         <td><a href="<?= lang['name'] ?>/admin/artwork/remove/<?= $anime->id ?>">X</a></td>
                     </tr>
                     <?php endforeach; ?>
@@ -67,7 +68,8 @@
                         <td><?= $manga->number_volume?></td>
                         <td><?= is_array($manga->genre)? implode(', ', $manga->genre) : $manga->genre ?></td>
                         <td><?= $manga->image ?></td>
-                        <td><a href="<?= lang['name'] ?>/admin/artwork/remove/<?= $anime->id ?>">X</a></td>
+                        <td><a href="<?= lang['name'] ?>/admin/artwork/edit/<?= $manga->id ?>">Editer</a></td>
+                        <td><a href="<?= lang['name'] ?>/admin/artwork/remove/<?= $manga->id ?>">X</a></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -148,7 +150,8 @@
                     <tr>
                         <td><?= $author->id ?></td>
                         <td><?= $author->name ?></td>
-                        <td><a href="<?= lang['name'] ?>/admin/author/remove/<?= $anime->id ?>">X</a></td>
+                        <td><a href="<?= lang['name'] ?>/admin/author/edit/<?= $author->id ?>">Editer</a></td>
+                        <td><a href="<?= lang['name'] ?>/admin/author/remove/<?= $author->id ?>">X</a></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -191,7 +194,8 @@
                     <tr>
                         <td><?= $genre->id ?></td>
                         <td><?= $genre->name ?></td>
-                        <td><a href="<?= lang['name'] ?>/admin/genre/remove/<?= $anime->id ?>">X</a></td>
+                        <td><a href="<?= lang['name'] ?>/admin/genre/edit/<?= $genre->id ?>">Editer</a></td>
+                        <td><a href="<?= lang['name'] ?>/admin/genre/remove/<?= $genre->id ?>">X</a></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -207,7 +211,6 @@
                 <div>
                     <label for="name">Nom</label>
                     <input id="name" type="text" name="name">
-                    <td><a href="<?= lang['name'] ?>/admin/genre/remove/<?= $anime->id ?>">X</a></td>
                 </div>
                 <input type="submit">
             </form>

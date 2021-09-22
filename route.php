@@ -66,6 +66,15 @@ return [
     '/admin/artwork/remove/:artwork_id' => [ 'class' => AdminController::class, 'method' => 'removeArtwork' ],
     '/admin/author/remove/:author_id' => [ 'class' => AdminController::class, 'method' => 'removeAuthor' ],
     '/admin/genre/remove/:genre_id' => [ 'class' => AdminController::class, 'method' => 'removeGenre' ],
+        // edit
+    '/admin/artwork/edit/:artwork_id' => [ 'class' => AdminController::class, 'method' => 'editArtwork' ],
+    '/admin/author/edit/:author_id' => [ 'class' => AdminController::class, 'method' => 'editAuthor' ],
+    '/admin/genre/edit/:genre_id' => [ 'class' => AdminController::class, 'method' => 'editGenre' ],
+        // editPost
+    '/admin/artwork/edit' => [ 'class' => AdminController::class, 'method' => 'editPostArtwork' ],
+    '/admin/author/edit' => [ 'class' => AdminController::class, 'method' => 'editPostAuthor' ],
+    '/admin/genre/edit' => [ 'class' => AdminController::class, 'method' => 'editPostGenre' ],
+
     
 
     // API

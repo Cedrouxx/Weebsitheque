@@ -86,6 +86,68 @@ class AdminController extends Controller{
         redirect('admin');
     }
 
+    public function editArtwork($artworkId){
+
+        if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))
+            abord(404);
+
+        $data = [];
+        $data['type'] = 'artwork';
+
+        $data['messages'] = Session::getMessage();
+        Session::clearMessage();
+        $data['artwork'] = Artwork::where('artwork.id', $artworkId)->getOne();
+        $artworkGenres = ArtworkGenre::select('genre.id','genre.name')->where('artwork_id', $artworkId)->getAll();
+        $data['artwork-genres'] = [];
+        foreach($artworkGenres as $genre){
+            $data['artwork-genres'][] = $genre->name;
+        }
+        $data['allGenres'] = Genre::getAll();
+        $data['allAuthors'] = Author::getAll();
+
+        $this->lunchPage('admin/edit', 'edit-artwork', $data);
+    }
+
+    public function editPostArtwork(){
+        
+        $messages = AdminVerifier::artworkEditForm($_POST, $_FILES);
+        if(!empty($messages)){
+            Session::addMessage($messages);
+            redirectToLastPage();
+        }
+        
+        
+        if(isset($file['image']) && $_FILES['image']['name'] !== '' && !($file['image']['error'] > 0)){
+            $fileType = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+            $folder = 'ressources/img/artwork/'.($_POST['type'] === 'Manga' ? 'manga' : 'anime').'/'.Str::slug($_POST['name']).'.'.$fileType;
+            move_uploaded_file($_FILES['image']['tmp_name'], $folder);
+        }
+        else{
+            $image = Artwork::select('artwork.id', 'artwork.image')->where('artwork.id', $_POST['id'])->getOne()->image;
+            $fileType = pathinfo($image, PATHINFO_EXTENSION);
+            $folder = 'ressources/img/artwork/'.($_POST['type'] === 'Manga' ? 'manga' : 'anime').'/'.Str::slug($_POST['name']).'.'.$fileType;
+            if ($image !== $folder)
+                rename($image, $folder.'.'.$fileType);
+        }
+
+        Artwork::where('artwork.id', $_POST['id'])
+        ->values([
+            'name' => $_POST['name'],
+            'slug' => Str::slug($_POST['name']),
+            'author_id' => $_POST['author'],
+            'number_volume' => $_POST['number_volume'],
+            'type' => $_POST['type'],
+            'image' => $folder,
+            'release_date' => $_POST['release_date']
+        ])->update();
+
+        Artwork::where('artwork.id', $_POST['id']);
+
+        exit;
+        redirect('admin');
+            
+    }
+
     public function addAuthor(){
 
         $messages = AdminVerifier::authorForm($_POST);
@@ -101,12 +163,61 @@ class AdminController extends Controller{
         redirect('admin');
     }
 
-    public function removeAuthor(){
+    public function removeAuthor($authorId){
         
         if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))
             abord(404);
 
-        
+        $artworkList = Artwork::select('artwork.id', 'artwork.name')->where('artwork.author_id', $authorId)->getAll();
+        $artworkNameList = [];
+        foreach($artworkList as $artwork){
+            $artworkNameList[] = $artwork->name;
+        }
+        if(!empty($artworkList)){
+            Session::addMessage([['error' =>  '"'.implode('", "', $artworkNameList).'" contien(nen)t l\'auteur/studio "'.Author::where('author.id', $authorId)->getOne()->name.'" !']]);
+            redirect('admin');
+        }
+
+        Author::where('author.id', $authorId)->delete();
+
+        redirect('admin');
+
+    }
+
+    public function editAuthor($authorId){
+
+        if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))
+            abord(404);
+
+        $data = [];
+        $data['type'] = 'author';
+
+        $data['messages'] = Session::getMessage();
+        Session::clearMessage();
+
+        $data['author'] = Author::where('author.id', $authorId)->getOne();
+
+
+        $this->lunchPage('admin/edit', 'edit-author', $data);
+    }
+
+    public function editPostAuthor(){
+
+        if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))
+            abord(404);
+
+        $messages = AdminVerifier::authorEditForm($_POST);
+        if(!empty($messages)){
+            Session::addMessage($messages);
+            redirectToLastPage();
+        }
+
+        Author::where('author.id', $_POST['id'])
+        ->values([
+            'name' => $_POST['name']
+        ])->update();
+
+        redirect('admin');
 
     }
 
@@ -132,6 +243,42 @@ class AdminController extends Controller{
 
         ArtworkGenre::where('genre_id', $genreId)->delete();
         Genre::where('id', $genreId)->delete();
+
+        redirect('admin');
+    }
+
+    public function editGenre($genreId){
+        if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))
+            abord(404);
+
+        $data = [];
+        $data['type'] = 'genre';
+
+        $data['messages'] = Session::getMessage();
+        Session::clearMessage();
+
+        $data['genre'] = Genre::where('genre.id', $genreId)->getOne();
+
+        $this->lunchPage('admin/edit', 'edit-genre', $data);
+    }
+
+    public function editPostGenre(){
+        
+        if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))
+            abord(404);
+
+        $messages = AdminVerifier::authorEditForm($_POST);
+        if(!empty($messages)){
+            Session::addMessage($messages);
+            redirectToLastPage();
+        }
+
+        Genre::where('genre.id', $_POST['id'])
+        ->values([
+            'name' => $_POST['name']
+        ])->update();
+
+        redirect('admin');
     }
 
 }

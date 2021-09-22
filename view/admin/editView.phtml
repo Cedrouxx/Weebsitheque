@@ -1,0 +1,94 @@
+
+<div>
+    <ul>
+        <?php foreach($data['messages'] as $message): ?>
+            <li class="<?=key($message)?>"><?= $message[key($message)] ?></li>
+        <?php endforeach; ?>
+    </ul>
+</div>
+
+<section>
+
+    <?php if($data['type'] === 'artwork'): ?>
+        <!-- Artwork -->
+        <h1>Modidication de l'artwork : <?= $data['artwork']->name ?> </h1>
+        <article>
+            <form action="<?= lang['name'] ?>/admin/artwork/edit" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="<?= $data['artwork']->id ?>">
+                <div>
+                    <label for="type">Type</label>
+                    <select name="type" id="type">
+                        <option value="Manga" <?= $data['artwork']->type === 'Manga' ? 'selected' : '' ?>>Manga</option>
+                        <option value="Anime" <?= $data['artwork']->type === 'Anime' ? 'selected' : '' ?>>Anime</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="artwork-name">Nom</label>
+                    <input type="text" id="artwork-name" name="name" value="<?= $data['artwork']->name ?>">
+                </div>
+                <div>
+                    <label for="artwork-author">Auteur</label>
+                    <select id="artwork-author" name="author">
+                        <?php foreach($data['allAuthors'] as $author): ?>
+                            <option value="<?= $author->id ?>" <?= $data['artwork']->author === $author->name ? 'selected' : '' ?>><?= $author->name ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div>
+                    <label for="artwork-number-volume">Nombre d'épisode</label>
+                    <input type="number" id="artwork-number-volume" name="number_volume" min="0" value="<?= $data['artwork']->number_volume ?>">
+                </div>
+                <div>
+                    <span>Genres : </span>
+                    <?php foreach($data['allGenres'] as $genre): ?>
+                        <input  type="checkbox" 
+                                id="artwork-genre-<?= $genre->id ?>" 
+                                name="genres[]" value="<?= $genre->id ?>" 
+                                <?= in_array($genre->name , $data['artwork-genres']) ? 'checked' : '' ?>>
+                        <label for="artwork-genre-<?= $genre->id ?>"><?= $genre->name ?></label>
+                    <?php endforeach; ?>
+                </div>
+                <div>
+                    <label for="artwork-image">Image</label>
+                    <input type="file" id="artwork-image" name="image">
+                </div>
+                <img src="<?= $data['artwork']->image ?>" alt="image de <?= $data['artwork']->name ?>">
+                <div>
+                    <label for="release_date ">Date</label>
+                    <input type="date" name="release_date" value="<?= $data['artwork']->release_date ?>">
+                </div>
+                <input type="submit" value="Modifier">
+            </form>
+        </article>
+
+    <?php elseif ($data['type'] === 'author'): ?>
+        <!-- Author -->
+        <h1>Modidication de l'auteur : <?= $data['author']->name ?> </h1>
+        <article>
+            <form action="<?= lang['name'] ?>/admin/author/edit" method="post">
+                <input type="hidden" name="id" value="<?= $data['author']->id ?>">
+                <div>
+                    <label for="name">Nom</label>
+                    <input id="name" type="text" name="name">
+                </div>
+                <input type="submit">
+            </form>
+        </article>
+
+    <?php elseif ($data['type'] === 'genre'): ?>
+        <!-- Genre -->
+        <h1>Modidication du genre : <?= $data['genre']->name ?> </h1>
+        <article>
+            <form action="<?= lang['name'] ?>/admin/genre/edit" method="post">
+                <input type="hidden" name="id" value="<?= $data['genre']->id ?>">
+                <div>
+                    <label for="name">Nom</label>
+                    <input id="name" type="text" name="name">
+                </div>
+                <input type="submit">
+            </form>
+        </article>
+
+    <?php endif; ?>
+
+</section>
