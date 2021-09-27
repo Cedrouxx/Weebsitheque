@@ -2,38 +2,35 @@
 
     <h1><?= lang['login']['registerTitle'] ?></h1>
 
-    <?php if(!empty($data['messages'])): ?>
-        <div class="borderAll shadow margeAll">
-            <ul class="listNone">
-                <?php foreach($data['messages'] as $message): ?>
-                    <li class="<?=key($message)?>"><?= $message[key($message)] ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
+    <?php require 'view/partials/displayMessage.phtml'?>
 
     <form class="borderAll shadow paddingAll margeAll" action="<?= lang['name'] ?>/registerPost" method="post">
 
+        <!-- username -->
         <div class="flexTD">
             <label class="width100pM width50p" for="username"><?= lang['login']['username'] ?> :</label>
             <input class="width100pM width50p" type="text" id="username" name="username">
         </div>
         <small class="block width50p block-right error" id="E-username"></small>
+        <!-- email -->
         <div class="flexTD margeTop">
             <label class="width100pM width50p" for="email"><?= lang['login']['email'] ?> :</label>
             <input class="width100pM width50p" type="email" id="email" name="email">
         </div>
         <small class="block width50p block-right error" id="E-email"></small>
+        <!-- password -->
         <div class="flexTD margeTop">
             <label class="width100pM width50p" for="password"><?= lang['login']['password'] ?> :</label>
             <input class="width100pM width50p" type="password" id="password" name="password">
         </div>
         <small class="block width50p block-right error" id="E-password"></small>
+        <!-- password confirm -->
         <div class="flexTD margeTop ">
             <label class="width100pM width50p" for="password-confirm"><?= lang['login']['passwordConfirm'] ?> :</label>
             <input class="width100pM width50p" type="password" id="password-confirm" name="password-confirm">
         </div>
         <small class="block width50p block-right error" id="E-password-confirm"></small>
+        <!-- submit -->
         <div class="margeTop">
             <input class="button block-center" type="submit" value="<?= lang['login']['register'] ?>" class="button">
         </div>

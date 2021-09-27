@@ -6,6 +6,7 @@ use App\Model\User;
 
 class AuthVerifier{
 
+    /* check if login form is ok */
     public static function loginForm(array $loginData): array{
 
         $result = [];
@@ -33,6 +34,7 @@ class AuthVerifier{
         return $result;
     }
 
+    /* check if register form is ok */
     public static function registerForm(array $loginData): array{
 
         $result = [];
@@ -72,6 +74,7 @@ class AuthVerifier{
         return $result;
     }
 
+    /* check if username form is ok */
     public static function username($usernameData){
         
         $result = [];
@@ -86,6 +89,7 @@ class AuthVerifier{
 
     }
 
+    /* check if email form is ok */
     public static function email($emailData){
         
         $result = [];
@@ -104,6 +108,7 @@ class AuthVerifier{
 
     }
 
+    /* check if password form is ok */
     public static function password($passwordData){
         
         $result = [];
@@ -125,6 +130,7 @@ class AuthVerifier{
 
     }
 
+    /* check if profile picture form is ok */
     public static function profilePicture(array $file){
         if(!isset($file['profilePicture']) || $file['profilePicture']['error'] > 0)
             $result[] = [ 'error' => 'Champ \'image\' non renseigné ou invalide !' ];

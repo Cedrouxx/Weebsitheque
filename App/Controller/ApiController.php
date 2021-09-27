@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Core\Math;
 use App\Core\Session;
 use App\Core\Verifier\ArtworkVerifier;
 use App\Model\Artwork;
@@ -11,6 +10,7 @@ use App\Model\UserList;
 
 class ApiController extends Controller{
 
+    /* change the status of one artwork in user list  */
     public function UserListChangeStatus(): void{
         
         if(!ArtworkVerifier::setStatusList($_POST) || !Session::isLogin()){
@@ -18,7 +18,7 @@ class ApiController extends Controller{
         }
         
         if(isset(UserList::where('user_list.user_id', Session::getUser()['id'])->where('user_list.artwork_id', $_POST['artwork_id'])->getOne()->id)){
-            UserList::values([ 'user_list_status_id' => $_POST['status'] ])
+            UserList::values([ 'user_list.status' => $_POST['status'] ])
             ->where('user_id' ,Session::getUser()['id'])
             ->where('artwork_id', $_POST['artwork_id'])
             ->update();
@@ -26,6 +26,7 @@ class ApiController extends Controller{
         }
     }
 
+    /* remove one artwork in user list  */
     public function RemoveArtworkList(): void{
 
         if(!Session::isLogin())
@@ -40,6 +41,7 @@ class ApiController extends Controller{
             ->delete();
     }
 
+    /* add one artwork in user list  */
     public function AddArtworkList(): void{
 
         if(!Session::isLogin())
@@ -55,14 +57,15 @@ class ApiController extends Controller{
             ])->insert();
     }
 
+    /* get all artwork in user list */
     public function getUserList($type = 'all'){
 
         if(Session::isLogin()){
 
             if($type === 'anime'){
-                $userList = UserList::where('user_list.user_id', Session::getUser()['id'])->where('type.name', 'Anime')->getAll();
+                $userList = UserList::where('user_list.user_id', Session::getUser()['id'])->where('type', 'Anime')->getAll();
             }else if($type === 'manga'){
-                $userList = UserList::where('user_list.user_id', Session::getUser()['id'])->where('type.name', 'Manga')->getAll();
+                $userList = UserList::where('user_list.user_id', Session::getUser()['id'])->where('type', 'Manga')->getAll();
             }else{
                 $userList = UserList::where('user_list.user_id', Session::getUser()['id'])->getAll();
             }
@@ -83,12 +86,13 @@ class ApiController extends Controller{
             echo json_encode([]);
     }
 
+    /* get all artwork or one type (Anime/Manga) */
     public function getArtwork($type = 'all'){
 
         if($type === 'anime'){
-            $userList = Artwork::where('type.name', 'Anime')->getAll();
+            $userList = Artwork::where('type', 'Anime')->getAll();
         }else if($type === 'manga'){
-            $userList = Artwork::where('type.name', 'Manga')->getAll();
+            $userList = Artwork::where('type', 'Manga')->getAll();
         }else{
             $userList = Artwork::getAll();
         }
@@ -106,9 +110,10 @@ class ApiController extends Controller{
 
     }
 
+    /* get all status */
     public function getStatus(){
 
-        echo json_encode( Status::getAll() ?? [] );
+        echo json_encode([ 'Undefined','To start','In progress','Stopped','Finished' ]);
 
     }
 

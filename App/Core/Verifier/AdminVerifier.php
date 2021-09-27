@@ -8,6 +8,7 @@ use DateTime;
 
 class AdminVerifier{
 
+    /* check if artwork form is ok */
     public static function artworkForm(array $artworkData, array $file): array{
 
         $result = [];
@@ -39,6 +40,7 @@ class AdminVerifier{
         return $result;
     }
 
+    /* check if author form is ok */
     public static function authorForm(array $authorData){
 
         $result = [];
@@ -56,6 +58,7 @@ class AdminVerifier{
         return $result;
     }
 
+    /* check if genre form is ok */
     public static function genreForm(array $genreData){
 
         $result = [];
@@ -73,6 +76,7 @@ class AdminVerifier{
         return $result;
     }
 
+    /* check if artwork edit form is ok */
     public static function artworkEditForm(array $artworkData, array $file): array{
 
         $result = [];
@@ -104,6 +108,7 @@ class AdminVerifier{
         return $result;
     }
 
+    /* check if author/genre edit form is ok */
     public static function authorEditForm(array $authorData){
 
         if(!isset($authorData['id']) || empty($authorData['id'])) 

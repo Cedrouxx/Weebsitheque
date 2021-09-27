@@ -1,11 +1,5 @@
 
-<div>
-    <ul>
-        <?php foreach($data['messages'] as $message): ?>
-            <li class="<?=key($message)?>"><?= $message[key($message)] ?></li>
-        <?php endforeach; ?>
-    </ul>
-</div>
+<?php require 'view/partials/displayMessage.phtml'; ?>
 
 <section>
 
@@ -14,7 +8,9 @@
         <h1>Modidication de l'artwork : <?= $data['artwork']->name ?> </h1>
         <article>
             <form action="<?= lang['name'] ?>/admin/artwork/edit" method="post" enctype="multipart/form-data">
+                <!-- id -->
                 <input type="hidden" name="id" value="<?= $data['artwork']->id ?>">
+                <!-- type -->
                 <div>
                     <label for="type">Type</label>
                     <select name="type" id="type">
@@ -22,10 +18,12 @@
                         <option value="Anime" <?= $data['artwork']->type === 'Anime' ? 'selected' : '' ?>>Anime</option>
                     </select>
                 </div>
+                <!-- name -->
                 <div>
                     <label for="artwork-name">Nom</label>
                     <input type="text" id="artwork-name" name="name" value="<?= $data['artwork']->name ?>">
                 </div>
+                <!-- author/studio -->
                 <div>
                     <label for="artwork-author">Auteur</label>
                     <select id="artwork-author" name="author">
@@ -34,10 +32,12 @@
                         <?php endforeach; ?>
                     </select>
                 </div>
+                <!-- number volume -->
                 <div>
                     <label for="artwork-number-volume">Nombre d'épisode</label>
                     <input type="number" id="artwork-number-volume" name="number_volume" min="0" value="<?= $data['artwork']->number_volume ?>">
                 </div>
+                <!-- genre -->
                 <div>
                     <span>Genres : </span>
                     <?php foreach($data['allGenres'] as $genre): ?>
@@ -48,11 +48,13 @@
                         <label for="artwork-genre-<?= $genre->id ?>"><?= $genre->name ?></label>
                     <?php endforeach; ?>
                 </div>
+                <!-- image -->
                 <div>
                     <label for="artwork-image">Image</label>
                     <input type="file" id="artwork-image" name="image">
                 </div>
                 <img src="<?= $data['artwork']->image ?>" alt="image de <?= $data['artwork']->name ?>">
+                <!-- release date -->
                 <div>
                     <label for="release_date ">Date</label>
                     <input type="date" name="release_date" value="<?= $data['artwork']->release_date ?>">
@@ -66,7 +68,9 @@
         <h1>Modidication de l'auteur : <?= $data['author']->name ?> </h1>
         <article>
             <form action="<?= lang['name'] ?>/admin/author/edit" method="post">
+                <!-- id -->
                 <input type="hidden" name="id" value="<?= $data['author']->id ?>">
+                <!-- name -->
                 <div>
                     <label for="name">Nom</label>
                     <input id="name" type="text" name="name">
@@ -80,7 +84,9 @@
         <h1>Modidication du genre : <?= $data['genre']->name ?> </h1>
         <article>
             <form action="<?= lang['name'] ?>/admin/genre/edit" method="post">
+                <!-- id -->
                 <input type="hidden" name="id" value="<?= $data['genre']->id ?>">
+                <!-- name -->
                 <div>
                     <label for="name">Nom</label>
                     <input id="name" type="text" name="name">

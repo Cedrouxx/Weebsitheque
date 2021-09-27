@@ -14,6 +14,7 @@ use App\Model\UserList;
 
 class AdminController extends Controller{
 
+    /* index of admin */
     public function index(): void{
 
         if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))
@@ -32,6 +33,7 @@ class AdminController extends Controller{
         $this->lunchPage('admin/index', 'Administration', $data);
     }
 
+    /* add one artwork */
     public function addArtwork(): void{
 
         $messages = AdminVerifier::artworkForm($_POST, $_FILES);
@@ -73,6 +75,7 @@ class AdminController extends Controller{
         redirect('admin');
     }
 
+    /* remove one artwork */
     public function removeArtwork($artworkId){
         
         if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))
@@ -86,6 +89,7 @@ class AdminController extends Controller{
         redirect('admin');
     }
 
+    /* form for edit one artwork */
     public function editArtwork($artworkId){
 
         if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))
@@ -108,6 +112,7 @@ class AdminController extends Controller{
         $this->lunchPage('admin/edit', 'edit-artwork', $data);
     }
 
+    /* post for edit one artwork */
     public function editPostArtwork(){
         
         $messages = AdminVerifier::artworkEditForm($_POST, $_FILES);
@@ -148,6 +153,7 @@ class AdminController extends Controller{
             
     }
 
+    /* add one author */
     public function addAuthor(){
 
         $messages = AdminVerifier::authorForm($_POST);
@@ -163,6 +169,7 @@ class AdminController extends Controller{
         redirect('admin');
     }
 
+    /* remove one author */
     public function removeAuthor($authorId){
         
         if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))
@@ -184,6 +191,7 @@ class AdminController extends Controller{
 
     }
 
+    /* form for edit one author */
     public function editAuthor($authorId){
 
         if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))
@@ -201,6 +209,7 @@ class AdminController extends Controller{
         $this->lunchPage('admin/edit', 'edit-author', $data);
     }
 
+    /* post for edit one author */
     public function editPostAuthor(){
 
         if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))
@@ -221,6 +230,7 @@ class AdminController extends Controller{
 
     }
 
+    /* add one genre */
     public function addGenre(){
 
         $messages = AdminVerifier::genreForm($_POST);
@@ -236,6 +246,7 @@ class AdminController extends Controller{
         redirect('admin');
     }
 
+    /* remove one genre */
     public function removeGenre($genreId){
         
         if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))
@@ -247,6 +258,7 @@ class AdminController extends Controller{
         redirect('admin');
     }
 
+    /* form for edit one genre */
     public function editGenre($genreId){
         if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))
             abord(404);
@@ -262,6 +274,7 @@ class AdminController extends Controller{
         $this->lunchPage('admin/edit', 'edit-genre', $data);
     }
 
+    /* post for edit one genre */
     public function editPostGenre(){
         
         if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))

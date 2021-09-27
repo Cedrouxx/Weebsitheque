@@ -23,7 +23,7 @@ class Database{
     }
     
     
-    
+    /* connection to database */
     public function connexion() :PDO{
         
        try {

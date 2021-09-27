@@ -1,6 +1,8 @@
+import Lang from "../Lang";
+
 export default class ArtworkSearch{
 
-    lang = document.querySelector('html').lang;
+    langName = document.querySelector('html').lang;
     baseUrl = document.querySelector('base').href;
 
     constructor(type, changeStatus, artworkList, isUserList = false){
@@ -19,6 +21,8 @@ export default class ArtworkSearch{
 
     async construct(){
 
+        this.lang = await Lang.getLang(this.langName);
+
         this.artworks = await this.getAllArtwork();
         this.allStatus = await this.getAllStatus();
 
@@ -27,7 +31,7 @@ export default class ArtworkSearch{
 
     async getAllArtwork(){
         let result;
-        await fetch(`${this.baseUrl}/${this.lang}/api/artwork/${this.type}`)
+        await fetch(`${this.baseUrl}/${this.langName}/api/artwork/${this.type}`)
         .then(response => response.json())
         .then(response => result = response);
         return result;
@@ -35,7 +39,7 @@ export default class ArtworkSearch{
 
     async getAllArtworkInUserList(){
         let result;
-        await fetch(`${this.baseUrl}/${this.lang}/api/UserList/getUserList/${this.type}`)
+        await fetch(`${this.baseUrl}/${this.langName}/api/UserList/getUserList/${this.type}`)
         .then(response => response.json())
         .then(response => result = response);
         return result;
@@ -43,7 +47,7 @@ export default class ArtworkSearch{
 
     async getAllStatus(){
         let result;
-        await fetch(`${this.baseUrl}/${this.lang}/api/status`)
+        await fetch(`${this.baseUrl}/${this.langName}/api/status`)
         .then(response => response.json())
         .then(response => result = response);
         return result;
@@ -84,10 +88,8 @@ export default class ArtworkSearch{
         this.artworkList.makeEvent();
 
     }
-
-    /* 
-    * Make a html for one artwork 
-    */
+ 
+    // Make a html for one artwork 
     makeHtml(artwork, userArtwork, genre){
 
         // article
@@ -126,7 +128,7 @@ export default class ArtworkSearch{
                 select.id = 'changeStatusSelect';
                 select.name = 'status';
                 this.allStatus.forEach( status => {
-                    let option = new Option(status.name, status.id, status.name === userArtwork.status, status.name === userArtwork.status);
+                    let option = new Option(this.lang.status[status], status, status === userArtwork.status, status === userArtwork.status);
                     select.append(option);
                 });
 
@@ -137,7 +139,7 @@ export default class ArtworkSearch{
                 if(userArtwork === undefined){
                     span.classList.add('none');
                 }else{
-                    span.innerText = userArtwork.status;
+                    span.innerText = this.lang.status[userArtwork.status];
                 }
             }
         } else{
@@ -171,7 +173,7 @@ export default class ArtworkSearch{
         let a = document.createElement('a');
         a.classList.add('button');
         a.classList.add('block-center');
-        a.href = `${this.lang}/${this.type}/info/${artwork.slug}`;
+        a.href = `${this.langName}/${this.type}/info/${artwork.slug}`;
         a.innerText = 'Plus d\'info';
 
         // append to div
@@ -183,7 +185,7 @@ export default class ArtworkSearch{
 
         // form
         let form = document.createElement('form');
-        form.action = `${this.lang}/add-artwork-list`;
+        form.action = `${this.langName}/add-artwork-list`;
         form.method = 'post';
 
         // input

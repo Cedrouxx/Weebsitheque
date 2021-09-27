@@ -2,15 +2,12 @@
     <h1><?= lang['login']['accountTitle'] ?></h1>
     <?php if(!empty($data['messages'])): ?>
         <article class="borderAll shadow margeAll">
-            <ul class="listNone">
-                <?php foreach($data['messages'] as $message): ?>
-                    <li class="<?=key($message)?>"><?= $message[key($message)] ?></li>
-                <?php endforeach; ?>
-            </ul>
+            <?php require 'view/partials/displayMessage.phtml' ?>
         </article>
     <?php endif; ?>
+    <!-- profile picture -->
     <article class="shadow borderAll paddingAll width70p block-center">
-        <h2 class="text-left">Photo de profile :</h2>
+        <h2 class="text-left"><?= lang['login']['profilePicture'] ?> :</h2>
         <form action="<?= lang['name'] ?>/my-account/change/profile-picture" method="post" enctype="multipart/form-data">
             <div class="flexTD flex-between">
                 <img src="<?= $data['user']['image'] ?>" alt="" class="profilePicture">
@@ -19,6 +16,7 @@
             <input type="submit" class="button margeTop block-center" value="<?= lang['login']['change'] ?>">
         </form>
     </article>
+    <!-- username -->
     <article class="shadow borderAll paddingAll width70p block-center">
         <h2 class="text-left"><?= lang['login']['username'] ?> : <?= $data['user']['username'] ?> </h2>
         <form action="<?= lang['name'] ?>/my-account/change/username" method="post">
@@ -30,6 +28,7 @@
             <input type="submit" class="button margeTop block-center" value="<?= lang['login']['change'] ?>">
         </form>
     </article>
+    <!-- email -->
     <article class="shadow borderAll paddingAll width70p block-center">
         <h2 class="text-left"><?= lang['login']['email'] ?> : <?= $data['user']['email'] ?> </h2>
         <form action="<?= lang['name'] ?>/my-account/change/email" method="post">
@@ -41,6 +40,7 @@
             <input type="submit" class="button margeTop block-center" value="<?= lang['login']['change'] ?>">
         </form>
     </article>
+    <!-- password -->
     <article class="shadow borderAll paddingAll width70p block-center">
         <h2 class="text-left"><?= lang['login']['password'] ?> : </h2>
         <form action="<?= lang['name'] ?>/my-account/change/password" method="post">

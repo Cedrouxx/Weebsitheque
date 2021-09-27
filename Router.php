@@ -18,7 +18,8 @@ class Router{
 
     }
 
-    public function search(){
+    /* search a route */
+    public function search(): array{
 
         foreach ($this->keyRouteList as $route){
             
@@ -46,7 +47,8 @@ class Router{
         ];
     }
 
-    public function start(string $routeFind, array $routeParameter){
+    /* start a route */
+    public function start(string $routeFind, array $routeParameter): void{
 
         if(empty($routeFind))
             abord(404);

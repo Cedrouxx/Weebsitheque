@@ -1,0 +1,7 @@
+<div>
+    <ul>
+        <?php foreach($data['messages'] as $message): ?>
+            <li class="<?=key($message)?>"><?= $message[key($message)] ?></li>
+        <?php endforeach; ?>
+    </ul>
+</div>

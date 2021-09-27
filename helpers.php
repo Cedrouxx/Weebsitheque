@@ -2,6 +2,7 @@
 
 use App\Controller\ErrorController;
 
+/* redirect to the desired page */
 function redirect(string $location = '', bool $withLang = true): void{
     if($withLang)
         header("Location: ".config['baseUrl'].lang['name']."/$location");
@@ -10,11 +11,13 @@ function redirect(string $location = '', bool $withLang = true): void{
     exit;
 }
 
+/* redirect to the last page */
 function redirectToLastPage(): void{
     header("Location: {$_SERVER["HTTP_REFERER"]}");
     exit;
 }
 
+/* make a error page */
 function abord(int $errorCode): void{
     switch ($errorCode){
         case 404:

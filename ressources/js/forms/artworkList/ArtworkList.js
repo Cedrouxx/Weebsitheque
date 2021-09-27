@@ -1,9 +1,16 @@
+import Lang from "../../Lang.js";
+
 export default class ArtworkList{
 
-    lang = document.querySelector('html').lang;
+    langName = document.querySelector('html').lang;
     baseUrl = document.querySelector('base').href;
 
     constructor(){
+        this.construct();
+    }
+
+    async construct(){
+        this.lang = await Lang.getLang(this.langName);
         this.makeEvent();
     }
 
@@ -41,7 +48,7 @@ export default class ArtworkList{
         }else if(e.target.matches('.add')){
             e.target.classList.remove('add');
             e.target.classList.add('remove');
-            status.innerText = 'Non défini';
+            status.innerText = this.lang.status['Undefined'];
             status.classList.remove('none');
             this.send('add', form);
         }else{
@@ -55,9 +62,9 @@ export default class ArtworkList{
         let url;
 
         if(requestType === 'remove')
-            url = `${this.baseUrl}/${this.lang}/api/UserList/RemoveArtworkList`;
+            url = `${this.baseUrl}/${this.langName}/api/UserList/RemoveArtworkList`;
         else if(requestType === 'add')
-            url = `${this.baseUrl}/${this.lang}/api/UserList/AddArtworkList`;
+            url = `${this.baseUrl}/${this.langName}/api/UserList/AddArtworkList`;
 
         let myInit = { method: 'POST',
             body: new FormData(form)

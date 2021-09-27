@@ -1,5 +1,4 @@
 <!-- display one artwork -->
-
 <figure class="hover-caption" tabindex="0">
 
     <!-- Image -->
@@ -12,11 +11,11 @@
             <input type="hidden" name="artwork_id" value="<?= $artwork->id ?>">
             <select  name="status" class="changeStatusSelect">
                 
-                <option value="Non défini" <?= $artwork->status === 'Non défini' ? 'selected' : '' ?>> Non défini </option>
-                <option value="À commencer" <?= $artwork->status === 'À commencer' ? 'selected' : '' ?>>À commencer</option>
-                <option value="En cours" <?= $artwork->status === 'En cours' ? 'selected' : '' ?>>En cours</option>
-                <option value="Arrêté" <?= $artwork->status === 'Arrêté' ? 'selected' : '' ?>>Arrêté</option>
-                <option value="Fini" <?= $artwork->status === 'Fini' ? 'selected' : '' ?>>Fini</option>
+                <option value="Undefined" <?= $artwork->status === 'Undefined' ? 'selected' : '' ?>><?= lang['status']['Undefined'] ?></option>
+                <option value="To start" <?= $artwork->status === 'To start' ? 'selected' : '' ?>><?= lang['status']['To start'] ?></option>
+                <option value="In progress" <?= $artwork->status === 'In progress' ? 'selected' : '' ?>><?= lang['status']['In progress'] ?></option>
+                <option value="Stopped" <?= $artwork->status === 'Stopped' ? 'selected' : '' ?>><?= lang['status']['Stopped'] ?></option>
+                <option value="Finished" <?= $artwork->status === 'Finished' ? 'selected' : '' ?>><?= lang['status']['Finished'] ?></option>
                 
             </select>
             <button type="submit" class="changeStatusButton"><?= lang['multi']['change'] ?></button>
@@ -24,7 +23,7 @@
     <?php else: ?>
         <!-- Span -->
         <?php if($data['isLogin'] && !empty($data['user_list'][$artwork->id])): ?>
-            <span class="user-status"><?= $data['user_list'][$artwork->id] ?></span>
+            <span class="user-status"><?= lang['status'][$data['user_list'][$artwork->id]] ?></span>
         <?php elseif($data['isLogin']): ?>
             <span class="user-status none"></span>
         <?php endif; ?>
@@ -49,7 +48,7 @@
         <?php if($data['isLogin']): ?>
             <form action="<?= lang['name'] ?>/<?= empty($data['user_list'][$artwork->id]) ? 'add-artwork-list' : 'remove-artwork-list'?>" method="post">
                 <input type="hidden" name="artwork_id" value="<?= $artwork->id ?>">
-                <?php if(empty($data['user_list'][$artwork->id]) && !isset($data['status'])): ?>
+                <?php if(empty($data['user_list'][$artwork->id]) && !isset($data['isUserList'])): ?>
                     <button class="artwork-list-button add"></button>
                 <?php else: ?>
                     <button class="artwork-list-button remove"></button>

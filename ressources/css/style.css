@@ -1,7 +1,5 @@
 /*Créer les varriables*/
 :root{
-    /* --primary-color: #7B9CFF;
-    --primary-color-bis: #3e6efd; */
     --primary-color: #318ce7;
     --primary-color-bis: #77b5fe;
     --secondary-color: #fff;
@@ -14,7 +12,6 @@
 /*****************************
 *          IMPORT            *
 *****************************/
-
 @font-face{
     font-family: animeAce;
     src: url('../fonts/animeace2bb_ot/animeace2_reg.otf') format('OpenType'),

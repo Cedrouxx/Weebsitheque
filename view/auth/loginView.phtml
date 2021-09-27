@@ -2,23 +2,18 @@
 
     <h1><?= lang['login']['loginTitle'] ?></h1>
 
-    <?php if(!empty($data['messages'])): ?>
-        <div class="borderAll shadow margeAll">
-            <ul class="listNone">
-                <?php foreach($data['messages'] as $message): ?>
-                    <li class="<?=key($message)?>"><?= $message[key($message)] ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
+    <?php if(!empty($data['messages'])) require 'view/partials/displayMessage.phtml' ?>
 
+    <!-- login form -->
     <form class="borderAll shadow paddingAll margeAll" action="<?= lang['name'] ?>/loginPost" method="post">
 
+        <!-- email -->
         <div class="flexTD">
             <label class="width100pM width50p" for="email"><?= lang['login']['email'] ?> :</label>
             <input class="width100pM width50p" type="email" id="email" name="email">
         </div>
         <small class="block width50p block-right error" id="E-email"></small>
+        <!-- password -->
         <div class="flexTD margeTop">
             <label class="width100pM width50p" for="password"><?= lang['login']['password'] ?> :</label>
             <input class="width100pM width50p" type="password" id="password" name="password">
@@ -29,6 +24,7 @@
 
     </form>
 
+    <!-- register link -->
     <p><?= lang['login']['questionDontHaveAccount'] ?> <a href="<?= lang['name'] ?>/register"><?= lang['login']['register'] ?></a>.</p>
 
 </section>

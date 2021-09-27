@@ -1,9 +1,11 @@
+<!-- nav (Anime, Mange, All) -->
 <nav class="flex-around width50p block-center">
     <a href="<?= lang['name'] ?>/my-list/anime" class="navButton">Anime</a>
     <a href="<?= lang['name'] ?>/my-list/manga" class="navButton">Manga</a>
     <a href="<?= lang['name'] ?>/my-list/all" class="navButton"><?= lang['multi']['all'] ?></a>
 </nav>
 
+<!-- List artwork -->
 <section class="grid-3 paddingRL">
 
     <input id="JStype" type="hidden" name="type" value="<?=strtolower($data['type'])?>">

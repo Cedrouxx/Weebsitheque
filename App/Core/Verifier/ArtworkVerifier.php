@@ -4,6 +4,7 @@ namespace App\Core\Verifier;
 
 class ArtworkVerifier{
 
+    /* check if comment form is ok */
     public static function commentForm(array $commentData): array{
 
         $result = [];
@@ -32,6 +33,7 @@ class ArtworkVerifier{
         return $result;
     }
 
+    /* check if remove list form is ok */
     public static function removeList(array $removeData): bool{
         if(!isset($removeData['artwork_id']) || empty($removeData['artwork_id'])) 
             return false;
@@ -39,6 +41,7 @@ class ArtworkVerifier{
         return true;
     }
 
+    /* check if form of set satus is ok */
     public static function setStatusList(array $setStatusData): bool{
         if(!ArtworkVerifier::removeList($setStatusData)) 
             return false;

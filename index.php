@@ -22,7 +22,8 @@ class Main{
 
     }
 
-    public function lang(){
+    /* initializes the language */
+    public function lang(): void{
         try{
             $lang = new Lang($_GET['lang'] ?? '');
             define('lang', $lang->getLang());
@@ -33,7 +34,8 @@ class Main{
         }
     }
 
-    public function autoLoad(){
+    /* initializes the autoloader */
+    public function autoLoad(): void{
 
         spl_autoload_register(function ($class_name) {
             include str_replace('\\', '/', $class_name) . '.php';

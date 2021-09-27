@@ -10,12 +10,12 @@ class lang {
 
     public function __construct(string $lang){
 
-        $require = @include 'Lang/'.$lang.'.php';
-        if(!$require)
+        $file = file_get_contents('Lang/'.$lang.'.json');
+        $lang = json_decode($file, true);
+        if(!$lang)
             throw new LangException('Langage not found !');
         else
-            $this->lang = $require;
-
+            $this->lang = $lang;
     }
 
     public function getLang(): array{

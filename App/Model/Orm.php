@@ -4,7 +4,6 @@ namespace App\Model;
 
 use App\Core\Database;
 use PDO;
-use PDOStatement;
 
 class Orm extends Database{
 
@@ -16,6 +15,7 @@ class Orm extends Database{
     private string $groupBy = '';
     private array $orderBy = [];
 
+    /* secure the datas */
     private function secure(array $datas): array{
 
         $result = [];
@@ -27,6 +27,7 @@ class Orm extends Database{
         return $result;
     }
 
+    /* call secure for all datas */
     private function secureAll(array $datas): array{
         $newDatas = [];
         foreach($datas as $data){
@@ -35,6 +36,7 @@ class Orm extends Database{
         return $newDatas;
     }
 
+    /* reset object */
     private function reset(){
         $this->select = [];
         $this->from = '';
@@ -44,16 +46,19 @@ class Orm extends Database{
         $this->values = [];
     }
     
+    /* set the SELECT */
     public function select(string ...$select){
         $this->select = $select;
         return $this;
     }
 
+    /* set the FROM */
     public function from(string $from){
         $this->from = $from;
         return $this;
     }
 
+    /* add WHERE */
     public function where(string $champName, $value){
         $this->where[] = [
             'champName' => $champName,
@@ -62,11 +67,13 @@ class Orm extends Database{
         return $this;
     }
 
+    /* set the GROUP BY */
     public function groupBy(string $groupBy){
         $this->groupBy = $groupBy;
         return $this;
     }
 
+    /* add join */
     public function with(string $table, string $first_id, string $second_id, string $typeJoin = 'INNER'){
         $this->with[] = [
             'table' => $table,
@@ -77,16 +84,19 @@ class Orm extends Database{
         return $this;
     }
 
+    /* set ORDER BY */
     public function orderBy(string ...$orderBy){
         $this->orderBy = $orderBy;
         return $this;
     }
 
+    /* set values for UPDATE and INSERT */
     public function values(array $values){
         $this->values = $values;
         return $this;
     }
 
+    /* make the sql command */
     private function get(){
 
         $select = 'SELECT '.(!empty($this->select)? implode(',', $this->select) : '*');
@@ -131,16 +141,19 @@ class Orm extends Database{
         
     }
 
+    /* get several element */
     public function getAll(){
         $query = $this->get();
         return ModelOutput::makeAll($this->secureAll(($query->fetchAll(PDO::FETCH_ASSOC)) ?:  []));
     }
 
+    /* get one element */
     public function getOne(){
         $query = $this->get();
         return ModelOutput::makeOne($this->secureAll(( $query->fetchAll(PDO::FETCH_ASSOC)) ?:  []));
     }
 
+    /* make and execute command INSERT */
     public function insert(){
 
         $from = 'INSERT INTO '.$this->from;
@@ -166,6 +179,7 @@ class Orm extends Database{
         $this->reset();
     }
 
+    /* make and execute command UPDATE */
     public function update(){
 
         $from = 'UPDATE '.$this->from;
@@ -200,6 +214,7 @@ class Orm extends Database{
         $this->reset();
     }
 
+    /* make and exectute command DELETE */
     public function delete(){
 
         $from = 'DELETE FROM '.$this->from;

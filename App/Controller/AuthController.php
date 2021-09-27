@@ -9,6 +9,7 @@ use App\Model\User;
 
 class AuthController extends Controller{
 
+    /* login page */
     public function login() :void{
 
         if(Session::isLogin())
@@ -20,6 +21,7 @@ class AuthController extends Controller{
         $this->lunchPage('auth/login', 'Connection', ['messages' => $messages]);
     }
 
+    /* login post */
     public function loginPost() :void{
 
         $verifier = AuthVerifier::loginForm($_POST);
@@ -38,6 +40,7 @@ class AuthController extends Controller{
         redirect('/');
     }
 
+    /* register page */
     public function register() :void{
 
         if(Session::isLogin())
@@ -49,6 +52,7 @@ class AuthController extends Controller{
         $this->lunchPage('auth/register', 'Inscription', ['messages' => $messages]);
     }
 
+    /* register post */
     public function registerPost() :void{
 
         $verifier = AuthVerifier::registerForm($_POST);
@@ -67,6 +71,7 @@ class AuthController extends Controller{
         redirect('login');
     }
 
+    /* logout post */
     public function logout() :void{
         if(Session::isLogin())
             Session::logout();
@@ -74,6 +79,7 @@ class AuthController extends Controller{
         redirect('/');
     }
 
+    /* user account page */
     public function myAccount(){
 
         if(!Session::isLogin())
@@ -87,6 +93,7 @@ class AuthController extends Controller{
         $this->lunchPage('auth/myAccount', 'Mon compte', $data);
     }
 
+    /* change user-picture post */
     public function changeProfilePicture(){
 
         if(!Session::isLogin())
@@ -114,6 +121,7 @@ class AuthController extends Controller{
         redirect('my-account');
     }
 
+    /* change username post */
     public function changeUsername(){
         
         if(!Session::isLogin())
@@ -143,6 +151,7 @@ class AuthController extends Controller{
 
     }
 
+    /* change email post */
     public function changeEmail(){
         
         if(!Session::isLogin())
@@ -171,6 +180,7 @@ class AuthController extends Controller{
 
     }
 
+    /* change password post */
     public function changePassword(){
         
         if(!Session::isLogin())

@@ -1,3 +1,4 @@
+<!-- presentation -->
 <section class="width70p block-center ">
     <h1>Présentation</h1>
     <article class="borderAll shadow hidden">
@@ -13,41 +14,43 @@
 </section>
 
 <?php if($data['isLogin']) : ?>
-<section class="width70p block-center">
-    <h1><?= lang['artworkInfo']['addComment'] ?></h1>
+<!-- send comment -->
+    <section class="width70p block-center">
+        <h1><?= lang['artworkInfo']['addComment'] ?></h1>
 
-    <?php if(!empty($data['messages'])): ?>
-        <div class="borderAll shadow margeAll">
-            <ul class="listNone">
-                <?php foreach($data['messages'] as $message): ?>
-                    <li class="<?=key($message)?>"><?= $message[key($message)] ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
+        <?php if(!empty($data['messages'])): ?>
+            <div class="borderAll shadow margeAll">
+                <ul class="listNone">
+                    <?php foreach($data['messages'] as $message): ?>
+                        <li class="<?=key($message)?>"><?= $message[key($message)] ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
 
-    <form   action="<?= lang['name'] ?>/<?= strtolower($data['artwork']->type) ?>/addComment?name=<?= $data['artwork']->slug ?>" 
-            method="post"
-            class="jsNotRefresh" 
-            data-refresh="" 
-            data-refresh-with="comment">
+        <form   action="<?= lang['name'] ?>/<?= strtolower($data['artwork']->type) ?>/addComment?name=<?= $data['artwork']->slug ?>" 
+                method="post"
+                class="jsNotRefresh" 
+                data-refresh="" 
+                data-refresh-with="comment">
 
-        
-        <input type="hidden" name="artwork_id" value="<?= $data['artwork']->id ?>">
-        <div class="paddingRL">
-            <label for="note"><?= lang['multi']['mark'] ?> : </label>
-            <input type="number" name="note" id="note" min="0" max="10" class="inputNote paddingAllMin borderAll shadow">
-            <span>/10</span>
-        </div>
-        <div class="paddingRL">
-            <textarea name="content" class="paddingAllMin borderAll shadow"></textarea>
-        </div>
-        <input type="submit" value="<?= lang['multi']['add'] ?>" class="button block-center">
-    </form>
-</section>
+            
+            <input type="hidden" name="artwork_id" value="<?= $data['artwork']->id ?>">
+            <div class="paddingRL">
+                <label for="note"><?= lang['multi']['mark'] ?> : </label>
+                <input type="number" name="note" id="note" min="0" max="10" class="inputNote paddingAllMin borderAll shadow">
+                <span>/10</span>
+            </div>
+            <div class="paddingRL">
+                <textarea name="content" class="paddingAllMin borderAll shadow"></textarea>
+            </div>
+            <input type="submit" value="<?= lang['multi']['add'] ?>" class="button block-center">
+        </form>
+    </section>
 <?php endif; ?>
 
 <?php if(!empty($data['comments'])): ?>
+<!-- comment list -->
     <section>
         <h1><?= lang['artworkInfo']['comment'] ?></h1>
         <div>

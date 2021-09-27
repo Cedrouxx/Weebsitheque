@@ -4,14 +4,13 @@ namespace App\Controller;
 
 use App\Model\Artwork;
 use App\Model\Comment;
-use App\Model\Status;
 use App\Model\UserList;
-use App\Core\Math;
 use App\Core\Session;
 use App\Core\Verifier\ArtworkVerifier;
 
 class ArtworkController extends Controller{
 
+    /* search page artwork  */
     public function search(string $type) :void{
 
         if($type === 'anime'){
@@ -36,6 +35,7 @@ class ArtworkController extends Controller{
         $this->lunchPage('artwork/search', 'Recherche', $data);
     }
 
+    /* info page artwork */
     public function info(string $type, string $ArtworkSlug){
 
         if(!isset($ArtworkSlug))
@@ -57,6 +57,7 @@ class ArtworkController extends Controller{
         $this->lunchPage('artwork/info', $data['artwork']->name, $data);
     }
 
+    /* post add comment */
     public function addComment(string $type){
         
         $verifier = ArtworkVerifier::commentForm($_POST);
@@ -84,6 +85,7 @@ class ArtworkController extends Controller{
 
     }
 
+    /* page of artwork in user list */
     public function myList(string $type = 'all'){
 
         if(!Session::isLogin())
@@ -105,11 +107,14 @@ class ArtworkController extends Controller{
         $data['type'] = $type;
         $data['isLogin'] = true;
 
+        $data['isUserList'] = true;
+
         $data['myList'] = true;
 
         $this->lunchPage('artwork/myList', 'Ma liste', $data);
     } 
 
+    /* post remove in user list */
     public function removeList(){
         if(!Session::isLogin())
             redirect();
@@ -125,6 +130,7 @@ class ArtworkController extends Controller{
         redirectToLastPage();
     }
 
+    /* post add in user list */
     public function addList(){
 
         if(!Session::isLogin())
@@ -142,6 +148,7 @@ class ArtworkController extends Controller{
         redirectToLastPage();
     }
 
+    /* post set status of one artwork in user list */
     public function setListStatus(){
         
         if(!Session::isLogin())
