@@ -76,7 +76,7 @@ class AdminController extends Controller{
     }
 
     /* remove one artwork */
-    public function removeArtwork($artworkId){
+    public function removeArtwork($artworkId): void{
         
         if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))
             abord(404);
@@ -90,7 +90,7 @@ class AdminController extends Controller{
     }
 
     /* form for edit one artwork */
-    public function editArtwork($artworkId){
+    public function editArtwork($artworkId): void{
 
         if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))
             abord(404);
@@ -113,7 +113,7 @@ class AdminController extends Controller{
     }
 
     /* post for edit one artwork */
-    public function editPostArtwork(){
+    public function editPostArtwork(): void{
         
         $messages = AdminVerifier::artworkEditForm($_POST, $_FILES);
         if(!empty($messages)){
@@ -154,7 +154,7 @@ class AdminController extends Controller{
     }
 
     /* add one author */
-    public function addAuthor(){
+    public function addAuthor(): void{
 
         $messages = AdminVerifier::authorForm($_POST);
         if(!empty($messages)){
@@ -170,7 +170,7 @@ class AdminController extends Controller{
     }
 
     /* remove one author */
-    public function removeAuthor($authorId){
+    public function removeAuthor($authorId): void{
         
         if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))
             abord(404);
@@ -192,7 +192,7 @@ class AdminController extends Controller{
     }
 
     /* form for edit one author */
-    public function editAuthor($authorId){
+    public function editAuthor($authorId): void{
 
         if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))
             abord(404);
@@ -210,7 +210,7 @@ class AdminController extends Controller{
     }
 
     /* post for edit one author */
-    public function editPostAuthor(){
+    public function editPostAuthor(): void{
 
         if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))
             abord(404);
@@ -231,7 +231,7 @@ class AdminController extends Controller{
     }
 
     /* add one genre */
-    public function addGenre(){
+    public function addGenre(): void{
 
         $messages = AdminVerifier::genreForm($_POST);
         if(!empty($messages)){
@@ -247,7 +247,7 @@ class AdminController extends Controller{
     }
 
     /* remove one genre */
-    public function removeGenre($genreId){
+    public function removeGenre($genreId): void{
         
         if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))
             abord(404);
@@ -259,7 +259,7 @@ class AdminController extends Controller{
     }
 
     /* form for edit one genre */
-    public function editGenre($genreId){
+    public function editGenre($genreId): void{
         if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))
             abord(404);
 
@@ -275,7 +275,7 @@ class AdminController extends Controller{
     }
 
     /* post for edit one genre */
-    public function editPostGenre(){
+    public function editPostGenre(): void{
         
         if(!Session::isLogin() || (Session::isLogin() && !Session::getUser()['isAdmin']))
             abord(404);

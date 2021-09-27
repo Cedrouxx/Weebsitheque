@@ -22,10 +22,11 @@
         "numberVolume" : "Nombre de volume",
         "type" : "Type",
         "mark" : "Note",
-        "moreInfo" : "Plus d\"info",
+        "moreInfo" : "Plus d'info",
         "all" : "Tous",
         "add" : "Ajouter",
-        "change" : "Changer"
+        "change" : "Changer",
+        "imageOf" : "image de "
     },
 
     "login" : {
@@ -39,7 +40,7 @@
         "passwordConfirm" : "Confirmation du mot-de-passe",
         "register" : "S'inscrire",
         "questionHaveAccount" : "Vous avez déjà un compte ?",
-        "questionDontHaveAccount" : "Vous n\"avez pas de compte ?",
+        "questionDontHaveAccount" : "Vous n'avez pas de compte ?",
         "new" : "Nouveau",
         "confirm" : "Confirmer",
         "change" : "Changer"

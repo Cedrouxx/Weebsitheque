@@ -80,7 +80,7 @@ class AuthController extends Controller{
     }
 
     /* user account page */
-    public function myAccount(){
+    public function myAccount(): void{
 
         if(!Session::isLogin())
             redirect('/');
@@ -94,7 +94,7 @@ class AuthController extends Controller{
     }
 
     /* change user-picture post */
-    public function changeProfilePicture(){
+    public function changeProfilePicture(): void{
 
         if(!Session::isLogin())
             redirect();
@@ -122,7 +122,7 @@ class AuthController extends Controller{
     }
 
     /* change username post */
-    public function changeUsername(){
+    public function changeUsername(): void{
         
         if(!Session::isLogin())
             redirect();
@@ -152,7 +152,7 @@ class AuthController extends Controller{
     }
 
     /* change email post */
-    public function changeEmail(){
+    public function changeEmail(): void{
         
         if(!Session::isLogin())
             redirect('/');
@@ -181,7 +181,7 @@ class AuthController extends Controller{
     }
 
     /* change password post */
-    public function changePassword(){
+    public function changePassword(): void{
         
         if(!Session::isLogin())
             redirect('/');

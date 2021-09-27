@@ -17,7 +17,7 @@
     <header>
         <div class="container">
             <!-- Title -->
-            <a href="<?= lang['name'] ?>/" class="logo"><span>Weebsithèque</span></a>
+            <a title="<?= lang['nav']['home'] ?>" href="<?= lang['name'] ?>/" class="logo"><span>Weebsithèque</span></a>
             <!-- Login / Account -->
             <div class="connect navigation">
                 <?php if($userIsLogin): ?>
@@ -27,48 +27,52 @@
                             <input type="checkbox" id="nav-user" class="nav-check">
                             <label for="nav-user"><?= $user['username'] ?></label>
                             <ul>
-                                <li><a href="<?= lang['name'] ?>/my-account"><?= lang['nav-login']['myAccount'] ?></a></li>
-                                <li><a href="<?= lang['name'] ?>/my-list/all"><?= lang['nav-login']['userLists'] ?></a></li>
+                                <li><a title="<?= lang['nav-login']['myAccount'] ?>" href="<?= lang['name'] ?>/my-account"><?= lang['nav-login']['myAccount'] ?></a></li>
+                                <li><a title="<?= lang['nav-login']['userLists'] ?>" href="<?= lang['name'] ?>/my-list/all"><?= lang['nav-login']['userLists'] ?></a></li>
                                 <?php if($user['isAdmin']): ?>
-                                    <li><a href="<?= lang['name'] ?>/admin"><?= lang['nav-login']['adminPage'] ?></a></li>
+                                    <li><a tile="<?= lang['nav-login']['adminPage'] ?>" href="<?= lang['name'] ?>/admin"><?= lang['nav-login']['adminPage'] ?></a></li>
                                 <?php endif; ?>
-                                <li ><a href="<?= lang['name'] ?>/logout"><?= lang['nav-login']['logout'] ?></a></li>
+                                <li ><a title="<?= lang['nav-login']['logout'] ?>" href="<?= lang['name'] ?>/logout"><?= lang['nav-login']['logout'] ?></a></li>
                             </ul>
                         </li>
                     </ul>
                 <?php else: ?>
-                    <a href="<?= lang['name'] ?>/login"><?= $userIsLogin? $user['username'] : lang['multi']['login'] ?></a>
+                    <a title="<?= lang['multi']['login'] ?>" href="<?= lang['name'] ?>/login"><?= lang['multi']['login'] ?></a>
                 <?php endif; ?>
             </div>
             <!-- Nav -->
             <nav class="navigation">
                 <ul>
-                    <li><a href="<?= lang['name'] ?>/"><?= lang['nav']['home'] ?></a></li>
+                    <!-- HOME -->
+                    <li><a title="<?= lang['nav']['home'] ?>" href="<?= lang['name'] ?>/"><?= lang['nav']['home'] ?></a></li>
+                    <!-- ANIME -->
                     <li>
                         <input type="checkbox" id="nav-anime" class="nav-check">
                         <label for="nav-anime">Anime</label>
                         <ul>
                             <?php if($userIsLogin): ?>
-                                <li><a href="<?= lang['name'] ?>/my-list/anime"><?= lang['nav']['myList'] ?></a></li> <!-- si connecter -->
+                                <li><a title="<?= lang['nav']['myList'] ?> Anime" href="<?= lang['name'] ?>/my-list/anime"><?= lang['nav']['myList'] ?></a></li> <!-- si connecter -->
                             <?php endif; ?>
-                            <li><a href="<?= lang['name'] ?>/anime/search"><?= lang['multi']['search'] ?></a></li>
+                            <li><a title="<?= lang['multi']['search'] ?>" href="<?= lang['name'] ?>/anime/search"><?= lang['multi']['search'] ?></a></li>
                         </ul>
                     </li>
+                    <!-- MANGA -->
                     <li>
                         <input type="checkbox" id="nav-manga" class="nav-check">
                         <label for="nav-manga">Manga</label>
                         <ul>
                             <?php if($userIsLogin): ?>
-                                <li><a href="<?= lang['name'] ?>/my-list/manga"><?= lang['nav']['myList'] ?></a></li> <!-- si connecter -->
+                                <li><a title="<?= lang['nav']['myList'] ?> Manga" href="<?= lang['name'] ?>/my-list/manga"><?= lang['nav']['myList'] ?></a></li> <!-- si connecter -->
                             <?php endif; ?>
-                            <li><a href="<?= lang['name'] ?>/manga/search"><?= lang['multi']['search'] ?></a></li>
+                            <li><a title="<?= lang['multi']['search'] ?>" href="<?= lang['name'] ?>/manga/search"><?= lang['multi']['search'] ?></a></li>
                         </ul>
                     </li>
+                    <!-- OTHER -->
                     <li>
                         <input type="checkbox" id="nav-diver" class="nav-check">
                         <label for="nav-diver"><?= lang['nav']['various'] ?></label>
                         <ul>
-                            <li><a href="<?= lang['name'] ?>/diver/waifu">Waifus</a></li> 
+                            <li><a title="Waifus" href="<?= lang['name'] ?>/diver/waifu">Waifus</a></li> 
                         </ul>
                     </li>
                 </ul>

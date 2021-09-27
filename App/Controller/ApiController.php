@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Core\Session;
 use App\Core\Verifier\ArtworkVerifier;
 use App\Model\Artwork;
-use App\Model\Status;
 use App\Model\UserList;
 
 class ApiController extends Controller{
@@ -58,7 +57,7 @@ class ApiController extends Controller{
     }
 
     /* get all artwork in user list */
-    public function getUserList($type = 'all'){
+    public function getUserList($type = 'all'): void{
 
         if(Session::isLogin()){
 
@@ -87,7 +86,7 @@ class ApiController extends Controller{
     }
 
     /* get all artwork or one type (Anime/Manga) */
-    public function getArtwork($type = 'all'){
+    public function getArtwork($type = 'all'): void{
 
         if($type === 'anime'){
             $userList = Artwork::where('type', 'Anime')->getAll();
@@ -111,7 +110,7 @@ class ApiController extends Controller{
     }
 
     /* get all status */
-    public function getStatus(){
+    public function getStatus(): void{
 
         echo json_encode([ 'Undefined','To start','In progress','Stopped','Finished' ]);
 

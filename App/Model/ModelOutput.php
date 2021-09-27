@@ -5,19 +5,19 @@ namespace App\Model;
 class ModelOutput{
     
     /* make one ModelOutput */
-    private static function make($datas){
+    private static function make($datas): ModelOutput{
         return new ModelOutput($datas);
     }
 
     /* call ModelOutput::make */
-    public static function makeOne(array $datas){
+    public static function makeOne(array $datas): ModelOutput{
         if(empty($datas))
             return ModelOutput::make([]);
         return ModelOutput::makeAll($datas)[0];
     }
 
     /* call ModelOutput::make for all data*/
-    public static function makeAll(array $datas){
+    public static function makeAll(array $datas): array{
         $tempArray = [];
 
         

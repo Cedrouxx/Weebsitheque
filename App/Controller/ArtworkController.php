@@ -36,7 +36,7 @@ class ArtworkController extends Controller{
     }
 
     /* info page artwork */
-    public function info(string $type, string $ArtworkSlug){
+    public function info(string $type, string $ArtworkSlug): void{
 
         if(!isset($ArtworkSlug))
             redirect("$type/search");
@@ -58,7 +58,7 @@ class ArtworkController extends Controller{
     }
 
     /* post add comment */
-    public function addComment(string $type){
+    public function addComment(string $type): void{
         
         $verifier = ArtworkVerifier::commentForm($_POST);
         $artwork = Artwork::where('artwork.id', $_POST['artwork_id'])->getOne();
@@ -86,7 +86,7 @@ class ArtworkController extends Controller{
     }
 
     /* page of artwork in user list */
-    public function myList(string $type = 'all'){
+    public function myList(string $type = 'all'): void{
 
         if(!Session::isLogin())
             redirect('/');
@@ -115,7 +115,7 @@ class ArtworkController extends Controller{
     } 
 
     /* post remove in user list */
-    public function removeList(){
+    public function removeList(): void{
         if(!Session::isLogin())
             redirect();
         
@@ -131,7 +131,7 @@ class ArtworkController extends Controller{
     }
 
     /* post add in user list */
-    public function addList(){
+    public function addList(): void{
 
         if(!Session::isLogin())
             redirect('/');
@@ -149,7 +149,7 @@ class ArtworkController extends Controller{
     }
 
     /* post set status of one artwork in user list */
-    public function setListStatus(){
+    public function setListStatus(): void{
         
         if(!Session::isLogin())
             redirect('/');

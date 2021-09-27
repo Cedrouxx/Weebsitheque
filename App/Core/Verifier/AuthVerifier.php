@@ -75,7 +75,7 @@ class AuthVerifier{
     }
 
     /* check if username form is ok */
-    public static function username($usernameData){
+    public static function username($usernameData): array{
         
         $result = [];
 
@@ -90,7 +90,7 @@ class AuthVerifier{
     }
 
     /* check if email form is ok */
-    public static function email($emailData){
+    public static function email($emailData): array{
         
         $result = [];
 
@@ -109,7 +109,7 @@ class AuthVerifier{
     }
 
     /* check if password form is ok */
-    public static function password($passwordData){
+    public static function password($passwordData): array{
         
         $result = [];
 
@@ -131,7 +131,7 @@ class AuthVerifier{
     }
 
     /* check if profile picture form is ok */
-    public static function profilePicture(array $file){
+    public static function profilePicture(array $file): array{
         if(!isset($file['profilePicture']) || $file['profilePicture']['error'] > 0)
             $result[] = [ 'error' => 'Champ \'image\' non renseigné ou invalide !' ];
 

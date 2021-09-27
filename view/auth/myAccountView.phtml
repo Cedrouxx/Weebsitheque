@@ -10,7 +10,7 @@
         <h2 class="text-left"><?= lang['login']['profilePicture'] ?> :</h2>
         <form action="<?= lang['name'] ?>/my-account/change/profile-picture" method="post" enctype="multipart/form-data">
             <div class="flexTD flex-between">
-                <img src="<?= $data['user']['image'] ?>" alt="" class="profilePicture">
+                <img src="<?= $data['user']['image'] ?>" alt="<?= lang['login']['profilePicture'] ?>" class="profilePicture">
                 <input id="profilePicture" type="file" class="width100pM width50p" name="profilePicture">
             </div>
             <input type="submit" class="button margeTop block-center" value="<?= lang['login']['change'] ?>">

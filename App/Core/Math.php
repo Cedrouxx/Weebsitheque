@@ -5,7 +5,7 @@ namespace App\Core;
 class Math{
 
     /* average integer */
-    public static function average(int ...$numbers){
+    public static function average(int ...$numbers): float{
         $result = 0;
         foreach($numbers as $number){
             $result += $number; 

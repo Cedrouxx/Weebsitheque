@@ -9,7 +9,7 @@ use App\Model\Artwork;
 class DefaultController extends Controller{
 
     /* home page */
-    public function home() :void{
+    public function home(): void{
 
         $data['isLogin'] = Session::isLogin();
 

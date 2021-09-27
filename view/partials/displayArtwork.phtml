@@ -42,7 +42,7 @@
             <?php if (!empty($artwork->note)): ?>
                 <p><?= lang['multi']['mark'] ?> : <?= $artwork->note ?>/10</p>
             <?php endif; ?>
-            <a href="<?= lang['name'] ?>/<?= strtolower($artwork->type) ?>/info/<?= $artwork->slug ?>" class="button block-center"><?= lang['multi']['moreInfo'] ?></a>
+            <a title="<?= lang['multi']['moreInfo'].' '.$artwork->name?>" href="<?= lang['name'] ?>/<?= strtolower($artwork->type) ?>/info/<?= $artwork->slug ?>" class="button block-center"><?= lang['multi']['moreInfo'] ?></a>
         </div>
         <!-- Add and Remove Button -->
         <?php if($data['isLogin']): ?>

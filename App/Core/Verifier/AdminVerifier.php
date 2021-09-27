@@ -41,7 +41,7 @@ class AdminVerifier{
     }
 
     /* check if author form is ok */
-    public static function authorForm(array $authorData){
+    public static function authorForm(array $authorData): array{
 
         $result = [];
 
@@ -59,7 +59,7 @@ class AdminVerifier{
     }
 
     /* check if genre form is ok */
-    public static function genreForm(array $genreData){
+    public static function genreForm(array $genreData): array{
 
         $result = [];
 
@@ -109,7 +109,7 @@ class AdminVerifier{
     }
 
     /* check if author/genre edit form is ok */
-    public static function authorEditForm(array $authorData){
+    public static function authorEditForm(array $authorData): array{
 
         if(!isset($authorData['id']) || empty($authorData['id'])) 
             return [[ 'error' => 'Une érreur est survenue, veuillez réessayer !' ]];

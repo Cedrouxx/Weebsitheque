@@ -1,4 +1,3 @@
-import { checkEmail } from "../../utilities.js";
 
 // helper for change profilePicture 
 export default class ChangeProfilePicture{
@@ -12,7 +11,6 @@ export default class ChangeProfilePicture{
         
         this.profilePictureInput.addEventListener('change', this.onProfilePictureChange.bind(this));
 
-        console.log(this.profilePictureInput)
         this.buttonDisable();
 
     }

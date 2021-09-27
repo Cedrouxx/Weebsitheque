@@ -53,7 +53,7 @@
                     <label for="artwork-image">Image</label>
                     <input type="file" id="artwork-image" name="image">
                 </div>
-                <img src="<?= $data['artwork']->image ?>" alt="image de <?= $data['artwork']->name ?>">
+                <img src="<?= $data['artwork']->image ?>" alt="<?= lang['multi']['imageOf'] ?> <?= $data['artwork']->name ?>">
                 <!-- release date -->
                 <div>
                     <label for="release_date ">Date</label>
