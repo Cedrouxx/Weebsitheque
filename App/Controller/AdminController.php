@@ -148,7 +148,6 @@ class AdminController extends Controller{
 
         Artwork::where('artwork.id', $_POST['id']);
 
-        exit;
         redirect('admin');
             
     }

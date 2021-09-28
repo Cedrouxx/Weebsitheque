@@ -29,8 +29,8 @@ class Main{
             define('lang', $lang->getLang());
         }catch(LangException){
             if ($_GET['url'] === '')
-                redirect($_GET['lang'] ?? '', false);
-            redirect('', false);
+                redirect($_GET['lang'] ?? '', 'fr');
+            redirect('', 'fr');
         }
     }
 

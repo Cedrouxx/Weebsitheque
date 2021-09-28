@@ -5,7 +5,7 @@ class UserList extends Model{
 
     protected static function defaultSelect(Orm $orm): Orm{
         return $orm->select('artwork.id', 
-                            'status AS status',
+                            'ANY_VALUE(status) AS status',
                             'artwork.id', 
                             'artwork.name', 
                             'artwork.slug',

@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `artwork` (
 --
 
 INSERT INTO `artwork` (`id`, `name`, `slug`, `author_id`, `number_volume`, `type`, `image`, `release_date`) VALUES
-(2, 'Violet Evergarden', 'violet-evergarden', 1, 14, 'Anime', 'ressources/img/artwork/anime/violet-evergarden.', '2018-01-11'),
+(2, 'Violet Evergarden', 'violet-evergarden', 1, 14, 'Anime', 'ressources/img/artwork/anime/violet-evergarden.jpg', '2018-01-11'),
 (3, 'Chobits', 'chobits', 2, 8, 'Manga', 'ressources/img/artwork/manga/chobits.jpeg', '2020-01-15'),
 (4, 'Kyoukai no Kanata', 'kyoukai-no-kanata', 1, 12, 'Anime', 'ressources/img/artwork/anime/kyoukai-no-kanata.jpg', '2013-12-19'),
 (5, 'Made in abyss', 'made-in-abyss', 3, 13, 'Anime', 'ressources/img/artwork/anime/made-in-abyss.jpg', '2017-07-07'),
