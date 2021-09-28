@@ -17,6 +17,9 @@ export default class ChangePassword{
         this.passwordInput.addEventListener('blur', this.onPasswordChange.bind(this));
         this.passwordConfirmInput.addEventListener('blur', this.onPasswordConfirmChange.bind(this));
 
+        this.passwordInput.addEventListener('keyup', this.onPasswordPress.bind(this));
+        this.passwordConfirmInput.addEventListener('keyup', this.onPasswordConfirmPress.bind(this));
+
         this.buttonDisable();
 
     }
@@ -26,18 +29,14 @@ export default class ChangePassword{
         let re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/g;
 
         if(e.target.value === ''){
-            this.passwordOk = false;
             this.passwordError.innerText = '';
         }else if(e.target.value.length < 8){
             this.passwordError.innerText = 'Le mot de passe doit faire au moin 8 carractères !';
-            this.passwordOk = false;
         }else if(!re.test(e.target.value)){
             this.passwordError.innerText = 'Le mot-de-passe doit contenir au moin une lettre majuscule, une lettre minuscule, un nombre et un carractère spécial (!, @, #, \$, %, \^, &, \*) !';
-            this.passwordOk = false;
             console.log(e.target.value, re.test(e.target.value))
         }else{
             this.passwordError.innerText = '';
-            this.passwordOk = true;
         }
 
         this.buttonDisable();
@@ -45,14 +44,40 @@ export default class ChangePassword{
 
     onPasswordConfirmChange(e){
         if(e.target.value === ''){
-            this.passwordConfirmOk = false;
             this.passwordConfirmError.innerText = '';
         }else if(e.target.value !== this.passwordInput.value){
-            this.passwordConfirmOk = false;
             this.passwordConfirmError.innerText = 'Les mots de passe ne coresponde pas !';
         }else{
-            this.passwordConfirmOk = true;
             this.passwordConfirmError.innerText = '';
+        }
+
+        this.buttonDisable();
+    }
+
+    onPasswordPress(e){
+
+        let re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/g;
+
+        if(e.target.value === ''){
+            this.passwordOk = false;
+        }else if(e.target.value.length < 8){
+            this.passwordOk = false;
+        }else if(!re.test(e.target.value)){
+            this.passwordOk = false;
+        }else{
+            this.passwordOk = true;
+        }
+
+        this.buttonDisable();
+    }
+
+    onPasswordConfirmPress(e){
+        if(e.target.value === ''){
+            this.passwordConfirmOk = false;
+        }else if(e.target.value !== this.passwordInput.value){
+            this.passwordConfirmOk = false;
+        }else{
+            this.passwordConfirmOk = true;
         }
 
         this.buttonDisable();

@@ -12,6 +12,7 @@ export default class ChangeEmail{
         this.submitButton = this.emailInput.closest('form').querySelector('input[type="submit"]');
         
         this.emailInput.addEventListener('blur', this.onEmailChange.bind(this));
+        this.emailInput.addEventListener('keyup', this.onEmailPress.bind(this));
 
         this.buttonDisable();
 
@@ -21,12 +22,22 @@ export default class ChangeEmail{
         
         if(e.target.value === ''){
             this.emailError.innerText = '';
-            this.emailOk = false;
         }else if(!checkEmail(e.target.value)){
             this.emailError.innerText = 'Adresse mail invalide !';
-            this.emailOk = false;
         }else{
             this.emailError.innerText = '';
+        }
+
+        this.buttonDisable();
+    }
+
+    onEmailPress(e){
+        
+        if(e.target.value === ''){
+            this.emailOk = false;
+        }else if(!checkEmail(e.target.value)){
+            this.emailOk = false;
+        }else{
             this.emailOk = true;
         }
 

@@ -16,7 +16,9 @@ export default class Login{
         
         
         this.emailInput.addEventListener('blur', this.onEmailChange.bind(this));
-        this.passwordInput.addEventListener('blur', this.onPasswordChange.bind(this));
+
+        this.emailInput.addEventListener('keyup', this.onEmailPress.bind(this));
+        this.passwordInput.addEventListener('keyup', this.onPasswordPress.bind(this));
 
         this.buttonDisable();
 
@@ -26,19 +28,29 @@ export default class Login{
         
         if(e.target.value === ''){
             this.emailError.innerText = '';
-            this.emailOk = false;
         }else if(!checkEmail(e.target.value)){
             this.emailError.innerText ='Adresse mail invalide !';
-            this.emailOk = false;
         }else{
             this.emailError.innerText = '';
+        }
+
+        this.buttonDisable();
+    }
+
+    onEmailPress(e){
+        
+        if(e.target.value === ''){
+            this.emailOk = false;
+        }else if(!checkEmail(e.target.value)){
+            this.emailOk = false;
+        }else{
             this.emailOk = true;
         }
 
         this.buttonDisable();
     }
 
-    onPasswordChange(e){
+    onPasswordPress(e){
 
         if(e.target.value === ''){
             this.passwordOk = false;

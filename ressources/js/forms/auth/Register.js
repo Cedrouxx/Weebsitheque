@@ -28,6 +28,11 @@ export default class Register{
         this.passwordInput.addEventListener('blur', this.onPasswordChange.bind(this));
         this.passwordConfirmInput.addEventListener('blur', this.onPasswordConfirmChange.bind(this));
 
+        this.usernameInput.addEventListener('keyup', this.onUsernamePress.bind(this));
+        this.emailInput.addEventListener('keyup', this.onEmailPress.bind(this));
+        this.passwordInput.addEventListener('keyup', this.onPasswordPress.bind(this));
+        this.passwordConfirmInput.addEventListener('keyup', this.onPasswordConfirmPress.bind(this));
+
         this.buttonDisable();
 
     }
@@ -35,13 +40,10 @@ export default class Register{
     onUsernameChange(e){
         if(e.target.value === ''){
             this.usernameError.innerText = '';
-            this.usernameOk = false;
         }else if(e.target.value.length < 3){
             this.usernameError.innerText = 'Le nom d\'utilisateur doit faire au moin 3 carractères !';
-            this.usernameOk = false;
         }else{
             this.usernameError.innerText = '';
-            this.usernameOk = true;
         }
         this.buttonDisable();
     }
@@ -50,13 +52,10 @@ export default class Register{
         
         if(e.target.value === ''){
             this.emailError.innerText = '';
-            this.emailOk = false;
         }else if(!checkEmail(e.target.value)){
             this.emailError.innerText = 'Adresse mail invalide !';
-            this.emailOk = false;
         }else{
             this.emailError.innerText = '';
-            this.emailOk = true;
         }
 
         this.buttonDisable();
@@ -67,18 +66,14 @@ export default class Register{
         let re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/g;
 
         if(e.target.value === ''){
-            this.passwordOk = false;
             this.passwordError.innerText = '';
         }else if(e.target.value.length < 8){
             this.passwordError.innerText = 'Le mot de passe doit faire au moin 8 carractères !';
-            this.passwordOk = false;
         }else if(!re.test(e.target.value)){
             this.passwordError.innerText = 'Le mot-de-passe doit contenir au moin une lettre majuscule, une lettre minuscule, un nombre et un carractère spécial (!, @, #, \$, %, \^, &, \*) !';
-            this.passwordOk = false;
             console.log(e.target.value, re.test(e.target.value))
         }else{
             this.passwordError.innerText = '';
-            this.passwordOk = true;
         }
 
         this.buttonDisable();
@@ -86,14 +81,64 @@ export default class Register{
 
     onPasswordConfirmChange(e){
         if(e.target.value === ''){
-            this.passwordConfirmOk = false;
             this.passwordConfirmError.innerText = '';
         }else if(e.target.value !== this.passwordInput.value){
-            this.passwordConfirmOk = false;
             this.passwordConfirmError.innerText = 'Les mots de passe ne coresponde pas !';
         }else{
-            this.passwordConfirmOk = true;
             this.passwordConfirmError.innerText = '';
+        }
+
+        this.buttonDisable();
+    }
+
+    onUsernamePress(e){
+        if(e.target.value === ''){
+            this.usernameOk = false;
+        }else if(e.target.value.length < 3){
+            this.usernameOk = false;
+        }else{
+            this.usernameOk = true;
+        }
+        this.buttonDisable();
+    }
+
+    onEmailPress(e){
+        
+        if(e.target.value === ''){
+            this.emailOk = false;
+        }else if(!checkEmail(e.target.value)){
+            this.emailOk = false;
+        }else{
+            this.emailOk = true;
+        }
+
+        this.buttonDisable();
+    }
+
+    onPasswordPress(e){
+
+        let re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/g;
+
+        if(e.target.value === ''){
+            this.passwordOk = false;
+        }else if(e.target.value.length < 8){
+            this.passwordOk = false;
+        }else if(!re.test(e.target.value)){            this.passwordOk = false;
+            console.log(e.target.value, re.test(e.target.value))
+        }else{
+            this.passwordOk = true;
+        }
+
+        this.buttonDisable();
+    }
+
+    onPasswordConfirmPress(e){
+        if(e.target.value === ''){
+            this.passwordConfirmOk = false;
+        }else if(e.target.value !== this.passwordInput.value){
+            this.passwordConfirmOk = false;
+        }else{
+            this.passwordConfirmOk = true;
         }
 
         this.buttonDisable();
