@@ -43,7 +43,7 @@ class Router{
 
         return [
             'routeFind' => '',
-            'routeParameter' => ''
+            'routeParameter' => []
         ];
     }
 

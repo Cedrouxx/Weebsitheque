@@ -6,10 +6,14 @@ use App\Controller\AdminController;
 use App\Controller\DiverController;
 use App\Controller\ArtworkController;
 use App\Controller\ApiController;
+use App\Controller\LangController;
 
 return [
     // Default
     '/' => [ 'class' => DefaultController::class, 'method' => 'home' ],
+
+    // Lang
+    '/change-lang' => [ 'class' => LangController::class, 'method' => 'change' ],
 
     // Auths
         // login

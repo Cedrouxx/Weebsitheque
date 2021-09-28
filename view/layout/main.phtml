@@ -16,6 +16,16 @@
     <!-- header -->
     <header>
         <div class="container">
+            <!-- Lang -->
+            <form action="<?= lang['name'] ?>/change-lang" method="post" class="width100p text-left lang">
+                <input type="hidden" name="lastpage" value="<?= $_GET['url'] ?>">
+                <select name="lang">
+                    <option value="fr" <?= lang['name'] === 'fr' ? 'selected' : '' ?>>fr</option>
+                    <option value="eng" <?= lang['name'] === 'eng' ? 'selected' : '' ?>>eng</option>
+                    <option value="troll" <?= lang['name'] === 'troll' ? 'selected' : '' ?>>troll</option>
+                </select>
+                <input type="submit" value="change">
+            </form>
             <!-- Title -->
             <a title="<?= lang['nav']['home'] ?>" href="<?= lang['name'] ?>/" class="logo"><span>Weebsithèque</span></a>
             <!-- Login / Account -->

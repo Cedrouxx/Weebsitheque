@@ -12,6 +12,7 @@ import ChangePassword from "./forms/auth/ChangePassword.js";
 import {config} from "./config.js";
 import ArtworkSearch from "./artworks/ArtworkSearch.js";
 import ChangeProfilePicture from "./forms/auth/ChangeProfilePicture.js";
+import Lang from "./Lang.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -41,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.target.rows = ((e.target.value.match(/\n/g) || []).length)+2;
     }));
 
+    new Lang();
 
     switch(document.title){
         
