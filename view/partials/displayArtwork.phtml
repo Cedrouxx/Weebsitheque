@@ -45,7 +45,7 @@
             <a title="<?= lang['multi']['moreInfo'].' '.$artwork->name?>" href="<?= lang['name'] ?>/<?= strtolower($artwork->type) ?>/info/<?= $artwork->slug ?>" class="button block-center"><?= lang['multi']['moreInfo'] ?></a>
         </div>
         <!-- Add and Remove Button -->
-        <?php if($data['isLogin']): ?>
+        <?php if($userIsLogin): ?>
             <form action="<?= lang['name'] ?>/<?= empty($data['user_list'][$artwork->id]) ? 'add-artwork-list' : 'remove-artwork-list'?>" method="post">
                 <input type="hidden" name="artwork_id" value="<?= $artwork->id ?>">
                 <?php if(empty($data['user_list'][$artwork->id]) && !isset($data['isUserList'])): ?>

@@ -34,7 +34,7 @@
         "registerTitle" : "Inscription",
         "accountTitle" : "Mon compte",
         "profilePicture" : "Photo de profile",
-        "username" : "Nom d\"utilisateur",
+        "username" : "Nom d'utilisateur",
         "email" : "Adresse mail",
         "password" : "Mot-de-passe",
         "passwordConfirm" : "Confirmation du mot-de-passe",
@@ -66,7 +66,7 @@
 
     "myList" : {
         "title" : {
-            "anime" : "Ma liste d\"anime",
+            "anime" : "Ma liste d'anime",
             "manga" : "Ma liste de manga",
             "all" : "Ma liste"
         }

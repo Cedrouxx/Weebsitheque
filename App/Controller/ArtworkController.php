@@ -157,11 +157,12 @@ class ArtworkController extends Controller{
         if(!ArtworkVerifier::setStatusList($_POST))
             redirectToLastPage();
 
-        if(isset(UserList::where('user.id', Session::getUser()['id'])->where('artwork.id', intval($_POST['artwork_id']))->id))
-            UserList::values([ 'user_list_status_id' => $_POST['status'] ])
+        if(isset(UserList::where('user.id', Session::getUser()['id'])->where('artwork.id', intval($_POST['artwork_id']))->getOne()->id))
+            UserList::values([ 'status' => $_POST['status'] ])
             ->where('user_id' ,Session::getUser()['id'])
             ->where('artwork_id', $_POST['artwork_id'])
             ->update();
+
 
         redirectToLastPage();
     }   
