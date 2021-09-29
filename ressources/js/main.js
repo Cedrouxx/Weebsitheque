@@ -9,12 +9,11 @@ import Register from "./forms/auth/Register.js";
 import ChangeUsername from "./forms/auth/ChangeUsername.js";
 import ChangeEmail from "./forms/auth/ChangeEmail.js";
 import ChangePassword from "./forms/auth/ChangePassword.js";
-import {config} from "./config.js";
 import ArtworkSearch from "./artworks/ArtworkSearch.js";
 import ChangeProfilePicture from "./forms/auth/ChangeProfilePicture.js";
 import Lang from "./Lang.js";
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
 
     document.addEventListener('click', e =>{
 
@@ -30,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
-    document.querySelectorAll('.notJS').forEach( element => element.parentElement.removeChild(element));
+    document.querySelectorAll('.notJS').forEach(element => element.parentElement.removeChild(element));
 
     // DIVER WAIFU
     if (document.title === 'Weebsithèque | Waifu')
@@ -43,33 +42,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
 
     new Lang();
+    let lang = await Lang.getLang(document.querySelector('html').lang);
+    let prefix = lang.pageTitle.prefix;
 
     switch(document.title){
         
-        case config.title.home:
+        case prefix+lang.pageTitle.home:
             new ChangeStatus();
             break;
 
-        case config.title.login:
+        case prefix+lang.pageTitle.login:
             new Login();
             break;
             
-        case config.title.register:
+        case prefix+lang.pageTitle.register:
             new Register();
             break;
             
-        case config.title.myAccount:
+        case prefix+lang.pageTitle.myAccount:
             new ChangeProfilePicture();
             new ChangeUsername();
             new ChangeEmail();
             new ChangePassword();
             break;
                 
-        case config.title.search:
+        case prefix+lang.pageTitle.search:
             new ArtworkSearch(document.querySelector('#JStype').value, new ChangeStatus(), new ArtworkList(), false);
             break;
                     
-        case config.title.userList:
+        case prefix+lang.pageTitle.myList:
             new ArtworkSearch(document.querySelector('#JStype').value, new ChangeStatus(), new ArtworkList(), true);
             break;
     }

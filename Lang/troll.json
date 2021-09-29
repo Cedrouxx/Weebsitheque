@@ -1,6 +1,22 @@
 {
     "name" : "troll",
 
+    "pageTitle" : {
+        "prefix" : "Weebsithèque | ",
+        "home" : "Aceuye",
+        "search" : "Rechaireshe",
+        "myList" : "Mah lyseteux",
+        "waifu" : "Waifu",
+        "myAccount" : "Mom quomtte",
+        "login" : "koneksion",
+        "register" : "Ainsquripsion",
+        "error404" : "Pajeux nom trousvais",
+        "admin" : "Addminnistrassion",
+        "editArtwork" : "Maudifficassion d'evre",
+        "editAuthor" : "Moddifikation d'otheur",
+        "editGenre" : "Maudifikation de ganr"
+    },
+
     "nav-login" : {
         "myAccount" : "Mont conte",
         "userLists" : "Mais lisseute",

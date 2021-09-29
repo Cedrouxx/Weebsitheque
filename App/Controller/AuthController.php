@@ -18,7 +18,7 @@ class AuthController extends Controller{
         $messages = Session::getMessage();
         Session::clearMessage();
 
-        $this->lunchPage('auth/login', 'Connection', ['messages' => $messages]);
+        $this->lunchPage('auth/login', lang['pageTitle']['login'], ['messages' => $messages]);
     }
 
     /* login post */
@@ -49,7 +49,7 @@ class AuthController extends Controller{
         $messages = Session::getMessage();
         Session::clearMessage();
 
-        $this->lunchPage('auth/register', 'Inscription', ['messages' => $messages]);
+        $this->lunchPage('auth/register', lang['pageTitle']['register'], ['messages' => $messages]);
     }
 
     /* register post */
@@ -90,7 +90,7 @@ class AuthController extends Controller{
         $data['messages'] = Session::getMessage();
         Session::clearMessage();
 
-        $this->lunchPage('auth/myAccount', 'Mon compte', $data);
+        $this->lunchPage('auth/myAccount', lang['pageTitle']['myAccount'], $data);
     }
 
     /* change user-picture post */

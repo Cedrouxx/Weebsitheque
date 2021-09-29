@@ -32,7 +32,7 @@ class ArtworkController extends Controller{
             }
         }
 
-        $this->lunchPage('artwork/search', 'Recherche', $data);
+        $this->lunchPage('artwork/search', lang['pageTitle']['search'], $data);
     }
 
     /* info page artwork */
@@ -111,7 +111,7 @@ class ArtworkController extends Controller{
 
         $data['myList'] = true;
 
-        $this->lunchPage('artwork/myList', 'Ma liste', $data);
+        $this->lunchPage('artwork/myList', lang['pageTitle']['myList'], $data);
     } 
 
     /* post remove in user list */

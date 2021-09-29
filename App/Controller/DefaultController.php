@@ -104,7 +104,7 @@ class DefaultController extends Controller{
             }
         }
 
-        $this->lunchPage('home', 'Accueil', $data);
+        $this->lunchPage('home', lang['pageTitle']['home'], $data);
     }
 
 }

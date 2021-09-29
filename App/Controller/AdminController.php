@@ -30,7 +30,7 @@ class AdminController extends Controller{
 
         $data['genres'] = Genre::getAll();
 
-        $this->lunchPage('admin/index', 'Administration', $data);
+        $this->lunchPage('admin/index', lang['pageTitle']['admin'], $data);
     }
 
     /* add one artwork */
@@ -109,7 +109,7 @@ class AdminController extends Controller{
         $data['allGenres'] = Genre::getAll();
         $data['allAuthors'] = Author::getAll();
 
-        $this->lunchPage('admin/edit', 'edit-artwork', $data);
+        $this->lunchPage('admin/edit', lang['pageTitle']['editArtwork'], $data);
     }
 
     /* post for edit one artwork */
@@ -212,7 +212,7 @@ class AdminController extends Controller{
         $data['author'] = Author::where('author.id', $authorId)->getOne();
 
 
-        $this->lunchPage('admin/edit', 'edit-author', $data);
+        $this->lunchPage('admin/edit', lang['pageTitle']['editAuthor'], $data);
     }
 
     /* post for edit one author */
@@ -277,7 +277,7 @@ class AdminController extends Controller{
 
         $data['genre'] = Genre::where('genre.id', $genreId)->getOne();
 
-        $this->lunchPage('admin/edit', 'edit-genre', $data);
+        $this->lunchPage('admin/edit', lang['pageTitle']['editGenre'], $data);
     }
 
     /* post for edit one genre */

@@ -15,7 +15,8 @@ class Artwork extends Model{
                             'artwork.image', 
                             'AVG(DISTINCT comment.note) AS note',
                             'artwork.release_date')
-        ->groupBy('artwork.id');
+        ->groupBy('artwork.id')
+        ->orderBy('artwork.name');
     }
 
     protected static function from($orm): Orm{

@@ -1,5 +1,21 @@
 {
     "name" : "eng",
+
+    "pageTitle" : {
+        "prefix" : "Weebsithèque | ",
+        "home" : "Home",
+        "search" : "Search",
+        "myList" : "My list",
+        "waifu" : "Waifu",
+        "myAccount" : "My account",
+        "login" : "Login",
+        "register" : "Register",
+        "error404" : "Page not found",
+        "admin" : "Administration",
+        "editArtwork" : "Artwork edit",
+        "editAuthor" : "Author edit",
+        "editGenre" : "Genre edit"
+    },
     
     "nav-login" : {
         "myAccount" : "My account",
