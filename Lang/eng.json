@@ -25,7 +25,8 @@
         "moreInfo" : "More info",
         "all" : "All",
         "add" : "Add",
-        "change" : "Change"
+        "change" : "Change",
+        "imageOf" : "image of "
     },
     
     "home" : {
