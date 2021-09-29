@@ -146,7 +146,14 @@ class AdminController extends Controller{
             'release_date' => $_POST['release_date']
         ])->update();
 
-        Artwork::where('artwork.id', $_POST['id']);
+        ArtworkGenre::where('artwork_id', $_POST['id'])->delete();
+
+        foreach($_POST['genres'] as $genre){
+            ArtworkGenre::values([
+                'artwork_id' => $_POST['id'],
+                'genre_id' => $genre
+            ])->insert();
+        }
 
         redirect('admin');
             

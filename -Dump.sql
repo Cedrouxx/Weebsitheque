@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `artwork_genre` (
   PRIMARY KEY (`id`),
   KEY `artwork_id` (`artwork_id`),
   KEY `genre_id` (`genre_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `artwork_genre`
@@ -93,7 +93,8 @@ INSERT INTO `artwork_genre` (`id`, `artwork_id`, `genre_id`) VALUES
 (16, 14, 1),
 (22, 19, 2),
 (23, 20, 1),
-(24, 3, 3);
+(24, 3, 3),
+(25, 21, 1);
 
 -- --------------------------------------------------------
 
