@@ -99,6 +99,12 @@
         "In progress" : "An courre",
         "Stopped" : "Araiter",
         "Finished" : "Finny"
+    },
+    
+    "waifu" : {
+        "title" : "Jénnairratterre a waifu",
+        "error" : "Un praublaimme et sureveunus, le praugrame n'as pa put ce lencer !"
     }
+
 
 }

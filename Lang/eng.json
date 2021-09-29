@@ -99,5 +99,10 @@
         "In progress" : "In progress",
         "Stopped" : "Stopped",
         "Finished" : "Finished"
+    },
+    
+    "waifu" : {
+        "title" : "Waifu generator",
+        "error" : "A problem occurred, the program could not be launched!"
     }
 }

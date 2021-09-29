@@ -99,6 +99,11 @@
         "In progress" : "En cours",
         "Stopped" : "Arrété",
         "Finished" : "Fini"
+    },
+
+    "waifu" : {
+        "title" : "Générateur à waifu",
+        "error" : "Un problème est survenu, le programme n'a pas pu ce lancé !"
     }
 
 }
