@@ -132,11 +132,11 @@ class AuthController extends Controller{
             Session::addMessage($verifier);
             redirect('my-account');
         }
-
+        
         $user = Session::getUser();
         User::values([
-            'username' => $user['id']
-        ])->where('id', $_POST['username'])
+            'username' => $_POST['username']
+        ])->where('user.id', $user['id'])
         ->update();
 
         $user['username'] = $_POST['username'];

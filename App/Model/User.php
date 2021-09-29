@@ -5,7 +5,7 @@ namespace App\Model;
 class User extends Model{
 
     protected static function defaultSelect(Orm $orm): Orm{
-        return $orm;
+        return $orm->select('*');
     }
 
     protected static function from(Orm $orm): Orm{
